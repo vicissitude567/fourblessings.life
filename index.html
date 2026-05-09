@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>记录册 — 日常碎片 · 随笔 · 美工</title>
+<style>
+  :root {
+    --cream: #faf9f6;
+    --white: #fff;
+    --warm: #f3f0eb;
+    --text: #1a1a1a;
+    --text-2: #555;
+    --text-3: #999;
+    --border: #e8e4df;
+    --accent: #c97d6e;
+    --accent-soft: #f5e8e4;
+    --accent-2: #8b9d83;
+    --accent-2-soft: #eef1ec;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Top bar ── */
+  .top-bar {
+    background: var(--accent-soft);
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    position: relative; z-index: 1;
+  }
+
+  /* ── Navigation ── */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--accent); }
+  .nav-logo {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: 26px;
+    font-style: italic;
+    letter-spacing: 2px;
+    color: var(--text) !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 82vh;
+    border-bottom: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .hero-image {
+    background: url('https://images.unsplash.com/photo-1517842645767-c639042777db?w=1000&q=80') center/cover;
+    min-height: 500px;
+    position: relative;
+  }
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.06) 100%);
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+  }
+  .hero-text .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .hero-text h1 {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: clamp(28px, 3.8vw, 42px);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0.3px;
+    margin-bottom: 20px;
+  }
+  .hero-text p {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 420px;
+  }
+
+  /* ── Section headers ── */
+  .section-head {
+    text-align: center;
+    padding: 80px 20px 40px;
+    position: relative; z-index: 1;
+  }
+  .section-head h2 {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .section-head .sub {
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 2px;
+  }
+
+  /* ── Article grid ── */
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .article-grid > a { text-decoration: none; color: inherit; display: block; }
+  .article-card {
+    background: var(--cream);
+    transition: all 0.35s var(--ease);
+  }
+  .article-card:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    position: relative;
+    z-index: 2;
+  }
+  .article-card .img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.35s;
+  }
+  .article-card:hover .img { filter: brightness(1.03); }
+  .article-card .body { padding: 28px 24px; }
+  .article-card .cat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .article-card h3 {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+  }
+  .article-card .date {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ── Feature rows ── */
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .feature-row:nth-child(even) { background: var(--white); }
+  .feature-img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+    transition: filter 0.4s;
+  }
+  .feature-row:hover .feature-img { filter: brightness(1.04); }
+  .feature-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px;
+  }
+  .feature-text .cat {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .feature-text h3 {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .feature-text p {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 400px;
+  }
+
+  /* ── Craft gallery ── */
+  .craft-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .craft-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+  }
+  .craft-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease), filter 0.4s;
+  }
+  .craft-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.06);
+  }
+  .craft-item .craft-label {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.4) 100%);
+    opacity: 0;
+    transition: opacity 0.35s;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  .craft-item:hover .craft-label { opacity: 1; }
+  .craft-label span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* ── Progress bar ── */
+  .progress-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative; z-index: 1;
+  }
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .progress-stats .current {
+    font-family: Georgia,"Noto Serif SC","Songti SC",serif;
+    font-size: 36px;
+    color: var(--accent);
+    font-style: italic;
+    line-height: 1;
+  }
+  .progress-stats .target {
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 1.5px;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 28%;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    border-radius: 2px;
+    transition: width 0.8s var(--ease);
+  }
+  .progress-note {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 1px;
+  }
+
+  /* ── Daily grid ── */
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .insta-grid img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: all 0.35s var(--ease);
+  }
+  .insta-grid img:hover {
+    opacity: 0.75;
+    transform: scale(1.03);
+    z-index: 2;
+    position: relative;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--white);
+    padding: 60px 40px 40px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+  }
+  .footer-col h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    color: var(--text-3);
+  }
+  .footer-col p {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.9;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col ul a {
+    font-size: 13px;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--accent); }
+  .footer-bottom {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 1px;
+  }
+
+  /* ── Decorative divider ── */
+  .ornament {
+    text-align: center;
+    padding: 56px 0 0;
+    font-size: 18px;
+    color: var(--border);
+    letter-spacing: 8px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .nav { gap: 20px; padding: 16px 20px; flex-wrap: wrap; }
+    .nav a { font-size: 11px; letter-spacing: 1.5px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-image { min-height: 320px; }
+    .hero-text { padding: 36px 24px; }
+    .article-grid { grid-template-columns: 1fr; }
+    .feature-row { grid-template-columns: 1fr; }
+    .feature-text { padding: 36px 24px; }
+    .craft-gallery { grid-template-columns: repeat(2, 1fr); }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 480px) {
+    .craft-gallery { grid-template-columns: repeat(2, 1fr); }
+    .insta-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">最好的花匠是自己 — 记录成长，好好生活 ✦</div>
+
+<nav class="nav">
+  <a href="#diary">日记</a>
+  <a href="#out">出去玩</a>
+  <a href="#" class="nav-logo">记录册</a>
+  <a href="#craft">美工</a>
+  <a href="#daily">碎片</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-image"></div>
+  <div class="hero-text">
+    <div class="label">一个记录日常的小角落</div>
+    <h1>拍照、写字、出去玩、<br>偶尔做点小手工</h1>
+    <p>这里没有什么宏大的叙事，只有真实的日常和碎碎念。</p>
+  </div>
+</section>
+
+<!-- Diary articles -->
+<div class="section-head" id="diary">
+  <h2>最近写的</h2>
+  <p class="sub">随笔 · 碎碎念 · 生活记录</p>
+</div>
+
+<section class="article-grid">
+  <a href="articles/notes.html">
+    <article class="article-card">
+      <img class="img" src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80" alt="notes" loading="lazy">
+      <div class="body">
+        <div class="cat">随笔</div>
+        <h3>那些纸条教会我的事</h3>
+        <div class="date">写给低谷时期的自己</div>
+      </div>
+    </article>
+  </a>
+  <a href="articles/ai.html">
+    <article class="article-card">
+      <img class="img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80" alt="AI" loading="lazy">
+      <div class="body">
+        <div class="cat">碎碎念</div>
+        <h3>AI和我：一个艺术生的迷茫与庆幸</h3>
+        <div class="date">关于未来的胡思乱想</div>
+      </div>
+    </article>
+  </a>
+  <a href="articles/morning.html">
+    <article class="article-card">
+      <img class="img" src="photos/photo-17.jpg" alt="morning" loading="lazy">
+      <div class="body">
+        <div class="cat">校园</div>
+        <h3>早七吐槽大会：谁的大学不修仙？</h3>
+        <div class="date">家人们谁懂啊 😭</div>
+      </div>
+    </article>
+  </a>
+</section>
+
+<!-- Outing -->
+<section class="feature-row" id="out">
+  <div class="feature-text">
+    <div class="cat">出去玩</div>
+    <h3>天气好的周末，<br>当然要出去走走啦</h3>
+    <p>和好朋友一起暴走两万步，吃了想了很久的那家店。阳光、笑声、还有拍了好多张舍不得删的照片 ☀️</p>
+  </div>
+  <img class="feature-img" src="photos/photo-26.jpg" alt="outing" loading="lazy">
+</section>
+
+<!-- Rainy day -->
+<section class="feature-row">
+  <img class="feature-img" src="photos/photo-rain.jpg" alt="rain" loading="lazy">
+  <div class="feature-text">
+    <div class="cat">日常</div>
+    <h3>雨天水坑拍照好看，<br>但踩进去就不美妙了</h3>
+    <p>裤子长这样 👖 风大雨大伞都快吹翻。只想窝在寝室，但这天气拍出来确实好看…</p>
+  </div>
+</section>
+
+<!-- Craft -->
+<div class="section-head" id="craft">
+  <h2>美工作品</h2>
+  <p class="sub">目标是做够 100 张 · 每一张都算数</p>
+</div>
+
+<section class="craft-gallery">
+  <div class="craft-item">
+    <img src="photos/photo-62.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-63.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-64.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-65.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-66.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-67.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-68.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+  <div class="craft-item">
+    <img src="photos/photo-69.jpg" alt="craft" loading="lazy">
+    <div class="craft-label"><span>美工作品</span></div>
+  </div>
+</section>
+
+<div class="progress-wrap" style="margin-top:32px;margin-bottom:64px;">
+  <div class="progress-stats">
+    <span class="current">28</span>
+    <span class="target">/ 100</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill"></div>
+  </div>
+  <p class="progress-note">慢慢来，每一张都算数 ✦</p>
+</div>
+
+<!-- Daily fragments -->
+<div class="section-head" id="daily">
+  <h2>日常碎片</h2>
+  <p class="sub">每一帧都舍不得删</p>
+</div>
+
+<section class="insta-grid">
+  <img src="photos/thumb/photo-01.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-05.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-09.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-12.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-15.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-18.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-22.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-25.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-28.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-30.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-35.jpg" alt="daily" loading="lazy">
+  <img src="photos/thumb/photo-40.jpg" alt="daily" loading="lazy">
+</section>
+
+<!-- Footer -->
+<footer id="about">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>关于这里</h4>
+      <p>
+        18岁 · 艺术生<br>
+        喜欢出去玩、拍照、写日记。<br>
+        记录不是为了给谁看，<br>是为了以后回头看看自己走过的路。
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>导航</h4>
+      <ul>
+        <li><a href="#diary">随笔日记</a></li>
+        <li><a href="#out">出去玩</a></li>
+        <li><a href="#craft">美工作品</a></li>
+        <li><a href="#daily">日常碎片</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>文章</h4>
+      <ul>
+        <li><a href="articles/notes.html">写给低谷的自己</a></li>
+        <li><a href="articles/ai.html">关于AI的碎碎念</a></li>
+        <li><a href="articles/morning.html">早七吐槽大会</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>爱人如养花，最好的花匠是自己</span>
+    <span>用 ♥ 记录每一天</span>
+  </div>
+</footer>
+
+</body>
+</html>
