@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>被GPT-image-2打懵了 · 生活日记</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face{font-family:'HongLeiXiao';src:local('鸿雷小纸条青春体');font-display:swap}
+:root{--paper:#faf8f3;--olive:#8b9d83;--brown:#a68b6f;--terracotta:#c97d6e;--ink:#3a3530;--ink-2:#6b635c;--ink-3:#9c948d;--tape-green:rgba(162,194,160,0.50);--shadow-paper:0 1px 2px rgba(0,0,0,.04),0 3px 8px rgba(0,0,0,.05);--shadow-card:0 2px 4px rgba(0,0,0,.03),0 6px 16px rgba(0,0,0,.05);--ease:cubic-bezier(.22,.61,.36,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Serif SC","PingFang SC","Microsoft YaHei",serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(139,157,131,.06) 28px,rgba(139,157,131,.06) 29px)}
+.wb{position:fixed;inset:0;z-index:0;pointer-events:none}.wb span{position:absolute;border-radius:50%;filter:blur(130px)}
+.wb1{width:650px;height:650px;top:-8%;left:-18%;background:radial-gradient(circle,rgba(139,157,131,.45) 0%,transparent 70%);opacity:.08}
+.wb2{width:420px;height:420px;bottom:-8%;left:25%;background:radial-gradient(circle,rgba(166,139,111,.3) 0%,transparent 70%);opacity:.06}
+.main{max-width:1100px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+.return-bar{padding:28px 0 8px}.return-bar a{color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color .2s;letter-spacing:.5px}.return-bar a:hover{color:var(--olive)}
+.title-area{padding:24px 0 32px;position:relative}.title-area .doodle{position:absolute;pointer-events:none;color:#d4b896;opacity:.5}
+.article-title{font-family:"HongLeiXiao","Ma Shan Zheng","Caveat","ZCOOL XiaoWei",cursive;font-size:clamp(32px,4vw,44px);font-weight:400;line-height:1.3;color:var(--ink);z-index:1;position:relative}
+.article-meta{display:flex;align-items:center;gap:16px;margin-top:10px;font-size:12px;color:var(--ink-3);font-family:"PingFang SC","Microsoft YaHei",sans-serif;z-index:1;position:relative}.article-meta span{display:inline-flex;align-items:center;gap:4px}.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ink-3);opacity:.4}
+.content-area{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:0 0 40px;align-items:start}
+.images-col{position:relative}.main-photo{position:relative;z-index:3;background:#fff;padding:14px;border-radius:3px;box-shadow:var(--shadow-card);transform:rotate(-1deg)}.main-photo img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.main-photo .heart-btn{position:absolute;top:22px;right:22px;background:rgba(255,255,255,.88);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;color:var(--ink-3);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:5;transition:all .25s}.main-photo .heart-btn:hover{color:var(--terracotta);transform:scale(1.1)}.main-photo .heart-btn.liked{color:#fff;background:var(--terracotta)}
+.small-polaroid{position:absolute;bottom:-30px;right:-20px;z-index:5;background:#fff;padding:8px 8px 28px;box-shadow:var(--shadow-card);transform:rotate(5deg);width:160px}.small-polaroid img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.small-polaroid .pin{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;z-index:3;background:radial-gradient(circle at 35% 35%,#f0d0b8,#c97d6e);box-shadow:0 2px 5px rgba(0,0,0,.15)}.small-polaroid .pin::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.5)}
+.washi-tape{position:absolute;z-index:3;pointer-events:none;border-radius:1px;opacity:.8}.euc-deco{position:absolute;pointer-events:none;z-index:0}
+.text-col{position:relative;z-index:1}.text-col p{font-size:14.5px;color:var(--ink-2);line-height:2.1;margin-bottom:18px;font-family:"Noto Serif SC","PingFang SC",serif}
+.text-note{display:inline-block;margin-top:36px;background:#f5f0e0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");padding:16px 20px;box-shadow:var(--shadow-paper);border:1px solid rgba(180,170,140,.12);transform:rotate(1.5deg);font-family:"Caveat","Ma Shan Zheng",cursive;font-size:15px;color:var(--brown);line-height:1.7}
+.bottom-bar{display:flex;align-items:center;justify-content:center;padding:20px 0 50px;border-top:1px solid rgba(0,0,0,.05)}.bottom-nav{display:flex;gap:24px}.bottom-nav a{font-size:13px;color:var(--ink-2);text-decoration:none;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color .2s;letter-spacing:.5px}.bottom-nav a:hover{color:var(--olive)}
+footer{background:#e8e4dc;text-align:center;padding:24px 20px 16px;z-index:1;margin-top:20px}footer .ft-text{font-family:"HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;font-size:18px;color:var(--ink);letter-spacing:.5px}footer .ft-text i{color:var(--terracotta);margin:0 2px;font-size:13px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.title-area{animation:fadeIn .6s var(--ease) both}.content-area{animation:fadeIn .7s var(--ease) .1s both}
+@media(max-width:900px){.content-area{grid-template-columns:1fr;gap:24px}.small-polaroid{position:relative;bottom:auto;right:auto;margin-top:-20px;margin-left:20px}.main{padding:0 20px}}
+</style></head><body>
+<div class="wb"><span class="wb1"></span><span class="wb2"></span></div>
+<div class="main">
+<div class="return-bar"><a href="journal-diary.html">← 返回日记</a></div>
+<section class="title-area">
+<div class="doodle" style="top:-2px;left:-6px;font-size:17px">✧</div>
+<h1 class="article-title">被GPT-image-2打懵了</h1>
+<div class="article-meta"><span><i class="fa-regular fa-calendar"></i> 2026年5月2日</span><span class="meta-dot"></span><span>星期六</span><span class="meta-dot"></span><span><i class="fa-solid fa-robot"></i> AI碎碎念</span></div>
+</section>
+<div class="content-area">
+<div class="images-col">
+<svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:.45" viewBox="0 0 140 170"><g fill="none" stroke="#8b9d83" stroke-width="1.2"><path d="M95,170 Q88,135 100,105 Q108,85 118,65"/><ellipse cx="74" cy="92" rx="15" ry="6" fill="#8b9d83" opacity=".16" transform="rotate(-28,74,92)"/></g></svg>
+<div class="main-photo">
+<button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+<img src="https://picsum.photos/seed/sunset5/600/450" alt="傍晚" loading="lazy">
+</div>
+<div class="small-polaroid"><div class="pin"></div><img src="https://picsum.photos/seed/flower5/300/300" alt="三角梅" loading="lazy"></div>
+<div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg)"></div>
+</div>
+<div class="text-col">
+<p>这几天上网我陷入了迷茫，心慌慌的。究竟是什么原因让我坐立不安？那就是 GPT-image-2 的生图效果——真的，太真了。我看了网上那些照片效果的生成，简直毫无违和感，特别真实。古早年代的照片，连画质都极为相似。照片也就算了，可怕的是视频也可以生成，甚至看不出一点破绽。</p>
+<p>那些美工就更不用说了，AI 的审美效果太顶了，重点是出图速度还飞快，效率超高。看着眼前的美工作品，有种淡淡的绝望——还没毕业就要失业了吗？在 AI 面前我无助得像个孩子 😢</p>
+<p>不知道大家有没有看过之前很火的一个短视频，大学生整蛊父母的——用 AI 生成一个乞丐形象的人在家里，把视频发给父母。父母看到家里的特征都对得上，以为真来了个乞丐，吓得不轻。视频充满喜感，以假乱真。有些父母文化程度不高，对网上的东西容易轻信，很难分辨是真是假。我还看到一个：悬崖上的一只猴子把雨伞当降落伞🪂飞起来的画面，我妈看到笑得可开心了，以为是真的。后来我提醒她👩这个是假的、AI 生成的，她才反应过来。细思极恐啊友友们，谁还能分出来真假来？</p>
+<p>实话实说，AI 出来我也挺庆幸的。为什么？因为它能帮我完成我不会、难以搞定的事情。比如做 PPT——面对空白文档完全没有思路的时候，给 AI 输入主题，不用多久，一份精美的 PPT 就出来了。还帮我解决了焦虑，不擅长不会的事情甚至可以和豆包视频电话，哈哈哈哈，直接视频教学 🤭 很好的一位老师，而且它不会嫌你烦、不会嫌你笨，永远有时间，永远第一时间回复你。悄悄说——也帮我偷了很多次懒。</p>
+<p>我也越来越依赖它，很感谢 AI 的出现。但随之而来的担忧也是真的：AI 太超前、太逼真了，还能生成聊天记录、身份信息，这些能力难免被坏人利用。别说老年人，大部分年轻人也分不出来了，被耍得团团转。</p>
+<p>（上面图片不是我生成的哦！借用别人的图，仅用来表达这篇文章，写的是我个人的想法！）</p>
+<div class="text-note">" AI 是工具，但方向得自己选。<br>&nbsp;&nbsp;害怕归害怕，该学还是要学。 ✦ "</div>
+</div>
+</div>
+<div class="bottom-bar"><div class="bottom-nav"><a href="journal-diary-detail-4.html">← 上一篇</a><a href="journal-diary-detail-6.html">下一篇 →</a></div></div>
+<footer><div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div></footer>
+</div></body></html>

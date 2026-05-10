@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社死现场与面试心得 · 生活日记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face{font-family:'HongLeiXiao';src:local('鸿雷小纸条青春体');font-display:swap;}
+:root{--paper:#faf8f3;--cream:#f5f0e8;--olive:#8b9d83;--olive-bg:#eef1ec;--brown:#a68b6f;--terracotta:#c97d6e;--ink:#3a3530;--ink-2:#6b635c;--ink-3:#9c948d;--tape-green:rgba(162,194,160,0.50);--shadow-paper:0 1px 2px rgba(0,0,0,0.04),0 3px 8px rgba(0,0,0,0.05);--shadow-card:0 2px 4px rgba(0,0,0,0.03),0 6px 16px rgba(0,0,0,0.05);--ease:cubic-bezier(0.22,0.61,0.36,1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Noto Serif SC","PingFang SC","Microsoft YaHei",serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.7;position:relative;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.04;background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(139,157,131,0.06) 28px,rgba(139,157,131,0.06) 29px);}
+.watercolor-bg{position:fixed;inset:0;z-index:0;pointer-events:none;}.watercolor-blob{position:absolute;border-radius:50%;filter:blur(130px);}
+.wb-1{width:650px;height:650px;top:-8%;left:-18%;background:radial-gradient(circle,rgba(139,157,131,0.45) 0%,transparent 70%);opacity:0.08;}
+.wb-2{width:420px;height:420px;bottom:-8%;left:25%;background:radial-gradient(circle,rgba(166,139,111,0.3) 0%,transparent 70%);opacity:0.06;}
+.main{max-width:1100px;margin:0 auto;padding:0 48px;position:relative;z-index:1;}
+.return-bar{padding:28px 0 8px;}.return-bar a{color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color 0.2s;letter-spacing:0.5px;}.return-bar a:hover{color:var(--olive);}
+.title-area{padding:24px 0 32px;position:relative;}.title-area .doodle{position:absolute;pointer-events:none;color:#d4b896;opacity:0.5;}
+.article-title{font-family:"HongLeiXiao","Ma Shan Zheng","Caveat","ZCOOL XiaoWei",cursive;font-size:clamp(32px,4vw,44px);font-weight:normal;line-height:1.3;color:var(--ink);position:relative;z-index:1;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-top:10px;font-size:12px;color:var(--ink-3);font-family:"PingFang SC","Microsoft YaHei",sans-serif;position:relative;z-index:1;}.article-meta span{display:inline-flex;align-items:center;gap:4px;}.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ink-3);opacity:0.4;}
+.content-area{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:0 0 40px;position:relative;align-items:start;}
+.images-col{position:relative;}.main-photo{position:relative;z-index:3;background:#fff;padding:14px;border-radius:3px;box-shadow:var(--shadow-card);transform:rotate(-1deg);}.main-photo img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
+.main-photo .heart-btn{position:absolute;top:22px;right:22px;background:rgba(255,255,255,0.88);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;color:var(--ink-3);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:5;transition:all 0.25s;}.main-photo .heart-btn:hover{color:var(--terracotta);transform:scale(1.1);}.main-photo .heart-btn.liked{color:#fff;background:var(--terracotta);}
+.small-polaroid{position:absolute;bottom:-30px;right:-20px;z-index:5;background:#fff;padding:8px 8px 28px;box-shadow:var(--shadow-card);transform:rotate(5deg);width:160px;}.small-polaroid img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;}
+.small-polaroid .pin{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;z-index:3;background:radial-gradient(circle at 35% 35%,#f0d0b8,#c97d6e);box-shadow:0 2px 5px rgba(0,0,0,0.15);}.small-polaroid .pin::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.5);}
+.washi-tape{position:absolute;z-index:3;pointer-events:none;border-radius:1px;opacity:0.8;}.euc-deco{position:absolute;pointer-events:none;z-index:0;}
+.text-col{position:relative;z-index:1;}.text-col p{font-size:14.5px;color:var(--ink-2);line-height:2.1;margin-bottom:18px;font-family:"Noto Serif SC","PingFang SC",serif;}
+.text-note{display:inline-block;margin-top:36px;background:#f5f0e0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");padding:16px 20px;box-shadow:var(--shadow-paper);border:1px solid rgba(180,170,140,0.12);transform:rotate(1.5deg);font-family:"Caveat","Ma Shan Zheng",cursive;font-size:15px;color:var(--brown);line-height:1.7;}
+.bottom-bar{display:flex;align-items:center;justify-content:center;padding:20px 0 50px;border-top:1px solid rgba(0,0,0,0.05);}.bottom-nav{display:flex;gap:24px;}.bottom-nav a{font-size:13px;color:var(--ink-2);text-decoration:none;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color 0.2s;letter-spacing:0.5px;}.bottom-nav a:hover{color:var(--olive);}
+footer{background:#e8e4dc;text-align:center;padding:24px 20px 16px;position:relative;z-index:1;margin-top:20px;}footer .ft-text{font-family:"HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;font-size:18px;color:var(--ink);letter-spacing:0.5px;}footer .ft-text i{color:var(--terracotta);margin:0 2px;font-size:13px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}.title-area{animation:fadeIn 0.6s var(--ease) both;}.content-area{animation:fadeIn 0.7s var(--ease) 0.1s both;}
+@media(max-width:900px){.content-area{grid-template-columns:1fr;gap:24px}.small-polaroid{position:relative;bottom:auto;right:auto;margin-top:-20px;margin-left:20px}.main{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="watercolor-bg"><div class="watercolor-blob wb-1"></div><div class="watercolor-blob wb-2"></div></div>
+<div class="main">
+<div class="return-bar"><a href="journal-diary.html">← 返回日记</a></div>
+<section class="title-area">
+<div class="doodle" style="top:-2px;left:-6px;font-size:17px;">✦</div>
+<h1 class="article-title">社死现场与面试心得</h1>
+<div class="article-meta"><span><i class="fa-regular fa-calendar"></i> 2026年5月7日</span><span class="meta-dot"></span><span>星期三</span><span class="meta-dot"></span><span><i class="fa-solid fa-bolt"></i> 成长日记</span></div>
+</section>
+<div class="content-area">
+<div class="images-col">
+<svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:0.45;" viewBox="0 0 140 170"><g fill="none" stroke="#8b9d83" stroke-width="1.2"><path d="M95,170 Q88,135 100,105 Q108,85 118,65"/><path d="M100,105 Q88,98 74,92"/><ellipse cx="74" cy="92" rx="15" ry="6" fill="#8b9d83" opacity="0.16" transform="rotate(-28,74,92)"/></g></svg>
+<div class="main-photo">
+<button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+<img src="https://picsum.photos/seed/market2/600/450" alt="菜市场" loading="lazy">
+</div>
+<div class="small-polaroid"><div class="pin"></div><img src="https://picsum.photos/seed/strawberry2/300/300" alt="草莓" loading="lazy"></div>
+<div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
+</div>
+<div class="text-col">
+<p>家人们谁懂啊？！今天上课经历了一次大型社死现场。老师在课上建班级群，要求我们统一改昵称——姓名加学号。结果我一个没注意，手快把群的总昵称给改了……大家直接哈哈大笑，我直接社死。</p>
+<p>本以为我会尴尬一整天，结果过了十几分钟就释怀了。没有纠结，没有反复回想，更没有内耗。突然发现，自己和以前不一样了。曾经被老师点名答不出问题、做了糗事，会想一整节课，甚至难受一整天，总觉得所有人都在看着自己、议论自己。但现在才慢慢明白：人生哪有那么多观众啊，自己就是主角！</p>
+<p>最近还去参加了兼职面试。到了面试的地方迟迟不敢进去，看着场面就很紧张，却也硬着头皮上了。最终并没有自己想象的那么糟糕——反而在面试中越来越放松。面了很多次才懂，面试看的从来不是完美，而是从容与真诚。心里要相信自己可以做到，要给自己打气。把真实想法表达出来，淡定一点，真诚一点，就已经赢过很多人了。</p>
+<p>未来希望自己再勇敢一点，多多尝试。在工作和生活中保持从容、淡定与自信。不怕出错，不怕尴尬，不怕被看见。允许一切发生，也允许自己不完美。</p>
+<div class="text-note">" 人生哪有那么多观众啊，<br>&nbsp;&nbsp;自己就是主角。 ✦ "</div>
+</div>
+</div>
+<div class="bottom-bar">
+<div class="bottom-nav"><a href="journal-diary-detail.html">← 上一篇</a><a href="journal-diary-detail-3.html">下一篇 →</a></div>
+</div>
+<footer><div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div></footer>
+</div>
+</body>
+</html>

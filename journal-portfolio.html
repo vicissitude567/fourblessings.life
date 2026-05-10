@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作品集 · Life·Art·Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face {
+  font-family: 'HongLeiXiao';
+  src: local('鸿雷小纸条青春体');
+  font-display: swap;
+}
+
+:root {
+  --paper: #faf8f3;
+  --cream: #f5f0e8;
+  --warm-white: #fefcf8;
+  --olive: #8b9d83;
+  --olive-light: #b8c5b2;
+  --olive-bg: #eef1ec;
+  --brown: #a68b6f;
+  --terracotta: #c97d6e;
+  --terracotta-soft: #f5e8e4;
+  --ink: #3a3530;
+  --ink-2: #6b635c;
+  --ink-3: #9c948d;
+  --border: #e5ded2;
+  --tape-green: rgba(162,194,160,0.50);
+  --tape-beige: rgba(215,200,175,0.50);
+  --tape-pink: rgba(220,175,175,0.45);
+  --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
+  --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
+  --shadow-lift: 0 4px 8px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.08);
+  --ease: cubic-bezier(0.22,0.61,0.36,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Serif SC","PingFang SC","Microsoft YaHei",serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.04;
+  background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(139,157,131,0.06) 28px, rgba(139,157,131,0.06) 29px);
+}
+
+.watercolor-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.watercolor-blob { position: absolute; border-radius: 50%; filter: blur(130px); }
+.wb-1 { width: 650px; height: 650px; top: -8%; left: -18%; background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%); opacity: 0.08; }
+.wb-2 { width: 550px; height: 550px; top: 38%; right: -12%; background: radial-gradient(circle, rgba(201,125,110,0.35) 0%, transparent 70%); opacity: 0.07; }
+.wb-3 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.06; }
+.wb-4 { width: 300px; height: 300px; top: 60%; left: 5%; background: radial-gradient(circle, rgba(180,190,170,0.3) 0%, transparent 70%); opacity: 0.05; }
+
+/* ── Navigation ── */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 48px;
+  background: rgba(250,248,243,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.02);
+}
+.nav-brand {
+  font-family: "Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink); letter-spacing: 0.5px; text-decoration: none;
+}
+.nav-brand i { color: var(--terracotta); font-size: 16px; margin: 0 2px; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--ink-2); text-decoration: none;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.8px;
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+}
+.nav-links a:hover,.nav-links a.active { color: var(--olive); border-bottom-color: var(--olive); }
+.nav-icons { display: flex; gap: 14px; }
+.nav-icons button {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink-2); font-size: 15px;
+  transition: color 0.2s;
+}
+.nav-icons button:hover { color: var(--olive); }
+
+/* ── Main ── */
+.main { max-width: 1400px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+
+/* ── Page Header ── */
+.page-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 44px 0 36px; position: relative;
+}
+.page-header-left { position: relative; }
+.hd-star { position: absolute; pointer-events: none; color: #d4b896; opacity: 0.55; }
+.page-header-title {
+  font-family: "HongLeiXiao","Ma Shan Zheng","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: clamp(36px,5vw,52px);
+  font-weight: normal; line-height: 1.3;
+  color: var(--ink);
+  position: relative; z-index: 1;
+}
+.page-header-sub {
+  font-size: 14px; color: var(--ink-2); margin-top: 8px;
+  font-family: "Noto Serif SC","PingFang SC",serif;
+  position: relative; z-index: 1;
+}
+.page-header-right { position: relative; flex-shrink: 0; }
+.palette-wrap { position: relative; width: 180px; height: 190px; }
+
+/* ── Masonry Grid ── */
+.masonry {
+  columns: 4; column-gap: 16px;
+  padding: 0 0 40px;
+}
+.masonry-card {
+  break-inside: avoid; margin-bottom: 22px;
+  background: #fdfaf5; border-radius: 6px; overflow: hidden;
+  box-shadow: var(--shadow-paper); cursor: pointer;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
+  display: inline-block; width: 100%;
+}
+.masonry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lift);
+  z-index: 5;
+}
+.masonry-card-img { position: relative; }
+.masonry-card img { width: 100%; display: block; transition: filter 0.35s; }
+.masonry-card:hover img { filter: brightness(1.04); }
+.heart-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(255,255,255,0.85); border: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  cursor: pointer; font-size: 11px; color: var(--ink-3);
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); z-index: 2;
+}
+.heart-btn:hover { color: var(--terracotta); transform: scale(1.1); }
+.heart-btn.liked { color: #fff; background: var(--terracotta); }
+.masonry-card .info { padding: 14px 18px; }
+.masonry-card h4 {
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  font-family: "Noto Serif SC",serif; margin-bottom: 4px;
+}
+.masonry-card .desc { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+
+/* ── Load More ── */
+.load-more-wrap { text-align: center; padding: 8px 0 50px; }
+.btn-load-more {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 36px; border-radius: 50px;
+  background: var(--olive); color: #fff;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  text-decoration: none;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  border: none; cursor: pointer;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 2px 14px rgba(139,157,131,0.22);
+}
+.btn-load-more:hover { background: #7d8f76; transform: translateY(-2px); box-shadow: 0 6px 26px rgba(139,157,131,0.32); }
+.btn-load-more i { font-size: 11px; }
+
+/* ── Footer ── */
+footer {
+  background: #e8e4dc; text-align: center;
+  padding: 24px 20px 16px;
+  position: relative; z-index: 1; margin-top: 20px;
+}
+footer .ft-text {
+  font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 20px; color: var(--ink); letter-spacing: 0.5px;
+}
+footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-header { animation: fadeIn 0.7s var(--ease) both; }
+.masonry { animation: fadeIn 0.7s var(--ease) 0.12s both; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .masonry { columns: 2; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 11px; }
+  .main { padding: 0 16px; }
+  .masonry { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="watercolor-bg">
+  <div class="watercolor-blob wb-1"></div>
+  <div class="watercolor-blob wb-2"></div>
+  <div class="watercolor-blob wb-3"></div>
+  <div class="watercolor-blob wb-4"></div>
+</div>
+
+<nav class="nav">
+  <a href="journal.html" class="nav-brand">Life · Art · Me <i class="fa-regular fa-face-smile"></i></a>
+  <ul class="nav-links">
+    <li><a href="journal.html">首页</a></li>
+    <li><a href="journal-diary.html">生活日记</a></li>
+    <li><a href="journal-portfolio.html" class="active">作品集</a></li>
+    <li><a href="journal-inspo.html">灵感收集</a></li>
+    <li><a href="journal.html#about">关于我</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button aria-label="theme"><i class="fa-regular fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- ═══════════ PAGE HEADER ═══════════ -->
+<section class="page-header">
+  <div class="page-header-left">
+    <div class="hd-star" style="top:-16px;left:-4px;font-size:18px;">✦</div>
+    <div class="hd-star" style="top:-6px;left:44px;font-size:12px;">✧</div>
+    <div class="hd-star" style="top:8px;right:-18px;font-size:13px;">✦</div>
+    <h1 class="page-header-title">作品集 ✧</h1>
+    <p class="page-header-sub">记录我的美工与设计作品</p>
+  </div>
+
+  <div class="page-header-right">
+    <div class="palette-wrap">
+      <!-- Palette + brush line art -->
+      <svg viewBox="0 0 180 190" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:190px;">
+        <g stroke="#9c948d" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+          <!-- Palette body -->
+          <ellipse cx="72" cy="85" rx="58" ry="48" fill="#f5ede4" stroke-width="1.6" opacity="0.9"/>
+          <!-- Thumb hole -->
+          <ellipse cx="72" cy="72" rx="13" ry="11" fill="#faf8f3"/>
+          <!-- Color blobs on palette -->
+          <circle cx="40" cy="68" r="7" fill="#c97d6e" opacity="0.7"/>
+          <circle cx="56" cy="85" r="6" fill="#8b9d83" opacity="0.6"/>
+          <circle cx="38" cy="92" r="8" fill="#d4b896" opacity="0.7"/>
+          <circle cx="52" cy="105" r="6" fill="#b8c5b2" opacity="0.6"/>
+          <circle cx="70" cy="110" r="5" fill="#d4a5a5" opacity="0.6"/>
+          <circle cx="88" cy="105" r="7" fill="#a8b89e" opacity="0.7"/>
+          <circle cx="100" cy="92" r="5" fill="#c9b99a" opacity="0.6"/>
+          <circle cx="95" cy="75" r="6" fill="#d4b896" opacity="0.6"/>
+          <!-- Brush handle -->
+          <line x1="105" y1="135" x2="135" y2="170"/>
+          <!-- Brush ferrule -->
+          <rect x="107" y="130" width="16" height="13" rx="1" fill="#d4c5b0" opacity="0.5"/>
+          <!-- Brush tip -->
+          <path d="M111,131 Q107,122 115,114"/>
+          <path d="M117,131 Q123,122 115,114"/>
+          <!-- Second brush handle -->
+          <line x1="68" y1="135" x2="55" y2="172"/>
+          <rect x="62" y="130" width="12" height="10" rx="1" fill="#d4c5b0" opacity="0.5"/>
+          <path d="M65,131 Q62,124 68,118"/>
+          <path d="M71,131 Q74,124 68,118"/>
+        </g>
+      </svg>
+      <span style="position:absolute;top:0;right:8px;font-size:14px;color:#d4b896;opacity:0.55;pointer-events:none;">✦</span>
+      <span style="position:absolute;bottom:30px;left:-4px;font-size:11px;color:#d4a5a5;opacity:0.45;pointer-events:none;">♡</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MASONRY GRID ═══════════ -->
+<div class="masonry">
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-01.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-02.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-03.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-04.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-05.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-06.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-07.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-08.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-09.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.05</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-10.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.04</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-11.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.04</div>
+    </div>
+  </div>
+
+  <div class="masonry-card">
+    <div class="masonry-card-img">
+      <img src="website/photos/portfolio/pf-12.jpg" alt="artwork" loading="lazy">
+      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <div class="info">
+      <h4>美工作品</h4>
+      <div class="desc">2026.04</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ LOAD MORE ═══════════ -->
+<div class="load-more-wrap">
+  <button class="btn-load-more" id="loadMoreBtn">
+    加载更多 <i class="fa-solid fa-arrow-down"></i>
+  </button>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  var loadCount = 0;
+  var extraCards = [
+    { img: 'website/photos/portfolio/pf-13.jpg', title: '美工作品', desc: '2026.04' },
+    { img: 'website/photos/portfolio/pf-14.jpg', title: '美工作品', desc: '2026.04' },
+    { img: 'website/photos/portfolio/pf-15.jpg', title: '美工作品', desc: '2026.04' },
+    { img: 'website/photos/portfolio/pf-16.jpg', title: '美工作品', desc: '2026.03' },
+    { img: 'website/photos/portfolio/pf-17.jpg', title: '美工作品', desc: '2026.03' },
+    { img: 'website/photos/portfolio/pf-18.jpg', title: '美工作品', desc: '2026.03' },
+    { img: 'website/photos/portfolio/pf-19.jpg', title: '美工作品', desc: '2026.02' },
+    { img: 'website/photos/portfolio/pf-20.jpg', title: '美工作品', desc: '2026.02' },
+    { img: 'website/photos/portfolio/pf-21.jpg', title: '美工作品', desc: '2026.02' },
+    { img: 'website/photos/portfolio/pf-22.jpg', title: '美工作品', desc: '2026.01' },
+    { img: 'website/photos/portfolio/pf-23.jpg', title: '美工作品', desc: '2026.01' },
+    { img: 'website/photos/portfolio/pf-24.jpg', title: '美工作品', desc: '2026.01' },
+    { img: 'website/photos/portfolio/pf-25.jpg', title: '美工作品', desc: '2025.12' },
+    { img: 'website/photos/portfolio/pf-26.jpg', title: '美工作品', desc: '2025.12' },
+    { img: 'website/photos/portfolio/pf-27.jpg', title: '美工作品', desc: '2025.12' },
+    { img: 'website/photos/portfolio/pf-28.jpg', title: '美工作品', desc: '2025.11' },
+    { img: 'website/photos/portfolio/pf-29.jpg', title: '美工作品', desc: '2025.11' },
+    { img: 'website/photos/portfolio/pf-30.jpg', title: '美工作品', desc: '2025.11' }
+  ];
+
+  var btn = document.getElementById('loadMoreBtn');
+  var masonry = document.querySelector('.masonry');
+
+  btn.addEventListener('click', function() {
+    btn.innerHTML = '加载中…';
+    btn.disabled = true;
+    setTimeout(function() {
+      var batch = extraCards.slice(loadCount, loadCount + 3);
+      batch.forEach(function(c) {
+        var card = document.createElement('div');
+        card.className = 'masonry-card';
+        card.innerHTML =
+          '<div class="masonry-card-img">' +
+          '<img src="' + c.img + '" alt="artwork" loading="lazy">' +
+          '<button class="heart-btn" onclick="this.classList.toggle(\'liked\')"><i class="fa-regular fa-heart"></i></button>' +
+          '</div>' +
+          '<div class="info"><h4>' + c.title + '</h4><div class="desc">' + c.desc + '</div></div>';
+        masonry.appendChild(card);
+      });
+      loadCount += 3;
+      btn.innerHTML = '加载更多 <i class="fa-solid fa-arrow-down"></i>';
+      btn.disabled = false;
+      if (loadCount >= extraCards.length) {
+        btn.style.display = 'none';
+      }
+    }, 800);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>画一棵生命树 · 生活日记</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face{font-family:'HongLeiXiao';src:local('鸿雷小纸条青春体');font-display:swap}
+:root{--paper:#faf8f3;--olive:#8b9d83;--brown:#a68b6f;--terracotta:#c97d6e;--ink:#3a3530;--ink-2:#6b635c;--ink-3:#9c948d;--tape-green:rgba(162,194,160,0.50);--shadow-paper:0 1px 2px rgba(0,0,0,.04),0 3px 8px rgba(0,0,0,.05);--shadow-card:0 2px 4px rgba(0,0,0,.03),0 6px 16px rgba(0,0,0,.05);--ease:cubic-bezier(.22,.61,.36,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Serif SC","PingFang SC","Microsoft YaHei",serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(139,157,131,.06) 28px,rgba(139,157,131,.06) 29px)}
+.wb{position:fixed;inset:0;z-index:0;pointer-events:none}.wb span{position:absolute;border-radius:50%;filter:blur(130px)}
+.wb1{width:650px;height:650px;top:-8%;left:-18%;background:radial-gradient(circle,rgba(139,157,131,.45) 0%,transparent 70%);opacity:.08}
+.wb2{width:420px;height:420px;bottom:-8%;left:25%;background:radial-gradient(circle,rgba(166,139,111,.3) 0%,transparent 70%);opacity:.06}
+.main{max-width:1100px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+.return-bar{padding:28px 0 8px}.return-bar a{color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color .2s;letter-spacing:.5px}.return-bar a:hover{color:var(--olive)}
+.title-area{padding:24px 0 32px;position:relative}.title-area .doodle{position:absolute;pointer-events:none;color:#d4b896;opacity:.5}
+.article-title{font-family:"HongLeiXiao","Ma Shan Zheng","Caveat","ZCOOL XiaoWei",cursive;font-size:clamp(32px,4vw,44px);font-weight:400;line-height:1.3;color:var(--ink);z-index:1;position:relative}
+.article-meta{display:flex;align-items:center;gap:16px;margin-top:10px;font-size:12px;color:var(--ink-3);font-family:"PingFang SC","Microsoft YaHei",sans-serif;z-index:1;position:relative}.article-meta span{display:inline-flex;align-items:center;gap:4px}.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ink-3);opacity:.4}
+.content-area{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:0 0 40px;align-items:start}
+.images-col{position:relative}.main-photo{position:relative;z-index:3;background:#fff;padding:14px;border-radius:3px;box-shadow:var(--shadow-card);transform:rotate(-1deg)}.main-photo img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.main-photo .heart-btn{position:absolute;top:22px;right:22px;background:rgba(255,255,255,.88);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;color:var(--ink-3);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:5;transition:all .25s}.main-photo .heart-btn:hover{color:var(--terracotta);transform:scale(1.1)}.main-photo .heart-btn.liked{color:#fff;background:var(--terracotta)}
+.small-polaroid{position:absolute;bottom:-30px;right:-20px;z-index:5;background:#fff;padding:8px 8px 28px;box-shadow:var(--shadow-card);transform:rotate(5deg);width:160px}.small-polaroid img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.small-polaroid .pin{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;z-index:3;background:radial-gradient(circle at 35% 35%,#f0d0b8,#c97d6e);box-shadow:0 2px 5px rgba(0,0,0,.15)}.small-polaroid .pin::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.5)}
+.washi-tape{position:absolute;z-index:3;pointer-events:none;border-radius:1px;opacity:.8}.euc-deco{position:absolute;pointer-events:none;z-index:0}
+.text-col{position:relative;z-index:1}.text-col p{font-size:14.5px;color:var(--ink-2);line-height:2.1;margin-bottom:18px;font-family:"Noto Serif SC","PingFang SC",serif}
+.text-note{display:inline-block;margin-top:36px;background:#f5f0e0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");padding:16px 20px;box-shadow:var(--shadow-paper);border:1px solid rgba(180,170,140,.12);transform:rotate(1.5deg);font-family:"Caveat","Ma Shan Zheng",cursive;font-size:15px;color:var(--brown);line-height:1.7}
+.bottom-bar{display:flex;align-items:center;justify-content:center;padding:20px 0 50px;border-top:1px solid rgba(0,0,0,.05)}.bottom-nav{display:flex;gap:24px}.bottom-nav a{font-size:13px;color:var(--ink-2);text-decoration:none;font-family:"PingFang SC","Microsoft YaHei",sans-serif;transition:color .2s;letter-spacing:.5px}.bottom-nav a:hover{color:var(--olive)}
+footer{background:#e8e4dc;text-align:center;padding:24px 20px 16px;z-index:1;margin-top:20px}footer .ft-text{font-family:"HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;font-size:18px;color:var(--ink);letter-spacing:.5px}footer .ft-text i{color:var(--terracotta);margin:0 2px;font-size:13px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.title-area{animation:fadeIn .6s var(--ease) both}.content-area{animation:fadeIn .7s var(--ease) .1s both}
+@media(max-width:900px){.content-area{grid-template-columns:1fr;gap:24px}.small-polaroid{position:relative;bottom:auto;right:auto;margin-top:-20px;margin-left:20px}.main{padding:0 20px}}
+</style></head><body>
+<div class="wb"><span class="wb1"></span><span class="wb2"></span></div>
+<div class="main">
+<div class="return-bar"><a href="journal-diary.html">← 返回日记</a></div>
+<section class="title-area">
+<div class="doodle" style="top:-2px;left:-6px;font-size:17px">✦</div>
+<h1 class="article-title">画一棵生命树</h1>
+<div class="article-meta"><span><i class="fa-regular fa-calendar"></i> 2026年5月5日</span><span class="meta-dot"></span><span>星期一</span><span class="meta-dot"></span><span><i class="fa-solid fa-tree"></i> 心理课作业</span></div>
+</section>
+<div class="content-area">
+<div class="images-col">
+<svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:.45" viewBox="0 0 140 170"><g fill="none" stroke="#8b9d83" stroke-width="1.2"><path d="M95,170 Q88,135 100,105 Q108,85 118,65"/><ellipse cx="74" cy="92" rx="15" ry="6" fill="#8b9d83" opacity=".16" transform="rotate(-28,74,92)"/></g></svg>
+<div class="main-photo">
+<button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+<img src="https://picsum.photos/seed/cafe4/600/450" alt="咖啡馆" loading="lazy">
+</div>
+<div class="small-polaroid"><div class="pin"></div><img src="https://picsum.photos/seed/cake4/300/300" alt="蛋糕" loading="lazy"></div>
+<div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg)"></div>
+</div>
+<div class="text-col">
+<p>昨天和今天给自己画了一棵生命树！这是心理课的作业，还挺有意思的——要画一棵属于自己生命树。树根写自己的国家与民族，树干写自身的优点和品性，树枝记录短期的小愿望，树叶🍃写给所有需要感恩的人，最后的果实，留给好好爱自己。</p>
+<p>本来只是随便写写画画，写着写着突然就迷茫了。仔细梳理才发现，我好像一点都不了解自己。说不清真正想要什么，也没想明白自己到底喜欢什么样的生活。不得不说，这种自我剖析的方式真的很适合静下心内省。偶尔停下来和自己对话，好好看清内心，才能想清楚——自己到底想以什么样的方式好好生活。树上的字是我对现在和以后的自己说的话😆 Come on！</p>
+<p>分享下昨天随手做的小手工～🥳 好看不？过程超治愈还很好玩，大家猜猜我画的是什么？无奖竞猜，答案留言就行😄</p>
+<p>最后想说：人生是旷野不是轨道，按自己喜欢的方式去生活就好了。人生短短三万天，重在体验嘛！还有我最近特别喜欢的一句网络热梗：人生不过葱姜蒜——葱明一点，姜🫚就一下，不行就蒜🧄了！！非常幽默诙谐，但是很有启发和道理。日子怎么过都是过，不如选一条轻松、开心、取悦自己的路？保持乐观，自在随心，好好生活！沉舟侧畔千帆过，病树前头万木春。</p>
+<p>但是不等于随心所欲啊，该学习还是要学的——为了有更好的未来和生活，为了成为更优秀的自己，为了遇见更优秀的人！</p>
+<p>来个小插曲：水坑拍出来好看，一不小心踩进去心情就不美妙了。雨天大家的裤子👖是不是都长这样？今天的雨巨大无比，风也巨大，伞都容易被吹翻，只想安心待在寝室不想出门上课。诶！要是路近点还是很想去的，哈哈哈哈，又给自己找上借口了😄 马上五一了！放假！坚持完明天满课的一天，假期也就到了，哈哈哈哈哈～</p>
+<p>最后祝看到这篇帖子的友友们天天开心，一帆风顺！</p>
+<div class="text-note">" 人生是旷野不是轨道，<br>&nbsp;&nbsp;按自己喜欢的方式去生活。 ✦ "</div>
+</div>
+</div>
+<div class="bottom-bar"><div class="bottom-nav"><a href="journal-diary-detail-3.html">← 上一篇</a><a href="journal-diary-detail-5.html">下一篇 →</a></div></div>
+<footer><div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div></footer>
+</div></body></html>
