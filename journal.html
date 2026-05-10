@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life·Art·Me ♡ 记录册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face {
+  font-family: 'HongLeiXiao';
+  src: local('鸿雷小纸条青春体');
+  font-display: swap;
+}
+
+:root {
+  --paper: #faf8f3;
+  --cream: #f5f0e8;
+  --warm-white: #fefcf8;
+  --olive: #8b9d83;
+  --olive-light: #b8c5b2;
+  --olive-bg: #eef1ec;
+  --brown: #a68b6f;
+  --terracotta: #c97d6e;
+  --terracotta-soft: #f5e8e4;
+  --ink: #3a3530;
+  --ink-2: #6b635c;
+  --ink-3: #9c948d;
+  --border: #e5ded2;
+  --tape-green: rgba(162,194,160,0.50);
+  --tape-beige: rgba(215,200,175,0.50);
+  --tape-pink: rgba(220,175,175,0.45);
+  --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
+  --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
+  --shadow-lift: 0 4px 8px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.08);
+  --ease: cubic-bezier(0.22,0.61,0.36,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Serif SC","PingFang SC","Microsoft YaHei",serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Paper texture ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.04;
+  background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(139,157,131,0.06) 28px, rgba(139,157,131,0.06) 29px);
+}
+
+/* ── Watercolor blobs ── */
+.watercolor-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.watercolor-blob {
+  position: absolute; border-radius: 50%; filter: blur(130px);
+}
+.wb-1 {
+  width: 650px; height: 650px; top: -8%; left: -18%;
+  background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%);
+  opacity: 0.08;
+}
+.wb-2 {
+  width: 550px; height: 550px; top: 38%; right: -12%;
+  background: radial-gradient(circle, rgba(201,125,110,0.35) 0%, transparent 70%);
+  opacity: 0.07;
+}
+.wb-3 {
+  width: 420px; height: 420px; bottom: -8%; left: 25%;
+  background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%);
+  opacity: 0.06;
+}
+.wb-4 {
+  width: 300px; height: 300px; top: 60%; left: 5%;
+  background: radial-gradient(circle, rgba(180,190,170,0.3) 0%, transparent 70%);
+  opacity: 0.05;
+}
+
+/* ── Navigation ── */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 48px;
+  background: rgba(250,248,243,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.02);
+}
+.nav-brand {
+  font-family: "Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink); letter-spacing: 0.5px; text-decoration: none;
+}
+.nav-brand i { color: var(--terracotta); font-size: 16px; margin: 0 2px; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--ink-2); text-decoration: none;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.8px;
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+}
+.nav-links a:hover,.nav-links a.active { color: var(--olive); border-bottom-color: var(--olive); }
+.nav-icons { display: flex; gap: 14px; }
+.nav-icons button {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink-2); font-size: 15px; padding: 4px;
+  transition: color 0.2s;
+}
+.nav-icons button:hover { color: var(--olive); }
+
+/* ── Main ── */
+.main { max-width: 1600px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 1; }
+
+/* ── Hero ── */
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 50px; padding: 50px 0 30px; align-items: start;
+  position: relative;
+}
+.hero-left { padding-top: 24px; padding-left: 40px; position: relative; }
+
+/* Hero doodles */
+.hero-doodle { position: absolute; pointer-events: none; z-index: 0; }
+.hd-star { color: #d4b896; opacity: 0.6; }
+.hd-heart { color: #d4a5a5; opacity: 0.55; }
+
+.hero-title {
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-weight: normal;
+  font-size: clamp(44px,6vw,68px);
+  font-weight: 400; line-height: 1.15;
+  color: var(--ink); margin-bottom: 18px;
+  position: relative; z-index: 1;
+}
+.hero-title .line2 { display: block; margin-left: 20px; margin-top: -4px; }
+.hero-title .heart {
+  display: inline-block; color: var(--terracotta); font-size: 0.5em;
+  vertical-align: middle; margin-left: 8px;
+}
+.hero-subtitle {
+  font-size: 14px; color: var(--ink-2); line-height: 1.85;
+  margin-bottom: 28px; max-width: 380px;
+  font-family: "Noto Serif SC","PingFang SC",serif;
+  position: relative; z-index: 1;
+}
+.hero-title-img {
+  position: absolute; top: 10px; left: 350px; z-index: 2;
+  width: 220px; object-fit: contain;
+}
+@media (max-width: 768px) { .hero-title-img { width: 130px; left: 180px; top: 0; } }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 32px; border-radius: 50px;
+  background: var(--olive); color: #fff;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  text-decoration: none;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  border: none; cursor: pointer;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 2px 14px rgba(139,157,131,0.22);
+  position: relative; z-index: 1;
+}
+.btn:hover { background: #7d8f76; transform: translateY(-2px); box-shadow: 0 6px 26px rgba(139,157,131,0.32); }
+
+/* ── Hero right: Collage ── */
+.hero-right { position: relative; min-height: 520px; }
+
+/* 🔥 修改点 1：将固定宽度改为百分比适应父级 */
+.collage { position: relative; width: 100%; max-width: 700px; margin: 0 auto; }
+.collage-inner { position: relative; width: 100%; height: 100%; }
+
+/* Washi tape strips */
+.washi {
+  position: absolute; z-index: 5; opacity: 0.85;
+  border-radius: 1px; pointer-events: none;
+}
+
+/* Main polaroid */
+.polaroid-main {
+  position: absolute; top: 20px; left: 0; right: 0; z-index: 5;
+  margin: 0 auto;
+  background: #fff; padding: 14px 14px 48px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.09);
+  transform: rotate(-2.5deg);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s;
+  width: 360px;
+  max-width: 90%; /* 增加自适应最大宽度 */
+}
+.polaroid-main:hover { transform: rotate(-1deg) translateY(-5px); box-shadow: 0 4px 10px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.1); }
+.polaroid-main img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+
+/* Secondary photo - brushes overlapping */
+/* 🔥 修改点 2：去掉固定的 left: 440px，改为 right: 5% */
+.photo-brush {
+  position: absolute; top: 300px; right: 5%; z-index: 6;
+  background: #fff; padding: 10px 10px 34px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(6deg);
+  width: 140px;
+  transition: transform 0.3s var(--ease);
+}
+.photo-brush:hover { transform: rotate(3deg) translateY(-3px); z-index: 6; }
+.photo-brush img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.polaroid-main .cap {
+  font-family: "Caveat",cursive; font-size: 16px; text-align: center;
+  color: var(--ink-2); margin-top: 10px; letter-spacing: 0.3px;
+}
+
+.pushpin {
+  position: absolute; top: -12px; left: 45%; z-index: 6;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f0d0b8, #c97d6e);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.pushpin::after {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5);
+}
+
+/* Sticky note - Today (parchment feel) */
+/* 🔥 修改点 3：去掉固定的 left: 20px，改为 left: 2% */
+.note-sticky {
+  position: absolute; top: 60px; left: 2%; z-index: 4;
+  background: #f3edd8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  padding: 24px 18px 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.06);
+  transform: rotate(3.5deg);
+  width: 230px;
+  max-width: 45%; /* 避免小屏幕遮挡主图 */
+  transition: transform 0.3s var(--ease);
+  font-family: "Caveat","Ma Shan Zheng",cursive;
+  color: var(--ink-2);
+  border: 1px solid rgba(180,170,140,0.15);
+}
+.note-sticky:hover { transform: rotate(0.5deg) translateY(-3px); }
+.note-sticky h4 { font-family: "Caveat",cursive; font-size: 22px; font-weight: 600; margin-bottom: 14px; color: var(--ink); letter-spacing: 0.5px; }
+.note-sticky ul { list-style: none; font-size: 14px; line-height: 1.9; }
+.note-sticky ul li { display: flex; align-items: baseline; gap: 7px; }
+.note-sticky ul li::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
+  border: 1.2px solid var(--ink-3);
+  border-radius: 1px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  transform: rotate(-1deg);
+  opacity: 0.7;
+}
+.note-sticky ul li.done::before {
+  content: '✓';
+  border-color: var(--olive);
+  color: var(--olive);
+  font-size: 12px;
+  line-height: 8px;
+  text-align: center;
+  font-family: "Caveat",cursive;
+  opacity: 1;
+}
+
+/* Eucalyptus branch */
+.euc-svg { position: absolute; top: -10px; right: 0; z-index: 1; opacity: 0.6; pointer-events: none; }
+
+/* Enjoy the little things text */
+.enjoy-text {
+  position: absolute; bottom: 60px; right: 5%; z-index: 4;
+  font-family: "Caveat",cursive; font-size: 15px; color: var(--brown);
+  transform: rotate(-3deg); letter-spacing: 0.4px;
+  line-height: 1.4;
+}
+
+/* ── Section headers ── */
+.section-title {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.section-title h2 {
+  font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 20px; font-weight: 600;
+  letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;
+  color: var(--ink);
+}
+.section-title .more {
+  font-size: 11px; color: var(--ink-3); text-decoration: none;
+  letter-spacing: 0.5px; font-family: "PingFang SC",sans-serif;
+  transition: color 0.2s;
+}
+.section-title .more:hover { color: var(--olive); }
+
+/* ── Three column ── */
+.three-col {
+  display: grid; grid-template-columns: 190px 1fr 280px;
+  gap: 36px; padding: 0px 0 40px;
+}
+
+/* ── About card ── */
+.about-wrap { position: relative; }
+.about-card {
+  background: #f5f0e0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  padding: 34px 22px 26px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 2px;
+  transform: rotate(3deg) scale(1.08);
+  border: 1px solid rgba(180,170,140,0.15);
+  margin-left: 10px;
+}
+.about-card h3 { font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive; font-size: 18px; margin-bottom: 14px; letter-spacing: 0.3px; color: var(--ink); }
+.about-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--ink-2); line-height: 2.0;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+}
+.about-item i { font-size: 11px; color: var(--ink-3); width: 14px; text-align: center; }
+.about-polaroid {
+  position: absolute; bottom: -30px; right: -10px;
+  background: #fff; padding: 5px 5px 16px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(7deg);
+  width: 72px; z-index: 3;
+}
+.about-polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.small-pin {
+  width: 14px; height: 14px; top: -7px; left: 50%;
+  transform: translateX(-50%); position: absolute;
+}
+
+/* ── Section box ── */
+.section-box {
+  background: rgba(253,250,244,0.6);
+  border: 1px solid rgba(180,170,145,0.35);
+  border-radius: 8px;
+  padding: 18px 20px 14px;
+  position: relative;
+}
+
+/* ── Diary cards ── */
+.diary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.diary-card {
+  background: #fdfaf5; border-radius: 6px; overflow: hidden;
+  box-shadow: var(--shadow-paper); cursor: pointer;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.diary-card:nth-child(odd) { transform: rotate(-0.3deg); }
+.diary-card:nth-child(even) { transform: rotate(0.2deg); }
+.diary-card:hover {
+  transform: translateY(-5px) rotate(0deg) !important;
+  box-shadow: var(--shadow-lift);
+  z-index: 5;
+}
+.diary-card img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; transition: filter 0.35s; }
+.diary-card:hover img { filter: brightness(1.04); }
+.diary-card .info { padding: 12px 14px; position: relative; }
+.diary-card .date {
+  font-size: 10px; color: var(--ink-3); letter-spacing: 1px;
+  font-family: "PingFang SC",sans-serif; margin-bottom: 3px;
+}
+.diary-card h4 {
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  font-family: "Noto Serif SC",serif; margin-bottom: 3px;
+}
+.diary-card .desc { font-size: 10px; color: var(--ink-3); line-height: 1.5; }
+.heart-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(255,255,255,0.82); border: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  cursor: pointer; font-size: 11px; color: var(--ink-3);
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.heart-btn:hover { color: var(--terracotta); transform: scale(1.1); }
+.heart-btn.liked { color: #fff; background: var(--terracotta); }
+
+/* ── Right: Inspiration ── */
+.inspo-images {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 16px;
+}
+.inspo-img {
+  background: #fff; padding: 6px 6px 24px;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(0.5deg); transition: transform 0.3s var(--ease);
+}
+.inspo-img:nth-child(2) { transform: rotate(-0.5deg); }
+.inspo-img:hover { transform: rotate(0deg) translateY(-3px); }
+.inspo-img img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+
+.inspo-bottom {
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.inspo-note {
+  background: #f5f0e0; padding: 10px 12px;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-1deg);
+  font-family: "PingFang SC",sans-serif;
+  font-size: 11px; color: var(--ink-2);
+  text-align: center;
+  line-height: 1.5;
+}
+.inspo-note .e { font-family: "Caveat",cursive; font-size: 13px; }
+
+.color-dots { display: flex; gap: 8px; justify-content: center; margin-top: 6px; }
+.color-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06), inset 0 -1px 2px rgba(0,0,0,0.06);
+  border: 2px solid #fff;
+}
+.cd-1 { background: #7a8b72; } .cd-2 { background: #9aaa8e; }
+.cd-3 { background: #c4b5a0; } .cd-4 { background: #d8cfc2; }
+
+.color-insp-card {
+  background: #f5f0e0; padding: 10px 12px;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(1deg);
+  font-family: "Caveat",cursive;
+  font-size: 14px; color: var(--brown);
+  line-height: 1.4;
+}
+.color-insp-card .sub { font-size: 11px; color: var(--ink-3); font-family: "PingFang SC",sans-serif; }
+
+.dried-deco { font-size: 22px; text-align: right; opacity: 0.45; margin-top: 8px; pointer-events: none; }
+
+/* ── Footer ── */
+footer {
+  background: #e8e4dc;
+  text-align: center; padding: 24px 20px 16px;
+  position: relative; z-index: 1; margin-top: 20px;
+}
+footer .ft-text {
+  font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 20px; color: var(--ink); letter-spacing: 0.5px; margin-bottom: 12px;
+}
+footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
+footer .social { display: flex; gap: 18px; justify-content: center; }
+footer .social a {
+  color: var(--ink-3); font-size: 16px; transition: all 0.2s; text-decoration: none;
+  width: 32px; height: 32px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.5);
+}
+footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8); transform: translateY(-2px); }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero { animation: fadeIn 0.7s var(--ease) both; }
+.three-col { animation: fadeIn 0.7s var(--ease) 0.12s both; }
+
+/* ── Responsive ── */
+@media (max-width: 1150px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; padding: 36px 0 50px; }
+  .hero-right { min-height: 500px; }
+  .three-col { grid-template-columns: 1fr; gap: 24px; }
+  .diary-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 11px; }
+  .main { padding: 0 16px; }
+  .hero { padding: 20px 0 36px; }
+  .hero-right { min-height: 420px; }
+  .diary-grid { grid-template-columns: 1fr; }
+  
+  /* 🔥 修改点 4：针对手机端的小微调 */
+  .polaroid-main { width: 220px; padding: 10px 10px 40px; }
+  .photo-brush { width: 110px; right: 5%; }
+  .note-sticky { width: 155px; font-size: 10px; left: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="watercolor-bg">
+  <div class="watercolor-blob wb-1"></div>
+  <div class="watercolor-blob wb-2"></div>
+  <div class="watercolor-blob wb-3"></div>
+  <div class="watercolor-blob wb-4"></div>
+</div>
+
+<nav class="nav">
+  <a href="#" class="nav-brand">Life · Art · Me <i class="fa-regular fa-face-smile"></i></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">首页</a></li>
+    <li><a href="journal-diary.html">生活日记</a></li>
+    <li><a href="journal-portfolio.html">作品集</a></li>
+    <li><a href="journal-inspo.html">灵感收集</a></li>
+    <li><a href="#about">关于我</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button aria-label="theme" id="themeToggle"><i class="fa-regular fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-doodle hd-star" style="top:-20px;left:-4px;font-size:20px;">✦</div>
+    <div class="hero-doodle hd-star" style="top:-8px;left:38px;font-size:14px;">✧</div>
+    <div class="hero-doodle hd-star" style="top:6px;left:80px;font-size:11px;">✦</div>
+    <div class="hero-doodle hd-heart" style="top:90px;right:40px;font-size:14px;">♡</div>
+
+    <h1 class="hero-title">
+      记录生活<br>
+      <span class="line2">收藏热爱<span class="heart">♡</span></span>
+    </h1>
+    <img class="hero-title-img" src="journal-hero-img.png" alt="">
+    <p class="hero-subtitle">18岁的我，热爱生活和美工，<br>用画笔记录美好，用心感受世界。</p>
+    <a href="#diary" class="btn">开始浏览 <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+
+  <!-- Collage -->
+  <div class="hero-right">
+    <div class="collage">
+      <div class="collage-inner">
+      <!-- Eucalyptus -->
+      <svg class="euc-svg" width="140" height="170" viewBox="0 0 140 170">
+        <g fill="none" stroke="#8b9d83" stroke-width="1.4" opacity="0.55">
+          <path d="M90,170 Q82,130 95,95 Q102,75 112,55"/>
+          <path d="M95,95 Q82,88 68,82"/>
+          <path d="M100,85 Q108,80 118,75"/>
+          <path d="M105,70 Q100,66 90,62"/>
+          <path d="M112,55 Q105,50 95,45"/>
+          <ellipse cx="68" cy="82" rx="16" ry="7" fill="#8b9d83" opacity="0.2" transform="rotate(-28,68,82)"/>
+          <ellipse cx="118" cy="75" rx="14" ry="6" fill="#8b9d83" opacity="0.2" transform="rotate(22,118,75)"/>
+          <ellipse cx="90" cy="62" rx="13" ry="5" fill="#8b9d83" opacity="0.18" transform="rotate(-12,90,62)"/>
+          <ellipse cx="95" cy="45" rx="12" ry="5" fill="#8b9d83" opacity="0.15" transform="rotate(8,95,45)"/>
+        </g>
+      </svg>
+
+      <!-- Main polaroid -->
+      <div class="polaroid-main">
+        <div class="pushpin"></div>
+        <img src="hero-daily.jpg" alt="日常生活" loading="lazy">
+        <div class="cap">日常生活 <i class="fa-regular fa-sun" style="font-size:13px;"></i></div>
+      </div>
+
+      <!-- Brush photo -->
+      <div class="photo-brush">
+        <img src="hero-small.jpg" alt="小照片" loading="lazy">
+      </div>
+
+      <!-- Sticky note -->
+      <div class="note-sticky">
+        <div class="washi" style="top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:55px;height:14px;background:var(--tape-beige);border-radius:1px;"></div>
+        <h4>Today :</h4>
+        <ul>
+          <li class="done">美工作品</li>
+          <li class="done">学习色彩搭配</li>
+          <li class="done">拍照记录生活</li>
+          <li>看一本好书</li>
+          <li>运动 / 保持好心情</li>
+        </ul>
+      </div>
+
+      <div class="enjoy-text">
+        Enjoy the<br>little things. <span style="font-size:12px;color:#d4a5a5;">♡</span>
+      </div>
+      </div><!-- /collage-inner -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THREE COLUMN ═══════════ -->
+<div class="three-col" id="about">
+
+  <!-- Left: About -->
+  <div class="about-wrap">
+    <div class="about-card">
+      <div class="washi" style="position:absolute;top:-6px;left:22%;width:50px;height:16px;background:var(--tape-green);transform:rotate(4deg);z-index:2;border-radius:1px;opacity:0.7;"></div>
+      <h3>关于我 <i class="fa-solid fa-leaf" style="font-size:11px;color:var(--olive);"></i></h3>
+      <div class="about-item"><i class="fa-regular fa-user"></i> 18岁</div>
+      <div class="about-item"><i class="fa-solid fa-at" style="font-size:10px;"></i> 美术生</div>
+      <div class="about-item"><i class="fa-regular fa-heart"></i> 热爱生活和美好事物</div>
+      <div class="about-item"><i class="fa-solid fa-camera"></i> 喜欢美工、设计、拍照</div>
+      <div class="about-item"><i class="fa-regular fa-face-smile"></i> 正在努力成为更好的自己！</div>
+      <div class="about-polaroid">
+        <div class="pushpin small-pin"></div>
+        <img src="https://images.unsplash.com/photo-1520763185298-1b434c919102?w=200&h=200&fit=crop" alt="white tulip" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- Center: Diary -->
+  <div id="diary" class="section-box">
+    <div class="section-title">
+      <h2>生活日记 <i class="fa-regular fa-star" style="font-size:13px;color:#d4b896;"></i></h2>
+      <a href="journal-diary.html" class="more">查看更多 <i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></a>
+    </div>
+    <div class="diary-grid">
+      <a href="journal-diary-detail.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+        <img src="diary-selfie.jpg" alt="自拍杆照片" loading="lazy">
+        <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-solid fa-heart"></i></button>
+        <div class="info">
+          <div class="date">2026.05.08</div>
+          <h4>用自拍杆拍出人生照片</h4>
+          <div class="desc">给自己安排上了自拍杆，果然没让我失望。自己才是最懂自己的人呀～</div>
+        </div>
+      </a>
+      <a href="journal-diary-detail-2.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+        <img src="diary-resume.jpg" alt="社死现场照片" loading="lazy">
+        <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-solid fa-heart"></i></button>
+        <div class="info">
+          <div class="date">2026.05.07</div>
+          <h4>社死现场与面试心得</h4>
+          <div class="desc">群昵称翻车现场！但过了十几分钟就释怀了。人生哪有那么多观众啊。</div>
+        </div>
+      </a>
+      <a href="journal-diary-detail-3.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+        <img src="diary-skincare.jpg" alt="护肤照片" loading="lazy">
+        <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-solid fa-heart"></i></button>
+        <div class="info">
+          <div class="date">2026.05.06</div>
+          <h4>护肤的正确顺序</h4>
+          <div class="desc">原来不是看哪个顺眼涂哪个。先补水→再精华→最后面霜，顺序对了才有用。</div>
+        </div>
+      </a>
+      <a href="journal-diary-detail-4.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+        <img src="diary-lifetree.jpg" alt="生命树照片" loading="lazy">
+        <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-solid fa-heart"></i></button>
+        <div class="info">
+          <div class="date">2026.05.05</div>
+          <h4>画一棵生命树</h4>
+          <div class="desc">心理课作业画了一棵生命树，写着写着发现，自己好像还不够了解自己。</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Right: Inspiration -->
+  <div id="inspo" class="section-box">
+    <div class="section-title">
+      <h2>灵感收集 <i class="fa-solid fa-sun" style="font-size:13px;color:#d4b896;"></i></h2>
+      <a href="#" class="more">查看更多 <i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></a>
+    </div>
+    <div class="inspo-images">
+      <div class="inspo-img">
+        <img src="https://picsum.photos/seed/landscape1/400/400" alt="风景" loading="lazy">
+      </div>
+      <div class="inspo-img">
+        <img src="https://picsum.photos/seed/landscape2/400/400" alt="风景" loading="lazy">
+      </div>
+    </div>
+    <div class="inspo-bottom">
+      <div class="inspo-note">
+        <div class="e">配色灵感</div>
+        <div class="color-dots">
+          <div class="color-dot cd-1"></div>
+          <div class="color-dot cd-2"></div>
+          <div class="color-dot cd-3"></div>
+          <div class="color-dot cd-4"></div>
+        </div>
+      </div>
+      <div class="color-insp-card">
+        <div>Color</div>
+        <div>Inspiration</div>
+        <div class="sub">♡</div>
+      </div>
+    </div>
+    <div class="dried-deco"><i class="fa-solid fa-seedling" style="color:var(--olive);"></i></div>
+  </div>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div>
+</footer>
+
+</div>
+
+<script>
+// Theme toggle
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', function() {
+  const isDark = document.body.style.background === 'rgb(40, 38, 35)';
+  if (isDark) {
+    document.body.style.background = '';
+    document.body.style.color = '';
+    this.innerHTML = '<i class="fa-regular fa-moon"></i>';
+  } else {
+    document.body.style.background = '#282623';
+    document.body.style.color = '#e8e4dd';
+    this.innerHTML = '<i class="fa-regular fa-sun"></i>';
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const t = this.getAttribute('href');
+    if (t.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(t);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
