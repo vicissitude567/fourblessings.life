@@ -92,7 +92,7 @@ body::after {
 /* ── Navigation ── */
 .nav {
   position: sticky; top: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
   padding: 14px 48px;
   background: rgba(250,248,243,0.88);
   backdrop-filter: blur(18px);
@@ -101,6 +101,7 @@ body::after {
   box-shadow: 0 1px 10px rgba(0,0,0,0.02);
 }
 .nav-brand {
+  position: absolute; left: 48px;
   font-family: "Caveat","ZCOOL XiaoWei",cursive;
   font-size: 26px; font-weight: 600;
   color: var(--ink); letter-spacing: 0.5px; text-decoration: none;
@@ -115,14 +116,6 @@ body::after {
   font-family: "PingFang SC","Microsoft YaHei",sans-serif;
 }
 .nav-links a:hover,.nav-links a.active { color: var(--olive); border-bottom-color: var(--olive); }
-.nav-icons { display: flex; gap: 14px; }
-.nav-icons button {
-  background: none; border: none; cursor: pointer;
-  color: var(--ink-2); font-size: 15px; padding: 4px;
-  transition: color 0.2s;
-}
-.nav-icons button:hover { color: var(--olive); }
-
 /* ── Main ── */
 .main { max-width: 1600px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 1; }
 
@@ -159,10 +152,10 @@ body::after {
   position: relative; z-index: 1;
 }
 .hero-title-img {
-  position: absolute; top: 10px; left: 350px; z-index: 2;
-  width: 220px; object-fit: contain;
+  position: absolute; top: 10px; left: 430px; z-index: 2;
+  width: 330px; object-fit: contain;
 }
-@media (max-width: 768px) { .hero-title-img { width: 130px; left: 180px; top: 0; } }
+@media (max-width: 768px) { .hero-title-img { width: 200px; left: 200px; top: 0; } }
 
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -509,10 +502,6 @@ footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8);
     <li><a href="journal-inspo.html">灵感收集</a></li>
     <li><a href="#about">关于我</a></li>
   </ul>
-  <div class="nav-icons">
-    <button aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <button aria-label="theme" id="themeToggle"><i class="fa-regular fa-moon"></i></button>
-  </div>
 </nav>
 
 <div class="main">
@@ -656,7 +645,7 @@ footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8);
   <div id="inspo" class="section-box">
     <div class="section-title">
       <h2>灵感收集 <i class="fa-solid fa-sun" style="font-size:13px;color:#d4b896;"></i></h2>
-      <a href="#" class="more">查看更多 <i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></a>
+      <a href="journal-inspo.html" class="more">查看更多 <i class="fa-solid fa-arrow-right" style="font-size:9px;"></i></a>
     </div>
     <div class="inspo-images">
       <div class="inspo-img">
@@ -695,21 +684,6 @@ footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8);
 </div>
 
 <script>
-// Theme toggle
-const themeBtn = document.getElementById('themeToggle');
-themeBtn.addEventListener('click', function() {
-  const isDark = document.body.style.background === 'rgb(40, 38, 35)';
-  if (isDark) {
-    document.body.style.background = '';
-    document.body.style.color = '';
-    this.innerHTML = '<i class="fa-regular fa-moon"></i>';
-  } else {
-    document.body.style.background = '#282623';
-    document.body.style.color = '#e8e4dd';
-    this.innerHTML = '<i class="fa-regular fa-sun"></i>';
-  }
-});
-
 // Smooth scroll
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', function(e) {

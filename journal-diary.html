@@ -345,12 +345,12 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
   <aside class="sidebar">
     <div class="sidebar-card">
       <ul class="sidebar-list">
-        <li><a href="#" class="active"><i class="fa-solid fa-border-all"></i> 全部</a></li>
-        <li><a href="#"><i class="fa-regular fa-pen-to-square"></i> 日常记录</a></li>
-        <li><a href="#"><i class="fa-solid fa-book"></i> 学习日常</a></li>
-        <li><a href="#"><i class="fa-solid fa-plane"></i> 旅行时光</a></li>
-        <li><a href="#"><i class="fa-solid fa-seedling"></i> 成长碎片</a></li>
-        <li><a href="#"><i class="fa-regular fa-face-smile"></i> 情绪小记</a></li>
+        <li><a href="#" class="active" data-filter="all"><i class="fa-solid fa-border-all"></i> 全部</a></li>
+        <li><a href="#" data-filter="daily"><i class="fa-regular fa-pen-to-square"></i> 日常记录</a></li>
+        <li><a href="#" data-filter="study"><i class="fa-solid fa-book"></i> 学习日常</a></li>
+        <li><a href="#" data-filter="travel"><i class="fa-solid fa-plane"></i> 旅行时光</a></li>
+        <li><a href="#" data-filter="growth"><i class="fa-solid fa-seedling"></i> 成长碎片</a></li>
+        <li><a href="#" data-filter="mood"><i class="fa-regular fa-face-smile"></i> 情绪小记</a></li>
       </ul>
     </div>
   </aside>
@@ -359,7 +359,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
   <div class="diary-area">
     <div class="diary-grid-3">
 
-      <a href="journal-diary-detail.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail.html" class="diary-card" data-category="daily" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-selfie.jpg" alt="自拍杆照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -371,7 +371,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <a href="journal-diary-detail-2.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail-2.html" class="diary-card" data-category="daily" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-resume.jpg" alt="社死现场照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -383,7 +383,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <a href="journal-diary-detail-3.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail-3.html" class="diary-card" data-category="study" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-skincare.jpg" alt="护肤照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -395,7 +395,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <a href="journal-diary-detail-4.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail-4.html" class="diary-card" data-category="growth" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-lifetree.jpg" alt="生命树照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -407,7 +407,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <a href="journal-diary-detail-5.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail-5.html" class="diary-card" data-category="study" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-ai.jpg" alt="GPT照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -419,7 +419,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <a href="journal-diary-detail-6.html" class="diary-card" style="text-decoration:none;color:inherit;display:block;">
+      <a href="journal-diary-detail-6.html" class="diary-card" data-category="travel" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
           <img src="diary-holiday.jpg" alt="五一假期照片" loading="lazy">
           <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
@@ -431,41 +431,17 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         </div>
       </a>
 
-      <div class="diary-card">
+      <a href="journal-diary-detail-7.html" class="diary-card" data-category="mood" style="text-decoration:none;color:inherit;display:block;">
         <div class="diary-card-img">
-          <img src="https://picsum.photos/seed/d7/400/300" alt="diary" loading="lazy">
-          <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+          <img src="diary-gaokao.jpg" alt="高考随笔" loading="lazy">
+          <button class="heart-btn" onclick="event.preventDefault();this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="info">
-          <div class="date">2026.05.08</div>
-          <h4>雨天的灵感</h4>
-          <div class="desc">窗外的雨声是最好的白噪音，窝在窗边画了一整本速写，灵感不断涌现。</div>
+          <div class="date">2026.05.07</div>
+          <h4>写给高考的你，也写给曾经的自己</h4>
+          <div class="desc">整理旧物翻到高三写给自己的小纸条，考试失利后陷入深深的自卑，通过写纸条给自己打气、找恩师倾诉，慢慢走了出来。轻舟已过万重山，愿每一位高考生勇敢应考。</div>
         </div>
-      </div>
-
-      <div class="diary-card">
-        <div class="diary-card-img">
-          <img src="https://picsum.photos/seed/d8/400/300" alt="diary" loading="lazy">
-          <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <div class="info">
-          <div class="date">2026.05.05</div>
-          <h4>立夏的小仪式</h4>
-          <div class="desc">煮了一壶青梅茶，画了一张立夏主题的小卡片，寄给远方的好朋友。</div>
-        </div>
-      </div>
-
-      <div class="diary-card">
-        <div class="diary-card-img">
-          <img src="https://picsum.photos/seed/d9/400/300" alt="diary" loading="lazy">
-          <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <div class="info">
-          <div class="date">2026.05.01</div>
-          <h4>五月的第一天</h4>
-          <div class="desc">新的一个月，给自己定下几个小目标，希望五月能温柔以待每一个日子。</div>
-        </div>
-      </div>
+      </a>
 
     </div>
 
@@ -487,33 +463,59 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
 (function() {
   const cards = document.querySelectorAll('.diary-card');
   const perPage = 6;
-  const totalPages = Math.ceil(cards.length / perPage);
   let current = 1;
+  let activeFilter = 'all';
+  let filteredCards = [];
+  let totalPages = 1;
+
+  function getFilteredCards() {
+    if (activeFilter === 'all') return Array.from(cards);
+    return Array.from(cards).filter(c => c.dataset.category === activeFilter);
+  }
 
   function showPage(page) {
     current = page;
-    cards.forEach((card, i) => {
-      card.style.display = (i >= (page - 1) * perPage && i < page * perPage) ? '' : 'none';
+    filteredCards = getFilteredCards();
+    totalPages = Math.ceil(filteredCards.length / perPage) || 1;
+    if (current > totalPages) current = totalPages;
+    cards.forEach(c => c.style.display = 'none');
+    filteredCards.forEach((c, i) => {
+      if (i >= (current - 1) * perPage && i < current * perPage) {
+        c.style.display = '';
+      }
     });
     buildPagination();
   }
 
   function buildPagination() {
-    const pag = document.getElementById('pagination');
+    var pag = document.getElementById('pagination');
     pag.innerHTML = '';
-    for (let i = 1; i <= totalPages; i++) {
-      const a = document.createElement('a');
+    if (totalPages <= 1) { pag.style.display = 'none'; return; }
+    pag.style.display = '';
+    for (var i = 1; i <= totalPages; i++) {
+      var a = document.createElement('a');
       a.href = '#';
       a.textContent = i;
       if (i === current) a.className = 'active';
       a.addEventListener('click', function(e) {
         e.preventDefault();
-        showPage(i);
-        window.scrollTo({ top: pag.offsetTop - 200, behavior: 'smooth' });
+        showPage(parseInt(this.textContent));
+        window.scrollTo({ top: document.getElementById('pagination').offsetTop - 200, behavior: 'smooth' });
       });
       pag.appendChild(a);
     }
   }
+
+  // Sidebar filter
+  document.querySelectorAll('.sidebar-list a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar-list a').forEach(function(l) { l.classList.remove('active'); });
+      this.classList.add('active');
+      activeFilter = this.dataset.filter;
+      showPage(1);
+    });
+  });
 
   showPage(1);
 })();

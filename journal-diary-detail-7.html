@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>画室的午后 · 生活日记</title>
+<title>写给高考的你 · 生活日记</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
@@ -28,10 +28,8 @@
   --border: #e5ded2;
   --tape-green: rgba(162,194,160,0.50);
   --tape-beige: rgba(215,200,175,0.50);
-  --tape-pink: rgba(220,175,175,0.45);
   --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
   --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
-  --shadow-lift: 0 4px 8px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.08);
   --ease: cubic-bezier(0.22,0.61,0.36,1);
 }
 
@@ -64,7 +62,7 @@ body::after {
 .wb-1 { width: 650px; height: 650px; top: -8%; left: -18%; background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%); opacity: 0.08; }
 .wb-2 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.06; }
 
-.main { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+.main { max-width: 800px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
 
 /* ── Return bar ── */
 .return-bar { padding: 28px 0 8px; }
@@ -98,13 +96,17 @@ body::after {
 
 /* ── Content collage ── */
 .content-area {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 40px; padding: 0 0 40px; position: relative;
-  align-items: start;
+  padding: 0 0 40px; position: relative;
 }
 
-/* Left: images */
-.images-col { position: relative; }
+/* Float images */
+.images-float {
+  float: left;
+  width: 340px;
+  margin-right: 36px;
+  margin-bottom: 24px;
+  position: relative;
+}
 .main-photo {
   position: relative; z-index: 3;
   background: #fff; padding: 14px; border-radius: 3px;
@@ -147,26 +149,26 @@ body::after {
   position: absolute; z-index: 3; pointer-events: none;
   border-radius: 1px; opacity: 0.8;
 }
-
-/* Eucalyptus decoration */
 .euc-deco { position: absolute; pointer-events: none; z-index: 0; }
 
-/* Right: text */
-.text-col { position: relative; z-index: 1; }
+/* Text flows around images */
 .text-col p {
   font-size: 14.5px; color: var(--ink-2); line-height: 2.1;
-  margin-bottom: 18px; font-family: "Noto Serif SC","PingFang SC",serif;
+  margin-bottom: 18px; text-indent: 2em;
+  font-family: "Noto Serif SC","PingFang SC",serif;
 }
 .text-note {
-  display: inline-block; margin-top: 36px;
+  display: block; margin: 40px 0 0;
+  padding: 20px 28px;
   background: #f5f0e0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  padding: 16px 20px;
   box-shadow: var(--shadow-paper);
   border: 1px solid rgba(180,170,140,0.12);
-  transform: rotate(1.5deg);
-  font-family: "Caveat","Ma Shan Zheng",cursive;
-  font-size: 15px; color: var(--brown); line-height: 1.7;
+  border-radius: 3px;
+  font-family: "Caveat","Ma Shan Zheng","HongLeiXiao",cursive;
+  font-size: 17px; color: var(--brown); line-height: 1.8;
+  text-align: center;
+  transform: rotate(0.5deg);
 }
 
 /* ── Bottom bar ── */
@@ -202,8 +204,8 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 .title-area { animation: fadeIn 0.6s var(--ease) both; }
 .content-area { animation: fadeIn 0.7s var(--ease) 0.1s both; }
 
-@media (max-width: 900px) {
-  .content-area { grid-template-columns: 1fr; gap: 24px; }
+@media (max-width: 768px) {
+  .images-float { float: none; width: 100%; margin-right: 0; }
   .small-polaroid { position: relative; bottom: auto; right: auto; margin-top: -20px; margin-left: 20px; }
   .main { padding: 0 20px; }
 }
@@ -228,21 +230,21 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
   <div class="doodle" style="top:-2px;left:-6px;font-size:17px;">✦</div>
   <div class="doodle" style="top:10px;left:40px;font-size:11px;">✧</div>
   <div class="doodle" style="bottom:10px;right:20px;font-size:14px;color:#d4a5a5;">♡</div>
-  <h1 class="article-title">用自拍杆拍出人生照片</h1>
+  <h1 class="article-title">写给高考的你，也写给曾经的自己</h1>
   <div class="article-meta">
-    <span><i class="fa-regular fa-calendar"></i> 2026年5月8日</span>
+    <span><i class="fa-regular fa-calendar"></i> 2026年5月7日</span>
     <span class="meta-dot"></span>
-    <span>星期四</span>
+    <span>星期三</span>
     <span class="meta-dot"></span>
-    <span><i class="fa-solid fa-camera-retro"></i> 自拍记录</span>
+    <span><i class="fa-solid fa-pen"></i> 麓麓随笔</span>
   </div>
 </section>
 
-<!-- ═══════════ CONTENT COLLAGE ═══════════ -->
+<!-- ═══════════ CONTENT ═══════════ -->
 <div class="content-area">
 
-  <!-- Left: Images -->
-  <div class="images-col">
+  <!-- Float images left, text wraps around -->
+  <div class="images-float">
     <!-- Eucalyptus top-right -->
     <svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:0.45;" viewBox="0 0 140 170">
       <g fill="none" stroke="#8b9d83" stroke-width="1.2">
@@ -257,31 +259,53 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
     <!-- Main photo -->
     <div class="main-photo">
       <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-      <img src="detail1-main.jpg" alt="自拍" loading="lazy">
+      <img src="detail7-main.jpg" alt="书桌" loading="lazy">
+    </div>
+
+    <!-- Small polaroid -->
+    <div class="small-polaroid">
+      <div class="pin"></div>
+      <img src="detail7-small.jpg" alt="纸条" loading="lazy">
     </div>
 
     <!-- Washi tape on main photo -->
     <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
   </div>
 
-  <!-- Right: Text -->
+  <!-- Text wraps around images -->
   <div class="text-col">
     <p>
-      最近刷到好多姐妹用自拍杆拍出了人生照片，羡慕了好久好久，真的被美到了。狠狠心动，犹豫了几天，终于也给自己安排上啦！果然没让我失望，于是就有了下面这些照片……
+      昨天返校，整理东西时翻到了高三下半年自己写的小纸条。一股难以言说的情绪涌上心头……
     </p>
     <p>
-      虽然目前拍得还不算完美，只会几个简单的姿势和角度，但真的超级开心。相信以后一定会越拍越好的，慢慢摸索，慢慢进步～
+      那时人生大事的考试失利了，特别特别伤心，伤心上升到自卑，情绪无法释放，整天郁郁寡欢。在走廊走路都低着头，头都不敢抬起来。现在回想起那段经历，心里还是堵得慌，心疼自己。
     </p>
     <p>
-      以前总期待着别人帮我拍，现在突然想通了：自己才是最懂自己的人呀。知道哪个角度好看，喜欢什么样的表情，想要什么样的感觉——不用迁就别人的节奏，安安静静给自己拍照，真的特别自在。
+      我就通过给自己写小作文、小纸条来激励自己。写一些肯定的话，比如"要相信自己""人生容错率很大""允许自己慢一点""没别人优秀没关系"。也写了很多鸡汤，比如"所谓无底深渊，下去，也是前程万里。既然已经跌到谷底，怎么走都是向上"。当然也有自责的话，恨自己没有学习的天赋、记忆力不好……
     </p>
     <p>
-      按自己的想法来就好。内心丰盈者，独行也如众。未来会多多记录，把生活里的小美好都拍下来。老了以后翻到这些照片，心里一定会很甜蜜吧——想起往日的美好时光，想起自己的青春。
+      这个方法确实帮了我很多，让我慢慢走出了失利的阴霾，变得乐观起来。现在看那些纸条，只觉得当时的自己还没开智。丢了好多，但当时书包夹层每层都有，随手一捞就是好几张。
     </p>
-    <div class="text-note">
-      " 自己才是最懂自己的人，<br>&nbsp;&nbsp;安安静静地给自己拍照，真的特别自在。 ✦ "
-    </div>
+    <p>
+      记得有段时间特别不信任自己，写小作文也无法释放，就去找恩师说了烦恼。还没走到办公室门口，不争气的眼泪就下来了。老师鼓励我说时间会冲淡一切，还分享了她教过的学生的经历。瞬间心情就好了很多。
+    </p>
+    <p>
+      那个瞬间的感触，文字能记录，照片能记录——所以我喜欢拍照和写随笔。不是为了给谁看，而是记录自己的成长蜕变。现在翻初中高中的青涩字迹和照片，心里暖暖的。
+    </p>
+    <p>
+      如今回头看，轻舟已过万重山。虽然最终也没有考得很好，但当时拼尽全力，不后悔就够了。高考打击了我，也锻炼了我的内心。虽然现在依旧迷茫、普通，但我已不缺从头再来的勇气。
+    </p>
   </div>
+
+  <!-- Full-width quote and closing -->
+  <div style="clear:both;"></div>
+  <div class="text-note" style="margin-top:20px;">
+    " 爱人如养花，最好的花匠一定是自己。<br>要自信，要有勇气，要接纳自己的所有。<br>勇敢的人先享受世界。 "
+  </div>
+
+  <p style="text-align:center;margin-top:20px;">
+    祝福所有要高考的宝子们，高考加油，金榜题名！<br>无论结果如何，人生都不会轻易完蛋。
+  </p>
 
 </div>
 
@@ -289,7 +313,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 <div class="bottom-bar">
   <div class="bottom-nav">
     <a href="journal-diary-detail-6.html">← 上一篇</a>
-    <a href="journal-diary-detail-2.html">下一篇 →</a>
+    <a href="journal-diary.html">返回列表</a>
   </div>
 </div>
 

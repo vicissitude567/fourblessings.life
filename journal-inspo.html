@@ -170,14 +170,17 @@ body::after {
 
 /* ── Inspo Grid ── */
 .inspo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  columns: 3;
+  column-gap: 22px;
   position: relative;
 }
 
 /* Card base */
 .inspo-card {
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 22px;
   background: #fff;
   box-shadow: var(--shadow-card);
   border-radius: 4px;
@@ -200,7 +203,7 @@ body::after {
 .inspo-card-img { position: relative; }
 .inspo-card-img img { width: 100%; display: block; object-fit: cover; }
 
-.inspo-card-body { padding: 12px 16px; }
+.inspo-card-body { padding: 10px 14px; }
 
 /* Washi tape */
 .tape {
@@ -246,6 +249,7 @@ body::after {
   text-align: center; color: var(--ink-2); margin-top: 6px; letter-spacing: 0.3px;
 }
 
+
 /* ── Footer ── */
 footer {
   background: #e8e4dc; text-align: center;
@@ -268,13 +272,14 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
 @media (max-width: 1100px) {
   .content-layout { grid-template-columns: 1fr; }
   .sidebar { position: static; }
-  .inspo-grid { grid-template-columns: 1fr; }
+  .inspo-grid { columns: 2; }
 }
 @media (max-width: 768px) {
   .nav { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 11px; }
   .main { padding: 0 16px; }
+  .inspo-grid { columns: 1; }
 }
 </style>
 </head>
@@ -322,13 +327,13 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
   <aside class="sidebar">
     <div class="sidebar-card">
       <ul class="sidebar-list">
-        <li><a href="#" class="active"><i class="fa-solid fa-border-all"></i> 全部</a></li>
-        <li><a href="#"><i class="fa-solid fa-palette"></i> 配色灵感</a></li>
-        <li><a href="#"><i class="fa-solid fa-camera"></i> 摄影灵感</a></li>
-        <li><a href="#"><i class="fa-solid fa-pencil"></i> 插画灵感</a></li>
-        <li><a href="#"><i class="fa-solid fa-feather"></i> 文字灵感</a></li>
-        <li><a href="#"><i class="fa-solid fa-cube"></i> 设计灵感</a></li>
-        <li><a href="#"><i class="fa-solid fa-seedling"></i> 生活灵感</a></li>
+        <li><a href="#" data-filter="all" class="active"><i class="fa-solid fa-border-all"></i> 全部</a></li>
+        <li><a href="#" data-filter="color"><i class="fa-solid fa-palette"></i> 配色灵感</a></li>
+        <li><a href="#" data-filter="photo"><i class="fa-solid fa-camera"></i> 摄影灵感</a></li>
+        <li><a href="#" data-filter="illustration"><i class="fa-solid fa-pencil"></i> 插画灵感</a></li>
+        <li><a href="#" data-filter="text"><i class="fa-solid fa-feather"></i> 文字灵感</a></li>
+        <li><a href="#" data-filter="design"><i class="fa-solid fa-cube"></i> 设计灵感</a></li>
+        <li><a href="#" data-filter="life"><i class="fa-solid fa-seedling"></i> 生活灵感</a></li>
       </ul>
     </div>
   </aside>
@@ -337,10 +342,10 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
   <div class="inspo-grid">
 
     <!-- 1. 配色灵感 -->
-    <div class="inspo-card paper">
+    <div class="inspo-card paper" data-category="color">
       <div class="tape" style="top:-5px;left:30%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/naturepalette/420/200" alt="nature" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-color.jpg" alt="配色灵感" loading="lazy" style="aspect-ratio:4/3;">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">配色灵感</div>
@@ -353,20 +358,20 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 2. 摄影灵感 - 宝丽来 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="photo">
       <div class="pin" style="left:48%;"></div>
       <div class="plrd-body">
-        <img src="https://picsum.photos/seed/seaflower2/420/320" alt="photo" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-sea.jpg" alt="海边的花" loading="lazy" style="aspect-ratio:4/3;">
         <div class="plrd-cap">摄影灵感</div>
         <div style="font-size:10px;text-align:center;color:var(--ink-3);font-family:'PingFang SC',sans-serif;margin-top:2px;">海边的花</div>
       </div>
     </div>
 
     <!-- 3. 插画灵感 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="illustration">
       <div class="tape" style="top:-5px;left:34%;width:40px;height:12px;background:var(--tape-pink);transform:rotate(-5deg);"></div>
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/linedrawing/420/200" alt="illustration" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-illustration.jpg" alt="插画灵感" loading="lazy" style="aspect-ratio:4/3;">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">插画灵感</div>
@@ -375,32 +380,44 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 4. 文字灵感 -->
-    <div class="inspo-card paper">
+    <div class="inspo-card paper" data-category="text">
       <div class="tape" style="top:-5px;left:38%;width:44px;height:13px;background:var(--tape-beige);transform:rotate(-3deg);"></div>
-      <div class="inspo-card-body" style="padding:24px 22px 20px;">
+      <div class="inspo-card-body" style="padding:16px 18px 14px;">
         <div class="c-title">文字灵感</div>
-        <div style="font-family:'Ma Shan Zheng','Caveat',cursive;font-size:16px;color:var(--ink-2);line-height:1.8;margin:8px 0;">
+        <div style="font-family:'Ma Shan Zheng','Caveat',cursive;font-size:15px;color:var(--ink-2);line-height:1.5;margin:4px 0;">
           "万物皆有裂痕，<br>那是光照进来的地方。"
         </div>
         <div class="c-sub">温柔治愈的句子</div>
       </div>
     </div>
 
+    <!-- 文字灵感 2 -->
+    <div class="inspo-card paper" data-category="text">
+      <div class="tape" style="top:-5px;left:36%;width:44px;height:13px;background:var(--tape-pink);transform:rotate(2deg);"></div>
+      <div class="inspo-card-body" style="padding:16px 18px 14px;">
+        <div class="c-title">文字灵感</div>
+        <div style="font-family:'Ma Shan Zheng','Caveat',cursive;font-size:15px;color:var(--ink-2);line-height:1.5;margin:4px 0;">
+          "亲爱的朋友，<br>人生永远柳暗花明。"
+        </div>
+        <div class="c-sub">治愈系文字</div>
+      </div>
+    </div>
+
     <!-- 5. 设计灵感 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="design">
       <div class="tape" style="top:-5px;left:28%;width:50px;height:14px;background:var(--tape-green);transform:rotate(4deg);"></div>
       <div class="plrd-body">
-        <img src="https://picsum.photos/seed/warmroom2/440/330" alt="design" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-room.jpg" alt="温暖房间" loading="lazy" style="aspect-ratio:4/3;">
         <div class="plrd-cap">设计灵感</div>
         <div style="font-size:10px;text-align:center;color:var(--ink-3);font-family:'PingFang SC',sans-serif;margin-top:2px;">温暖的房间</div>
       </div>
     </div>
 
     <!-- 6. 生活灵感 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="life">
       <div class="pin" style="left:auto;right:20%;"></div>
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/coffee2/420/300" alt="life" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-life.jpg" alt="生活灵感" loading="lazy" style="aspect-ratio:4/3;">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">生活灵感</div>
@@ -409,9 +426,9 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 7. Color Inspiration 2 -->
-    <div class="inspo-card paper">
+    <div class="inspo-card paper" data-category="color">
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/morandi/420/200" alt="morandi" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-morandi.jpg" alt="莫兰迪" loading="lazy" style="aspect-ratio:4/3;">
       </div>
       <div class="inspo-card-body">
         <div class="c-title" style="font-size:15px;">Color Inspiration</div>
@@ -427,7 +444,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 8. Extra photo -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="photo">
       <div class="plrd-body">
         <img src="https://picsum.photos/seed/vaselife/420/320" alt="extra" loading="lazy" style="aspect-ratio:4/3;">
         <div class="plrd-cap" style="font-size:13px;">日常静物</div>
@@ -435,8 +452,8 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 9. 手写便签 -->
-    <div class="inspo-card paper">
-      <div class="inspo-card-body" style="text-align:center;">
+    <div class="inspo-card paper" data-category="text">
+      <div class="inspo-card-body" style="padding:16px 18px 14px;text-align:center;">
         <div style="font-family:'Caveat','Ma Shan Zheng',cursive;font-size:18px;color:var(--brown);line-height:1.6;">
           collect<br>beautiful<br>moments <span style="color:#d4a5a5;font-size:14px;">♡</span>
         </div>
@@ -444,9 +461,9 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 10. 设计灵感2 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="design">
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/minimaldesk/420/300" alt="design2" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-desk.jpg" alt="工作台" loading="lazy" style="aspect-ratio:4/3;">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">设计灵感</div>
@@ -455,7 +472,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 11. 摄影灵感2 -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="photo">
       <div class="tape" style="top:-5px;left:32%;width:44px;height:12px;background:var(--tape-pink);transform:rotate(-4deg);"></div>
       <div class="inspo-card-img">
         <img src="https://picsum.photos/seed/morninglight/420/320" alt="photo2" loading="lazy" style="aspect-ratio:4/3;">
@@ -467,10 +484,10 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     </div>
 
     <!-- 12. Extra photo -->
-    <div class="inspo-card">
+    <div class="inspo-card" data-category="life">
       <div class="pin"></div>
       <div class="plrd-body">
-        <img src="https://picsum.photos/seed/blossom/420/320" alt="blossom" loading="lazy" style="aspect-ratio:1/1;">
+        <img src="inspo-blossom.jpg" alt="花开了" loading="lazy" style="aspect-ratio:1/1;">
         <div class="plrd-cap">花开了</div>
       </div>
     </div>
@@ -484,6 +501,61 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
 </footer>
 
 </div>
+
+
+
+
+
+<script>
+(function() {
+  var cards = document.querySelectorAll('.inspo-card');
+  var grid = document.querySelector('.inspo-grid');
+  var activeFilter = 'all';
+
+  function filterCards() {
+    cards.forEach(function(c) {
+      if (activeFilter === 'all' || c.dataset.category === activeFilter) {
+        c.style.display = '';
+      } else {
+        c.style.display = 'none';
+      }
+    });
+    // All: columns (masonry). Filtered: flex (3 per row, natural height)
+    if (activeFilter === 'all') {
+      grid.style.display = '';
+      grid.style.columns = '';
+      grid.style.columnGap = '';
+      grid.style.flexWrap = '';
+      grid.style.gap = '';
+      grid.style.alignItems = '';
+      cards.forEach(function(c) {
+        c.style.width = '';
+        c.style.marginBottom = '';
+      });
+    } else {
+      grid.style.display = 'flex';
+      grid.style.columns = 'auto';
+      grid.style.flexWrap = 'wrap';
+      grid.style.gap = '22px';
+      grid.style.alignItems = 'flex-start';
+      cards.forEach(function(c) {
+        c.style.width = c.style.display === 'none' ? '' : 'calc((100% - 44px) / 3)';
+        c.style.marginBottom = '0';
+      });
+    }
+  }
+
+  document.querySelectorAll('.sidebar-list a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar-list a').forEach(function(l) { l.classList.remove('active'); });
+      this.classList.add('active');
+      activeFilter = this.dataset.filter;
+      filterCards();
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
