@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>属于我的日记网站 · 生活日记</title>
+<title>微风、美食与平凡幸福 · 生活日记</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
@@ -28,6 +28,7 @@
   --border: #e5ded2;
   --tape-green: rgba(162,194,160,0.50);
   --tape-beige: rgba(215,200,175,0.50);
+  --tape-pink: rgba(220,175,175,0.45);
   --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
   --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
   --ease: cubic-bezier(0.22,0.61,0.36,1);
@@ -60,7 +61,8 @@ body::after {
 .watercolor-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 .watercolor-blob { position: absolute; border-radius: 50%; filter: blur(130px); }
 .wb-1 { width: 650px; height: 650px; top: -8%; left: -18%; background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%); opacity: 0.08; }
-.wb-2 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.06; }
+.wb-2 { width: 550px; height: 550px; top: 38%; right: -12%; background: radial-gradient(circle, rgba(201,125,110,0.35) 0%, transparent 70%); opacity: 0.07; }
+.wb-3 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.06; }
 
 .main { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
 
@@ -94,7 +96,7 @@ body::after {
 .article-meta span { display: inline-flex; align-items: center; gap: 4px; }
 .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); opacity: 0.4; }
 
-/* ── Content collage ── */
+/* ── Content ── */
 .content-area {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 40px; padding: 0 0 40px; position: relative;
@@ -141,6 +143,19 @@ body::after {
   width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5);
 }
 
+/* Extra photo below */
+.extra-photo {
+  position: relative; z-index: 3; margin-top: 30px;
+  background: #fff; padding: 10px 10px 34px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-2deg); width: 200px;
+}
+.extra-photo img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; }
+.extra-photo .cap {
+  font-family: "Caveat",cursive; font-size: 13px; text-align: center;
+  color: var(--ink-2); margin-top: 6px; letter-spacing: 0.3px;
+}
+
 .washi-tape {
   position: absolute; z-index: 3; pointer-events: none;
   border-radius: 1px; opacity: 0.8;
@@ -151,8 +166,12 @@ body::after {
 .text-col { position: relative; z-index: 1; }
 .text-col p {
   font-size: 14.5px; color: var(--ink-2); line-height: 2.1;
-  margin-bottom: 18px; text-indent: 2em;
-  font-family: "Noto Serif SC","PingFang SC",serif;
+  margin-bottom: 18px; font-family: "Noto Serif SC","PingFang SC",serif;
+}
+.text-col .day-label {
+  display: inline-block; margin-top: 8px; margin-bottom: 6px;
+  font-family: "Caveat","Ma Shan Zheng",cursive;
+  font-size: 18px; color: var(--olive); letter-spacing: 0.5px;
 }
 .text-note {
   display: inline-block; margin-top: 36px;
@@ -212,6 +231,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 <div class="watercolor-bg">
   <div class="watercolor-blob wb-1"></div>
   <div class="watercolor-blob wb-2"></div>
+  <div class="watercolor-blob wb-3"></div>
 </div>
 
 <div class="main">
@@ -226,13 +246,13 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
   <div class="doodle" style="top:-2px;left:-6px;font-size:17px;">✦</div>
   <div class="doodle" style="top:10px;left:40px;font-size:11px;">✧</div>
   <div class="doodle" style="bottom:10px;right:20px;font-size:14px;color:#d4a5a5;">♡</div>
-  <h1 class="article-title">属于我的日记网站</h1>
+  <h1 class="article-title">微风、美食与平凡幸福</h1>
   <div class="article-meta">
-    <span><i class="fa-regular fa-calendar"></i> 2026年5月12日</span>
+    <span><i class="fa-regular fa-calendar"></i> 2026年5月15日</span>
     <span class="meta-dot"></span>
-    <span>星期一</span>
+    <span>星期四</span>
     <span class="meta-dot"></span>
-    <span><i class="fa-solid fa-gift"></i> 日常记录</span>
+    <span><i class="fa-solid fa-clapperboard"></i> 生活vlog</span>
   </div>
 </section>
 
@@ -251,40 +271,88 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
       </g>
     </svg>
 
-    <div class="main-photo">
-      <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-      <img src="gift-main.jpg" alt="礼物" loading="lazy">
+    <!-- Photo group: selfie + snacks -->
+    <div style="position:relative;margin-bottom:30px;">
+      <div class="main-photo">
+        <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+        <img src="detail9-main.jpg" alt="自拍" loading="lazy">
+      </div>
+      <div class="small-polaroid">
+        <div class="pin"></div>
+        <img src="detail9-small.jpg" alt="小吃" loading="lazy">
+      </div>
+      <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
     </div>
 
-    <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
+    <!-- Scenery photo -->
+    <div style="position:relative;margin-bottom:24px;">
+      <div class="main-photo" style="transform:rotate(2deg);">
+        <img src="detail9-scenery.jpg" alt="自拍" loading="lazy">
+      </div>
+      <div class="washi-tape" style="top:-6px;left:28%;width:44px;height:12px;background:var(--tape-beige);transform:rotate(-4deg);"></div>
+    </div>
+
+    <!-- Notes photo -->
+    <div style="position:relative;margin-bottom:24px;">
+      <div class="main-photo" style="transform:rotate(-1.5deg);">
+        <img src="detail9-notes.jpg" alt="语文课笔记" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Extra photo -->
+    <div class="extra-photo">
+      <img src="detail9-extra.jpg" alt="巧乐兹" loading="lazy">
+      <div class="cap">夏天的第一个雪糕 🍦</div>
+    </div>
   </div>
 
   <!-- Right: Text -->
   <div class="text-col">
+    <span class="day-label">✧ 大前天 · 晚自习路上</span>
     <p>
-      昨天收到了好朋友特意给我做的，专属于我的日记网站！真的非常感动——里面是我喜欢的文案，我的照片，我的随笔，配色特别好看治愈，排版也特别舒服，就连网址都是以我喜欢的四叶草来命名的。
+      大前天去晚自习的路上，吹着微风。仿佛回到高中晚饭后，和朋友在操场散步的场景，悠哉舒适……
+    </p>
+
+    <span class="day-label">✧ 前天中午 · 班主任请客</span>
+    <p>
+      中午班主任请客吃饭（・∀・），我们班主任简直太好了！这是他请我的第二顿。和我高中班主任性格很像，很风趣幽默，特别喜欢他当我们班主任，和我们跟朋友一样。
+    </p>
+
+    <span class="day-label">✧ 前天下午 · 小吃街大作战</span>
+    <p>
+      难得下午没课，和室友去吃小吃街啦！看我们的战绩——在炎热的天气下，怒走20分钟，翻山越岭只为了吃 (｡･ω･｡)
     </p>
     <p>
-      想当年特别痴迷于看《暗格里的秘密》，当时就非常羡慕女主有一个属于自己的日记网站。没想到在平凡的一天，我也收到了这份惊喜。对于喜欢写日记和记录生活的我来说，简直就是喜出望外。
+      结果就是我们俩脸都被晒得巨红，一人的两只手都提了好几包，路程非常艰辛啊～回去大抵是吃完这个吃那个、吃完那个吃这个，最终是吃得这段时间都不想再吃了，腻了。下次继续，小吃街我爱你😍
     </p>
     <p>
-      我会好好珍惜这个网站，也非常感谢我的朋友对我这么真诚、这么好。这就是理科生的浪漫吗？怎么可以心思这么细腻呀 (´∀`)
+      大概是买了麻糍、糖醋鸡架、锅包肉、肉夹馍、烧饼……4个人的量，不是2个人吃这么多！看我吃播↓
     </p>
     <p>
-      顺便说说我对朋友的定义吧。其实我一直对朋友淡淡的，却又很珍视。在我看来，朋友不需要无时无刻在一起，不需要无时无刻发消息聊天——毕竟每个人都要有自己的私人空间。我和好朋友的相处模式是：可以一两个月不发消息联系，但一见面就无话不说，一放假就约着出去玩，在一起相处就十分舒适开心。
+      糖醋＋辣！美味！外面是肉松，就是说又甜又咸，意外的好次！下次还加肉松，哈哈哈，这家麻糍真是绝了！yyds 爱次爱次～
+    </p>
+
+    <span class="day-label">✧ 昨天下午 · 语文课</span>
+    <p>
+      字迹已经潦草，但相比上次认真了！从高中到大学，字迹还是那么潇洒 (^.^)
     </p>
     <p>
-      友情大多是阶段性的，尤其是学生阶段，后面会因为每个人的规划、学校和工作的不同而渐行渐远。物理上是越来越远了，但真正的朋友是可以忽略物理距离的——心里还是紧紧相连。比如会记得对方的生日，在外面看到适合朋友的东西会想到ta，出去玩会带纪念品给ta，会希望ta未来的路越走越顺，可以随时分享最近的烦恼和快乐……
+      吃上了这个夏天第一个雪糕🍦。不懂就问，太久没吃巧乐兹了，在我印象中它一直卖3.5元啊，现在居然涨到5元了吗？物价惊到我……
     </p>
     <p>
-      以前的我挺幼稚的，看到自己的朋友交到新朋友会特别嫉妒难过，觉得在对方心里自己已经没有那么重要了，总是患得患失。现在看开啦——真正的朋友是不会走散的。每个人都要在自己的路上闪闪发光，保持乐观！
+      南瓜粥🎃颜色好看！看着就让人心情好起来～
+    </p>
+
+    <span class="day-label">✧ 结尾</span>
+    <p>
+      最后附赠一张照片结束 over！期待下期，有趣不？挑了一点点有趣的发，还有很多忘记记录了，还有一些无聊没发的～
     </p>
     <p>
-      很感谢学生时代的友谊，感恩你们的出现，让我收获了幸福和欢乐。虽然也有不愉快的时候，但正是这些小插曲让我们越来越了解对方。现在大家都还在联系，以后也一直会是好朋友。
+      迎来周末，今天下午练美工了，好久没练了，太忙……幸福就是如此简单，平凡的日子很美好 ❤ 希望自己永远不要失去对幸福平凡生活的感知力！
     </p>
 
     <div class="text-note">
-      " 真正的朋友，<br>不需要时时刻刻联系，<br>但在心里始终有对方的位置。 ✦ "
+      " 幸福就是如此简单，<br>平凡的日子很美好。 ✦ "
     </div>
   </div>
 
@@ -293,8 +361,8 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 <!-- ═══════════ BOTTOM BAR ═══════════ -->
 <div class="bottom-bar">
   <div class="bottom-nav">
-    <a href="journal-diary-detail-7.html">← 上一篇</a>
-    <a href="journal-diary-detail-9.html">下一篇 →</a>
+    <a href="journal-diary-detail-8.html">← 上一篇</a>
+    <a href="journal-diary.html">返回列表</a>
   </div>
 </div>
 
