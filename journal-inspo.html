@@ -201,7 +201,7 @@ body::after {
 }
 
 .inspo-card-img { position: relative; }
-.inspo-card-img img { width: 100%; display: block; object-fit: cover; }
+.inspo-card-img img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
 
 .inspo-card-body { padding: 10px 14px; }
 
@@ -243,7 +243,7 @@ body::after {
 
 /* Polaroid style */
 .plrd-body { padding: 8px 8px 28px; }
-.plrd-body img { width: 100%; display: block; object-fit: cover; }
+.plrd-body img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
 .plrd-cap {
   font-family: "Caveat",cursive; font-size: 13px;
   text-align: center; color: var(--ink-2); margin-top: 6px; letter-spacing: 0.3px;
@@ -345,7 +345,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <div class="inspo-card paper" data-category="color">
       <div class="tape" style="top:-5px;left:30%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
       <div class="inspo-card-img">
-        <img src="inspo-color.jpg" alt="配色灵感" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-color.jpg" alt="配色灵感" loading="lazy" style="">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">配色灵感</div>
@@ -407,7 +407,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <div class="inspo-card" data-category="design">
       <div class="tape" style="top:-5px;left:28%;width:50px;height:14px;background:var(--tape-green);transform:rotate(4deg);"></div>
       <div class="plrd-body">
-        <img src="inspo-room.jpg" alt="温暖房间" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-room.jpg" alt="温暖房间" loading="lazy" style="">
         <div class="plrd-cap">设计灵感</div>
         <div style="font-size:10px;text-align:center;color:var(--ink-3);font-family:'PingFang SC',sans-serif;margin-top:2px;">温暖的房间</div>
       </div>
@@ -417,7 +417,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <div class="inspo-card" data-category="life">
       <div class="pin" style="left:auto;right:20%;"></div>
       <div class="inspo-card-img">
-        <img src="inspo-life.jpg" alt="生活灵感" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-life.jpg" alt="生活灵感" loading="lazy" style="">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">生活灵感</div>
@@ -428,7 +428,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <!-- 7. Color Inspiration 2 -->
     <div class="inspo-card paper" data-category="color">
       <div class="inspo-card-img">
-        <img src="inspo-morandi.jpg" alt="莫兰迪" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-morandi.jpg" alt="莫兰迪" loading="lazy" style="">
       </div>
       <div class="inspo-card-body">
         <div class="c-title" style="font-size:15px;">Color Inspiration</div>
@@ -446,7 +446,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <!-- 8. Extra photo -->
     <div class="inspo-card" data-category="photo">
       <div class="plrd-body">
-        <img src="https://picsum.photos/seed/vaselife/420/320" alt="extra" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="https://picsum.photos/seed/vaselife/420/320" alt="extra" loading="lazy" style="">
         <div class="plrd-cap" style="font-size:13px;">日常静物</div>
       </div>
     </div>
@@ -463,7 +463,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
     <!-- 10. 设计灵感2 -->
     <div class="inspo-card" data-category="design">
       <div class="inspo-card-img">
-        <img src="inspo-desk.jpg" alt="工作台" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="inspo-desk.jpg" alt="工作台" loading="lazy" style="">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">设计灵感</div>
@@ -471,11 +471,62 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
       </div>
     </div>
 
+    <!-- 摄影灵感系列 -->
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:45%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-01.jpg" alt="摄影" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:52%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-02.jpg" alt="摄影" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:48%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-03.jpg" alt="摄影" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:50%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-04.jpg" alt="摄影" loading="lazy" style="">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:47%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-05.jpg" alt="摄影" loading="lazy" style="">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:51%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-06.jpg" alt="摄影" loading="lazy" style="">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+    <div class="inspo-card" data-category="photo">
+      <div class="pin" style="left:49%;"></div>
+      <div class="plrd-body">
+        <img src="inspo/inspo-photo-07.jpg" alt="摄影" loading="lazy" style="">
+        <div class="plrd-cap">摄影灵感</div>
+      </div>
+    </div>
+
     <!-- 11. 摄影灵感2 -->
     <div class="inspo-card" data-category="photo">
       <div class="tape" style="top:-5px;left:32%;width:44px;height:12px;background:var(--tape-pink);transform:rotate(-4deg);"></div>
       <div class="inspo-card-img">
-        <img src="https://picsum.photos/seed/morninglight/420/320" alt="photo2" loading="lazy" style="aspect-ratio:4/3;">
+        <img src="https://picsum.photos/seed/morninglight/420/320" alt="photo2" loading="lazy" style="">
       </div>
       <div class="inspo-card-body">
         <div class="c-title">摄影灵感</div>
@@ -520,29 +571,16 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
         c.style.display = 'none';
       }
     });
-    // All: columns (masonry). Filtered: flex (3 per row, natural height)
-    if (activeFilter === 'all') {
-      grid.style.display = '';
-      grid.style.columns = '';
-      grid.style.columnGap = '';
-      grid.style.flexWrap = '';
-      grid.style.gap = '';
-      grid.style.alignItems = '';
-      cards.forEach(function(c) {
-        c.style.width = '';
-        c.style.marginBottom = '';
-      });
-    } else {
-      grid.style.display = 'flex';
-      grid.style.columns = 'auto';
-      grid.style.flexWrap = 'wrap';
-      grid.style.gap = '22px';
-      grid.style.alignItems = 'flex-start';
-      cards.forEach(function(c) {
-        c.style.width = c.style.display === 'none' ? '' : 'calc((100% - 44px) / 3)';
-        c.style.marginBottom = '0';
-      });
-    }
+    // All and filtered: flex grid (3 per row, no gaps)
+    grid.style.display = 'flex';
+    grid.style.columns = 'auto';
+    grid.style.flexWrap = 'wrap';
+    grid.style.gap = '22px';
+    grid.style.alignItems = 'flex-start';
+    cards.forEach(function(c) {
+      c.style.width = c.style.display === 'none' ? '' : 'calc((100% - 44px) / 3)';
+      c.style.marginBottom = '0';
+    });
   }
 
   document.querySelectorAll('.sidebar-list a').forEach(function(link) {
