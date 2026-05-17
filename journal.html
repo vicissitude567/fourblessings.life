@@ -152,7 +152,7 @@ body::after {
   position: relative; z-index: 1;
 }
 .hero-title-img {
-  position: absolute; top: 10px; left: 430px; z-index: 2;
+  position: absolute; top: -20px; left: 1180px; z-index: 2;
   width: 330px; object-fit: contain;
 }
 @media (max-width: 768px) { .hero-title-img { width: 200px; left: 200px; top: 0; } }
@@ -186,14 +186,13 @@ body::after {
 
 /* Main polaroid */
 .polaroid-main {
-  position: absolute; top: 20px; left: 0; right: 0; z-index: 5;
-  margin: 0 auto;
+  position: absolute; top: 20px; left: -370px; z-index: 5;
   background: #fff; padding: 14px 14px 48px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.09);
   transform: rotate(-2.5deg);
   transition: transform 0.35s var(--ease), box-shadow 0.35s;
   width: 360px;
-  max-width: 90%; /* 增加自适应最大宽度 */
+  max-width: 90%;
 }
 .polaroid-main:hover { transform: rotate(-1deg) translateY(-5px); box-shadow: 0 4px 10px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.1); }
 .polaroid-main img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
@@ -201,7 +200,7 @@ body::after {
 /* Secondary photo - brushes overlapping */
 /* 🔥 修改点 2：去掉固定的 left: 440px，改为 right: 5% */
 .photo-brush {
-  position: absolute; top: 300px; right: 5%; z-index: 6;
+  position: absolute; top: 300px; left: -60px; z-index: 6;
   background: #fff; padding: 10px 10px 34px;
   box-shadow: var(--shadow-card);
   transform: rotate(6deg);
@@ -229,18 +228,16 @@ body::after {
 /* Sticky note - Today (parchment feel) */
 /* 🔥 修改点 3：去掉固定的 left: 20px，改为 left: 2% */
 .note-sticky {
-  position: absolute; top: 60px; left: 2%; z-index: 4;
-  background: #f3edd8;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  position: absolute; top: 60px; left: 6%; z-index: 4;
+  background: #f3edd8 url('today-bg.png') center/cover no-repeat;
   padding: 24px 18px 18px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.06);
   transform: rotate(3.5deg);
   width: 230px;
-  max-width: 45%; /* 避免小屏幕遮挡主图 */
+  max-width: 45%;
   transition: transform 0.3s var(--ease);
   font-family: "Caveat","Ma Shan Zheng",cursive;
   color: var(--ink-2);
-  border: 1px solid rgba(180,170,140,0.15);
 }
 .note-sticky:hover { transform: rotate(0.5deg) translateY(-3px); }
 .note-sticky h4 { font-family: "Caveat",cursive; font-size: 22px; font-weight: 600; margin-bottom: 14px; color: var(--ink); letter-spacing: 0.5px; }
@@ -482,6 +479,105 @@ footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8);
   .photo-brush { width: 110px; right: 5%; }
   .note-sticky { width: 155px; font-size: 10px; left: 0; }
 }
+/* ── 氛围音乐小组件 ── */
+.music-widget {
+  position: absolute; top: 310px; left: 180px; z-index: 4;
+  width: 260px; background: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  border-radius: 3px; padding: 18px 16px 50px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.05);
+  transform: rotate(-1deg);
+  border: 1px solid rgba(180,170,140,0.12);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s;
+}
+.music-widget:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05), 0 10px 24px rgba(0,0,0,0.07);
+}
+.music-widget .mw-tape {
+  position: absolute; top: -5px; left: 30%; width: 44px; height: 13px;
+  background: var(--tape-green); transform: rotate(2deg);
+  border-radius: 1px; z-index: 2;
+}
+.music-widget .mw-label {
+  font-family: "Caveat","Ma Shan Zheng",cursive;
+  font-size: 17px; color: var(--olive); margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.music-widget .mw-title {
+  font-family: "Noto Serif SC",serif;
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  margin-bottom: 2px;
+}
+.music-widget .mw-artist {
+  font-size: 10px; color: var(--ink-3);
+  font-family: "PingFang SC",sans-serif;
+  margin-bottom: 10px;
+}
+.music-widget .mw-controls {
+  display: flex; align-items: center; gap: 10px;
+  position: relative; z-index: 2;
+}
+.music-widget .mw-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink-2); font-size: 11px; padding: 3px;
+  transition: all 0.25s;
+}
+.music-widget .mw-btn:hover { color: var(--olive); }
+.music-widget .mw-btn-play {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--olive); color: #fff; font-size: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(139,157,131,0.2);
+}
+.music-widget .mw-btn-play:hover { background: #7d8f76; color: #fff; }
+/* 半露唱片 */
+.music-widget .mw-vinyl {
+  position: absolute; bottom: -30px; right: -10px; z-index: 1;
+  width: 90px; height: 90px; border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%,
+    #2a2520 0px,#1a1510 2px,#2a2520 4px,#1a1510 6px,#2a2520 8px,
+    #1a1510 10px,#2a2520 12px,#1a1510 14px,#2a2520 16px,#1a1510 18px,
+    #2a2520 20px,#1a1510 22px,#2a2520 24px,#1a1510 26px,#2a2520 28px,
+    #1a1510 30px,#2a2520 32px,#1a1510 34px,#2a2520 36px,#1a1510 38px,
+    #2a2520 40px,#1a1510 42px,#2a2520 44px
+  );
+  box-shadow: 0 3px 16px rgba(0,0,0,0.2);
+  opacity: 0.92;
+}
+.music-widget .mw-vinyl::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+.music-widget .mw-vinyl .mw-vinyl-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #faf8f3, #c4ad92);
+  border: 1.5px solid #b8a080; z-index: 1;
+}
+.music-widget .mw-vinyl.spinning {
+  animation: mw-spin 3s linear infinite;
+}
+@keyframes mw-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* 呼吸光晕 */
+.music-widget .mw-glow {
+  position: absolute; bottom: -10px; right: 0; z-index: 0;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,157,131,0.18) 0%, transparent 70%);
+  pointer-events: none; opacity: 0; transition: opacity 0.8s;
+}
+.music-widget.playing .mw-glow { opacity: 1; animation: mw-breathe 3s ease-in-out infinite; }
+@keyframes mw-breathe {
+  0%,100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+@media (max-width: 768px) {
+  .music-widget { width: 150px; top: 280px; padding: 14px 12px 40px; }
+  .music-widget .mw-vinyl { width: 64px; height: 64px; bottom: -28px; right: -6px; }
+}
 </style>
 </head>
 <body>
@@ -554,17 +650,38 @@ footer .social a:hover { color: var(--olive); background: rgba(255,255,255,0.8);
         <img src="hero-small.jpg" alt="小照片" loading="lazy">
       </div>
 
-      <!-- Sticky note -->
-      <div class="note-sticky">
-        <div class="washi" style="top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:55px;height:14px;background:var(--tape-beige);border-radius:1px;"></div>
-        <h4>Today :</h4>
-        <ul>
-          <li class="done">美工作品</li>
-          <li class="done">学习色彩搭配</li>
-          <li class="done">拍照记录生活</li>
-          <li>看一本好书</li>
-          <li>运动 / 保持好心情</li>
-        </ul>
+
+      <!-- 氛围音乐小组件 -->
+      <div class="music-widget" id="musicWidget">
+        <div class="mw-tape"></div>
+        <div class="mw-label">♪ Now Playing</div>
+        <div class="mw-title">New Soul</div>
+        <div class="mw-artist">Yael Naim</div>
+        <div class="mw-controls">
+          <button class="mw-btn" id="mwPrev" title="上一首"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="mw-btn mw-btn-play" id="mwPlay" title="播放"><i class="fa-solid fa-play"></i></button>
+          <button class="mw-btn" id="mwNext" title="下一首"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+        <div class="mw-vinyl" id="mwVinyl">
+          <div class="mw-vinyl-center"></div>
+        </div>
+        <div class="mw-glow" id="mwGlow"></div>
+      </div>
+
+      <!-- Today装饰 -->
+      <img src="today-right.png" alt="" style="position:absolute;top:30px;left:150px;z-index:5;width:180px;">
+      <div style="position:absolute;top:20px;left:30px;z-index:4;width:230px;transform:rotate(3deg);">
+        <img src="hero-deco.png" alt="" style="width:100%;position:absolute;inset:0;opacity:0.7;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.06));">
+        <div style="position:relative;padding:42px 24px 18px 36px;font-family:Caveat,Ma Shan Zheng,cursive;color:var(--ink-2);">
+          <h4 style="font-family:Caveat,cursive;font-size:22px;font-weight:600;margin-bottom:14px;color:var(--ink);letter-spacing:0.5px;">Today :</h4>
+          <ul style="list-style:none;font-size:14px;line-height:1.9;">
+            <li style="display:flex;align-items:baseline;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border:1.2px solid var(--olive);border-radius:1px;transform:rotate(-1deg);flex-shrink:0;margin-top:5px;text-align:center;line-height:8px;font-size:12px;color:var(--olive);">✓</span> 美工作品</li>
+            <li style="display:flex;align-items:baseline;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border:1.2px solid var(--olive);border-radius:1px;transform:rotate(-1deg);flex-shrink:0;margin-top:5px;text-align:center;line-height:8px;font-size:12px;color:var(--olive);">✓</span> 学习色彩搭配</li>
+            <li style="display:flex;align-items:baseline;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border:1.2px solid var(--olive);border-radius:1px;transform:rotate(-1deg);flex-shrink:0;margin-top:5px;text-align:center;line-height:8px;font-size:12px;color:var(--olive);">✓</span> 拍照记录生活</li>
+            <li style="display:flex;align-items:baseline;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border:1.2px solid var(--ink-3);border-radius:1px;transform:rotate(-1deg);opacity:0.7;flex-shrink:0;margin-top:5px;"></span> 看一本好书</li>
+            <li style="display:flex;align-items:baseline;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border:1.2px solid var(--ink-3);border-radius:1px;transform:rotate(-1deg);opacity:0.7;flex-shrink:0;margin-top:5px;"></span> 运动 / 保持好心情</li>
+          </ul>
+        </div>
       </div>
 
       <div class="enjoy-text">
@@ -697,6 +814,80 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     }
   });
 });
+</script>
+
+<!-- ── 氛围音乐 ── -->
+<script>
+(function() {
+  var playlist = [
+    { title: 'New Soul', artist: 'Yael Naim', src: 'music/Yael%20Naim%20-%20New%20Soul.mp3' },
+    { title: '7 Years', artist: 'Lukas Graham', src: 'music/Lukas%20Graham%20-%207%20Years.mp3' },
+    { title: 'Call Me Maybe', artist: 'Carly Rae Jepsen', src: 'music/Carly%20Rae%20Jepsen%20-%20Call%20Me%20Maybe.mp3' },
+    { title: 'Take Me Hand', artist: 'DAISHI DANCE & Cécile Corbel', src: 'music/DAISHI%20DANCE%E3%80%81C%C3%A9cile%20Corbel%20-%20Take%20Me%20Hand.mp3' },
+    { title: '在你的身边', artist: '盛哲', src: 'music/%E7%9B%9B%E5%93%B2%20-%20%E5%9C%A8%E4%BD%A0%E7%9A%84%E8%BA%AB%E8%BE%B9.mp3' },
+    { title: '坏女孩', artist: '徐良 & 小凌', src: 'music/%E5%BE%90%E8%89%AF%E3%80%81%E5%B0%8F%E5%87%8C%20-%20%E5%9D%8F%E5%A5%B3%E5%AD%A9.mp3' }
+  ];
+  var trackIndex = 0;
+  var audio = new Audio();
+  var isPlaying = false;
+  var widget = document.getElementById('musicWidget');
+  var vinyl = document.getElementById('mwVinyl');
+  var playBtn = document.getElementById('mwPlay');
+  var prevBtn = document.getElementById('mwPrev');
+  var nextBtn = document.getElementById('mwNext');
+  var titleEl = widget.querySelector('.mw-title');
+  var artistEl = widget.querySelector('.mw-artist');
+
+  audio.volume = 0.5;
+
+  function loadTrack(idx) {
+    trackIndex = (idx + playlist.length) % playlist.length;
+    var t = playlist[trackIndex];
+    titleEl.textContent = t.title;
+    artistEl.textContent = t.artist;
+    audio.src = t.src;
+    audio.load();
+  }
+
+  function play() {
+    if (!audio.src) loadTrack(0);
+    audio.play().then(function() {
+      isPlaying = true;
+      widget.classList.add('playing');
+      vinyl.classList.add('spinning');
+      playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    }).catch(function() {});
+  }
+
+  function pause() {
+    audio.pause();
+    isPlaying = false;
+    widget.classList.remove('playing');
+    vinyl.classList.remove('spinning');
+    playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+
+  playBtn.addEventListener('click', function() {
+    if (isPlaying) { pause(); } else { play(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(trackIndex - 1);
+    if (isPlaying) play();
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(trackIndex + 1);
+    if (isPlaying) play();
+  });
+
+  audio.addEventListener('ended', function() {
+    loadTrack(trackIndex + 1);
+    play();
+  });
+
+  loadTrack(0);
+})();
 </script>
 
 </body>
