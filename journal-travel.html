@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旅行笔记 · Life·Art·Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&family=LXGW+WenKai:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face {
+  font-family: 'HongLeiXiao';
+  src: local('鸿雷小纸条青春体');
+  font-display: swap;
+}
+
+/* ══════ Shared site variables ══════ */
+:root {
+  --paper: #faf8f3;
+  --cream: #f5f0e8;
+  --warm-white: #fefcf8;
+  --olive: #8b9d83;
+  --olive-light: #b8c5b2;
+  --brown: #a68b6f;
+  --terracotta: #c97d6e;
+  --ink: #3a3530;
+  --ink-2: #6b635c;
+  --ink-3: #9c948d;
+  --ease: cubic-bezier(0.22,0.61,0.36,1);
+  --board-scale: 1;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Serif SC","PingFang SC","Microsoft YaHei",serif;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.74), transparent 22%),
+    radial-gradient(circle at 88% 22%, rgba(223, 203, 174, 0.2), transparent 20%),
+    radial-gradient(circle at 58% 82%, rgba(214, 193, 160, 0.12), transparent 24%),
+    linear-gradient(180deg, #fbf6ef 0%, #f6edde 100%);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── Paper texture (warm) ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Watercolor blobs (shared) ── */
+.watercolor-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.watercolor-blob { position: absolute; border-radius: 50%; filter: blur(130px); }
+.wb-1 { width: 650px; height: 650px; top: -8%; left: -18%; background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%); opacity: 0.06; }
+.wb-2 { width: 550px; height: 550px; top: 38%; right: -12%; background: radial-gradient(circle, rgba(201,125,110,0.35) 0%, transparent 70%); opacity: 0.05; }
+.wb-3 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.05; }
+.wb-4 { width: 300px; height: 300px; top: 60%; left: 5%; background: radial-gradient(circle, rgba(180,190,170,0.3) 0%, transparent 70%); opacity: 0.04; }
+
+/* ── Navigation (shared) ── */
+.nav {
+  position: sticky; top: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px 48px;
+  background: rgba(250,248,243,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.02);
+}
+.nav-brand {
+  position: absolute; left: 48px;
+  font-family: "Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink); letter-spacing: 0.5px; text-decoration: none;
+}
+.nav-brand i { color: var(--terracotta); font-size: 16px; margin: 0 2px; }
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--ink-2); text-decoration: none;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.8px;
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+}
+.nav-links a:hover,.nav-links a.active { color: var(--olive); border-bottom-color: var(--olive); }
+
+/* ══════ Travel Board Layout ══════ */
+.stage {
+  position: relative;
+  width: 100%;
+  min-height: calc(1024px * var(--board-scale) + 40px);
+  padding: 20px 0 40px;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 4% 28%, rgba(139, 157, 131, 0.06), transparent 28%),
+    radial-gradient(circle at 96% 68%, rgba(201, 125, 110, 0.05), transparent 30%);
+}
+
+.board {
+  width: 1536px;
+  height: 1024px;
+  margin: 0 auto;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Scale board to fit viewport */
+@media (max-width: 1550px) {
+  .stage { overflow-x: auto; }
+  .board { transform-origin: top left; }
+}
+
+.board::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.22), transparent 64%);
+}
+
+.board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image:
+    radial-gradient(rgba(124, 101, 68, 0.55) 0.7px, transparent 0.7px),
+    radial-gradient(rgba(168, 138, 98, 0.35) 0.8px, transparent 0.8px);
+  background-size: 19px 19px, 27px 27px;
+  background-position: 0 0, 11px 9px;
+}
+
+.board img {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── Panels ── */
+.panel {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(252, 249, 243, 0.84), rgba(247, 240, 231, 0.76));
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(126, 101, 67, 0.1);
+  overflow: hidden;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.28), transparent 26%),
+    radial-gradient(circle at 84% 84%, rgba(209, 182, 145, 0.12), transparent 18%);
+}
+
+/* ── Title ── */
+.title-wrap {
+  position: absolute;
+  left: 54px;
+  top: 26px;
+  width: 610px;
+}
+
+.title {
+  margin: 0;
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 54px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 18px 0 0 20px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 21px;
+  color: #413729;
+  letter-spacing: 0.5px;
+}
+
+.subtitle .spark { color: #d3a254; margin-left: 6px; }
+
+.underline {
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 428px;
+  height: 34px;
+  pointer-events: none;
+}
+
+.underline::before,
+.underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  border-radius: 999px;
+  background: rgba(136, 123, 87, 0.58);
+}
+
+.underline::before {
+  width: 100%; height: 5px; top: 17px; transform: rotate(-2deg);
+}
+.underline::after {
+  width: 60%; height: 3px; left: 44px; top: 20px;
+}
+
+/* ── Decorative elements ── */
+.sprig {
+  position: absolute;
+  left: 1076px;
+  top: 42px;
+  width: 92px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.82;
+  mix-blend-mode: multiply;
+}
+
+.quote-note {
+  position: absolute;
+  left: 1172px;
+  top: 27px;
+  width: 192px;
+  min-height: 96px;
+  padding: 23px 18px 14px;
+  background:
+    linear-gradient(rgba(252, 247, 239, 0.16), rgba(243, 234, 221, 0.22)),
+    url("assets/paper-quote-bg.png") center / 100% 100% no-repeat;
+  background-blend-mode: multiply;
+  border: 0;
+  border-radius: 3px;
+  transform: rotate(-6deg);
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 17px;
+  line-height: 1.75;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #4f4130;
+  z-index: 1;
+}
+
+.quote-note::before { display: none; }
+
+.girl {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  width: 170px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.62;
+  mix-blend-mode: multiply;
+}
+
+/* ── Nav Panel (left sidebar) ── */
+.nav-panel {
+  left: 30px;
+  top: 149px;
+  width: 137px;
+  height: 317px;
+  padding: 22px 18px;
+  border-radius: 18px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 73px;
+  border-bottom: 1px solid rgba(127, 105, 74, 0.14);
+  font-size: 17px;
+}
+
+.nav-item:last-child { border-bottom: 0; }
+
+.nav-icon {
+  width: 18px; text-align: center; color: #6f5c44; font-size: 18px;
+}
+
+/* ── Stats Panel ── */
+.stats-panel {
+  left: 34px;
+  top: 468px;
+  width: 207px;
+  height: 249px;
+  padding: 15px 13px 12px;
+  border-radius: 0 0 10px 10px;
+  background:
+    linear-gradient(rgba(252, 247, 239, 0.16), rgba(243, 234, 221, 0.22)),
+    url("assets/stats-bg-new.png") center / 100% 100% no-repeat;
+  background-blend-mode: multiply;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.stats-panel::before { display: none; }
+
+.stats-title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 4px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.stats-grid strong {
+  display: block; font-size: 37px; line-height: 1; margin-bottom: 2px;
+}
+
+.stats-grid span, .stats-foot span { color: #736553; font-size: 10px; }
+
+.stats-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.stats-foot b { display: block; margin-bottom: 3px; }
+
+/* ── Left flower ── */
+.left-flower {
+  position: absolute;
+  left: 86px; top: 612px;
+  width: 54px; height: auto;
+  opacity: 0.74; object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* ── Map Panel ── */
+.map-panel {
+  left: 182px;
+  top: 132px;
+  width: 682px;
+  height: 452px;
+  background: url("assets/map-bg-new.png") center / 100% 100% no-repeat;
+  border: 0;
+  box-shadow: none;
+}
+
+.map-panel::before { display: none; }
+
+.map-panel-title {
+  position: absolute;
+  left: 28px; top: 18px;
+  margin: 0; z-index: 1;
+}
+
+.map-panel-inner {
+  position: absolute;
+  left: 26px; top: 68px;
+  width: 630px; height: 358px;
+  overflow: hidden;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.map-panel-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.map-panel .tape {
+  right: 38px; top: 9px;
+  transform: rotate(18deg);
+}
+
+.tape {
+  position: absolute;
+  width: 60px; height: 18px;
+  background: rgba(220, 198, 162, 0.72);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(106, 84, 51, 0.08);
+}
+
+.section-head {
+  margin: 0 0 10px 10px;
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* ── Recent Notes Panel ── */
+.recent-panel {
+  left: 881px;
+  top: 140px;
+  width: 491px;
+  height: 456px;
+  padding: 16px 18px 14px;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.recent-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(252, 247, 239, 0.12), rgba(242, 233, 220, 0.18)),
+    url("assets/recent-panel-bg-new.png") center / 100% 100% no-repeat;
+  background-blend-mode: multiply;
+  opacity: 0.95;
+  filter: saturate(0.86);
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+.head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 4px 11px 0 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.head-row h2 {
+  margin: 0;
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 19px;
+  letter-spacing: 0.3px;
+}
+
+.head-row a {
+  color: #7a6b58;
+  font-size: 10.5px;
+  text-decoration: none;
+  transform: translateY(1px);
+}
+
+.notes {
+  display: grid;
+  gap: 0;
+  padding: 0 10px 0 11px;
+  margin-top: -6px;
+  position: relative;
+  z-index: 1;
+}
+
+.note-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 17px;
+  align-items: center;
+  min-height: 96px;
+  padding: 9px 31px 8px 12px;
+  border-radius: 15px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.note-card:hover { transform: translateY(-1px); }
+.note-card:focus-visible {
+  outline: 1px solid rgba(134, 111, 81, 0.45);
+  outline-offset: -2px;
+}
+.note-card.is-active { opacity: 1; margin-top: -2px; }
+
+.note-thumb {
+  width: 112px; height: 74px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(86, 66, 44, 0.09);
+}
+
+.note-meta {
+  margin: 0 0 4px;
+  color: #736553;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.note-card h3 {
+  margin: 0 0 4px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 16px;
+  line-height: 1.18;
+  color: #4d4032;
+}
+
+.note-card p {
+  margin: 0 0 3px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 11px;
+  color: #675747;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-loc {
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  color: #887865;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.heart {
+  position: absolute;
+  right: 8px; top: 25px;
+  color: #b3a18a;
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* ── Gallery Panel ── */
+.postcard-bg {
+  position: absolute;
+  left: 178px; top: 606px;
+  width: 1192px; height: 404px;
+  object-fit: fill;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.98;
+  filter: saturate(0.9) brightness(1.01);
+}
+
+.gallery-panel {
+  left: 193px;
+  top: 610px;
+  width: 402px;
+  height: 392px;
+  padding: 23px 18px 18px;
+  border-radius: 18px;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.label {
+  position: absolute;
+  left: 12px; top: -10px;
+  padding: 10px 22px;
+  background: rgba(218, 198, 166, 0.74);
+  border-radius: 4px;
+  transform: rotate(-4deg);
+  box-shadow: 0 8px 16px rgba(120, 96, 60, 0.09);
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 18px;
+}
+
+.hero-photo {
+  width: 348px; height: 233px;
+  margin: 0 auto;
+  border-radius: 2px;
+  object-fit: cover;
+  transform: rotate(-3deg);
+  box-shadow: 0 10px 26px rgba(111, 88, 55, 0.18);
+}
+
+.small-photos {
+  position: absolute;
+  left: 16px; bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.polaroid {
+  width: 120px;
+  padding: 7px 7px 12px;
+  background: #f9f2e8;
+  border-radius: 4px;
+  border: 1px solid rgba(123, 103, 74, 0.12);
+  box-shadow: 0 10px 16px rgba(111, 88, 55, 0.14);
+  position: relative;
+}
+
+.polaroid::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: -6px;
+  width: 26px; height: 10px;
+  background: rgba(234, 224, 198, 0.76);
+  transform: translateX(-50%) rotate(4deg);
+}
+
+.polaroid:nth-child(1) { transform: rotate(-8deg); }
+.polaroid:nth-child(2) { transform: rotate(4deg); }
+.polaroid:nth-child(3) { transform: rotate(8deg); }
+
+.polaroid img {
+  width: 100%; height: 116px;
+  object-fit: cover;
+}
+
+/* ── Article Detail Panel ── */
+.article-panel {
+  position: absolute;
+  left: 620px;
+  top: 612px;
+  width: 519px;
+  height: 392px;
+  padding: 25px 26px 18px 36px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: visible;
+  z-index: 1;
+}
+
+.article-panel::before { display: none; }
+
+.article-date {
+  margin: 0 0 14px;
+  color: #6b5c4c;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.article-title {
+  margin: 0 0 16px;
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 42px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.sun { color: #d4a04c; font-size: 32px; vertical-align: middle; margin-left: 6px; }
+
+.postmark {
+  position: absolute;
+  right: 34px; top: 16px;
+  width: 190px; height: 77px;
+  object-fit: contain;
+  opacity: 0.28;
+}
+
+.article-text {
+  width: 418px;
+  margin: 0 0 18px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 13px;
+  line-height: 2.05;
+  color: #4d4031;
+}
+
+.article-bottom {
+  position: absolute;
+  left: 28px; top: 236px;
+  width: 304px; height: 189px;
+  margin: 0;
+  background: transparent;
+  isolation: isolate;
+}
+
+.article-bottom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("assets/todo-bg-new.png") center / 100% 100% no-repeat;
+  z-index: 0;
+}
+
+.todo {
+  position: absolute;
+  left: 16px; top: 18px;
+  width: 146px;
+  min-height: 130px;
+  padding: 12px 12px 10px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  transform: none;
+  z-index: 1;
+}
+
+.todo::before { display: none; }
+
+.todo h4, .mood h4, .info-panel h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+}
+
+.todo ul {
+  list-style: none;
+  margin: 0; padding: 6px 0 0;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  font-size: 13px;
+  line-height: 1.85;
+  color: #56483a;
+}
+
+.todo li::before {
+  content: "☑";
+  margin-right: 8px;
+  color: #7a6853;
+}
+
+.mood {
+  position: absolute;
+  left: 168px; top: 74px;
+  width: 92px;
+  min-height: 66px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  transform: none;
+  z-index: 1;
+}
+
+.stars {
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #a57d48;
+  margin-left: -10px;
+}
+
+/* ── Info Panel ── */
+.info-panel {
+  left: 1128px;
+  top: 630px;
+  width: 209px;
+  height: 349px;
+  padding: 16px 18px 18px 24px;
+  border-radius: 16px;
+  box-shadow: none;
+  background: transparent;
+  border: 0;
+}
+
+.info-panel::before { display: none; }
+
+.info-list {
+  display: grid;
+  font-family: "LXGW WenKai","KaiTi","Kaiti SC","STKaiti",serif;
+  gap: 13px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #544737;
+}
+
+.info-row { display: flex; align-items: center; gap: 8px; }
+.info-row .label-t { min-width: 48px; }
+.emoji { color: #d1a154; }
+
+.mini-map {
+  width: 174px; height: 107px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid rgba(123, 101, 72, 0.08);
+}
+
+/* ── Bottom decorations ── */
+.flowers {
+  position: absolute;
+  right: 58px; top: 362px;
+  width: 124px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.68;
+  mix-blend-mode: multiply;
+}
+
+.closing-note {
+  position: absolute;
+  right: 14px; bottom: 28px;
+  width: 210px;
+  min-height: 104px;
+  padding: 28px 18px 14px;
+  background:
+    linear-gradient(rgba(249, 244, 235, 0.16), rgba(238, 229, 214, 0.24)),
+    url("assets/paper-transparent.png") center / 100% 100% no-repeat;
+  background-blend-mode: multiply;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: none;
+  transform: rotate(-5deg);
+  font-family: "HongLeiXiao","Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4e4736;
+  text-align: center;
+  z-index: 2;
+}
+
+.closing-note::before { display: none; }
+
+/* ── Footer ── */
+footer {
+  background: #e8e4dc;
+  text-align: center;
+  padding: 24px 20px 16px;
+  position: relative;
+  z-index: 1;
+}
+footer .ft-text {
+  font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 20px; color: var(--ink);
+  letter-spacing: 0.5px; margin-bottom: 12px;
+}
+footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 14px; }
+
+/* ── Responsive ── */
+@media (max-width: 1550px) {
+  .stage { overflow-x: auto; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 10px 16px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 11px; }
+  .nav-brand { position: static; font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="watercolor-bg">
+  <div class="watercolor-blob wb-1"></div>
+  <div class="watercolor-blob wb-2"></div>
+  <div class="watercolor-blob wb-3"></div>
+  <div class="watercolor-blob wb-4"></div>
+</div>
+
+<nav class="nav">
+  <a href="journal.html" class="nav-brand">Life · Art · Me <i class="fa-regular fa-face-smile"></i></a>
+  <ul class="nav-links">
+    <li><a href="journal.html">首页</a></li>
+    <li><a href="journal-diary.html">生活日记</a></li>
+    <li><a href="journal-portfolio.html">作品集</a></li>
+    <li><a href="journal-inspo.html">灵感收集</a></li>
+    <li><a href="journal-travel.html" class="active">旅行笔记</a></li>
+  </ul>
+</nav>
+
+<main class="stage">
+  <section class="board" aria-label="城市足迹与旅行笔记页面">
+    <header class="title-wrap">
+      <h1 class="title">城市足迹 &amp; 旅行笔记 ♡</h1>
+      <div class="underline" aria-hidden="true"></div>
+      <p class="subtitle">每一段旅程，都是生活的礼物 <span class="spark">✦</span></p>
+    </header>
+
+    <img class="sprig" src="assets/leaf-sprig-generated.png" alt="">
+    <aside class="quote-note">世界那么大，<br>我想去看看。♡</aside>
+    <img class="girl" src="assets/sketch-girl-generated.png" alt="">
+
+    <!-- Map Panel -->
+    <section class="panel map-panel" aria-label="我去过的城市">
+      <h2 class="section-head map-panel-title">⌬ 我去过的城市 · · · ✈ · · ·</h2>
+      <div class="map-panel-inner">
+        <img src="assets/map-content-from-user.png" alt="我去过的城市地图">
+      </div>
+    </section>
+
+    <!-- Recent Travel Notes -->
+    <section class="panel recent-panel">
+      <div class="head-row">
+        <h2>最近的旅行笔记 ✦</h2>
+        <a href="#detail">查看更多 →</a>
+      </div>
+      <div class="notes">
+        <article class="note-card is-active" data-note="xiamen" tabindex="0" role="button" aria-controls="detail">
+          <img class="note-thumb" src="assets/recent-sea.png" alt="">
+          <div>
+            <p class="note-meta">2024.05.20</p>
+            <h3>厦门の海边日记</h3>
+            <p>吹着海风，走在沙滩上，所有的烦恼都被海浪带走了。</p>
+            <div class="note-loc">⌖ 厦门</div>
+          </div>
+          <div class="heart">♡</div>
+        </article>
+
+        <article class="note-card" data-note="chengdu" tabindex="0" role="button" aria-controls="detail">
+          <img class="note-thumb" src="assets/chengdu-photo-1.jpg" alt="">
+          <div>
+            <p class="note-meta">2024.04.10</p>
+            <h3>成都慢生活</h3>
+            <p>在成都的街头走走停停，感受这座城市的温柔与悠闲。</p>
+            <div class="note-loc">⌖ 成都</div>
+          </div>
+          <div class="heart">♡</div>
+        </article>
+
+        <article class="note-card" data-note="beijing" tabindex="0" role="button" aria-controls="detail">
+          <img class="note-thumb" src="assets/beijing-photo-1.jpg" alt="">
+          <div>
+            <p class="note-meta">2024.03.25</p>
+            <h3>北京的春天</h3>
+            <p>第一次来北京，被这座城市的厚重感深深震撼。</p>
+            <div class="note-loc">⌖ 北京</div>
+          </div>
+          <div class="heart">♡</div>
+        </article>
+
+        <article class="note-card" data-note="xian" tabindex="0" role="button" aria-controls="detail">
+          <img class="note-thumb" src="assets/xian-photo-1.jpg" alt="">
+          <div>
+            <p class="note-meta">2024.02.14</p>
+            <h3>西安古城记</h3>
+            <p>十三朝古都，每一块砖都在诉说着历史里的故事。</p>
+            <div class="note-loc">⌖ 西安</div>
+          </div>
+          <div class="heart">♡</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Postcard background & Gallery -->
+    <img class="postcard-bg" src="assets/paper-postcard-from-user-v2.jpg" alt="">
+    <section class="panel gallery-panel">
+      <div class="label">旅行笔记详情</div>
+      <img id="detail-hero" class="hero-photo" src="assets/xiamen-photo-1.jpg" alt="厦门海边照片">
+      <div class="small-photos">
+        <div class="polaroid"><img id="detail-photo-1" src="assets/xiamen-photo-2.jpg" alt=""></div>
+        <div class="polaroid"><img id="detail-photo-2" src="assets/xiamen-photo-3.jpg" alt=""></div>
+        <div class="polaroid"><img id="detail-photo-3" src="assets/xiamen-photo-4.jpg" alt=""></div>
+      </div>
+    </section>
+
+    <!-- Article Detail -->
+    <article id="detail" class="article-panel">
+      <img class="postmark" src="assets/postmark.png" alt="">
+      <p id="detail-date" class="article-date">2024.05.20 · 厦门</p>
+      <h2 id="detail-title" class="article-title">厦门の海边日记 <span class="sun">☼</span></h2>
+      <p id="detail-text" class="article-text">
+        这是我第三次来厦门，还是会被这里的海和慢节奏治愈。<br>
+        清晨沿着环岛路骑行，看日出、吹着海风，整个人都变得轻松起来。<br>
+        午后在曾厝垵的小巷里闲逛，吃了很好吃的沙茶面和土笋冻。<br>
+        傍晚坐在海边的礁石上，看着太阳慢慢落下，心里满满都是感动。<br>
+        生活真的很美好，值得我们用心去感受每一个瞬间。♡
+      </p>
+
+      <div class="article-bottom">
+        <section class="todo">
+          <h4>今日小记</h4>
+          <ul id="detail-todo">
+            <li>环岛路骑行</li>
+            <li>曾厝垵逛吃</li>
+            <li>沙茶面超好吃</li>
+            <li>看日落</li>
+          </ul>
+        </section>
+
+        <section class="mood">
+          <h4>Mood:</h4>
+          <div id="detail-stars" class="stars">★★★★★</div>
+        </section>
+      </div>
+    </article>
+
+    <!-- Info Panel -->
+    <aside class="panel info-panel">
+      <h3>旅行信息</h3>
+      <div class="info-list">
+        <div class="info-row"><span class="label-t">天气：</span><span id="detail-weather-emoji" class="emoji">☀</span><span id="detail-weather">晴天</span></div>
+        <div class="info-row"><span class="label-t">温度：</span><span id="detail-temp">24℃</span></div>
+        <div class="info-row"><span class="label-t">心情：</span><span id="detail-mood-emoji" class="emoji">☺</span><span id="detail-mood">愉快</span></div>
+        <div class="info-row"><span class="label-t">同行：</span><span id="detail-company">独自旅行</span></div>
+      </div>
+
+      <h3>位置地图</h3>
+      <img id="detail-map" class="mini-map" src="assets/xiamen-map.jpg" alt="厦门位置地图">
+    </aside>
+
+    <img class="flowers" src="assets/right-flowers-generated.png" alt="">
+    <aside class="closing-note">记录美好时光<br>收藏珍贵回忆 ♡</aside>
+  </section>
+</main>
+
+<footer>
+  <div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div>
+</footer>
+
+<script>
+(function() {
+  /* ── Board scaling ── */
+  const setBoardScale = () => {
+    const w = window.innerWidth;
+    const scale = Math.min(1, w / 1536);
+    document.documentElement.style.setProperty("--board-scale", String(scale));
+  };
+
+  /* ── City data ── */
+  const noteDetails = {
+    xiamen: {
+      date: "2024.05.20 · 厦门",
+      title: '厦门の海边日记 <span class="sun">☼</span>',
+      text: [
+        "这是我第三次来厦门，还是会被这里的海和慢节奏治愈。",
+        "清晨沿着环岛路骑行，看日出、吹着海风，整个人都变得轻松起来。",
+        "午后在曾厝垵的小巷里闲逛，吃了很好吃的沙茶面和土笋冻。",
+        "傍晚坐在海边的礁石上，看着太阳慢慢落下，心里满满都是感动。",
+        "生活真的很美好，值得我们用心去感受每一个瞬间。♡"
+      ],
+      hero: "assets/xiamen-photo-1.jpg",
+      heroAlt: "厦门海边照片",
+      photos: [
+        { src: "assets/xiamen-photo-2.jpg", alt: "厦门海边" },
+        { src: "assets/xiamen-photo-3.jpg", alt: "厦门海景" },
+        { src: "assets/xiamen-photo-4.jpg", alt: "厦门缆车" }
+      ],
+      todo: ["环岛路骑行", "曾厝垵逛吃", "沙茶面超好吃", "看日落"],
+      stars: "★★★★★",
+      weatherEmoji: "☀", weather: "晴天", temp: "24℃",
+      moodEmoji: "☺", mood: "愉快", company: "独自旅行",
+      map: "assets/xiamen-map.jpg", mapAlt: "厦门位置地图"
+    },
+    chengdu: {
+      date: "2024.04.10 · 成都",
+      title: "成都慢生活",
+      text: [
+        "清晨先去街边小店吃一碗热腾腾的担担面，整座城市像刚刚醒来一样松弛。",
+        "在人民公园坐着喝盖碗茶，看大爷们聊天、打牌，时间也跟着慢了下来。",
+        "下午去看了可爱的熊猫，圆滚滚地趴着晒太阳，真的很治愈。",
+        "夜里沿着小巷继续散步，空气里是火锅和花椒的香气，让人舍不得回去。"
+      ],
+      hero: "assets/chengdu-photo-1.jpg",
+      heroAlt: "成都古建筑",
+      photos: [
+        { src: "assets/chengdu-photo-2.jpg", alt: "安顺廊桥夜景" },
+        { src: "assets/chengdu-photo-3.jpg", alt: "IFS熊猫" },
+        { src: "assets/chengdu-photo-4.jpg", alt: "大熊猫吃竹子" }
+      ],
+      todo: ["人民公园喝茶", "看熊猫", "慢慢散步", "火锅安排上"],
+      stars: "★★★★★",
+      weatherEmoji: "☁", weather: "多云", temp: "22℃",
+      moodEmoji: "☺", mood: "放松", company: "一个人晃悠",
+      map: "assets/chengdu-map.png", mapAlt: "成都位置地图"
+    },
+    beijing: {
+      date: "2024.03.25 · 北京",
+      title: "北京的春天",
+      text: [
+        "第一次来北京，被这座城市的厚重感深深震撼。",
+        "走在胡同里，红砖灰瓦和老槐树交织在一起，时间仿佛慢了下来。",
+        "傍晚登上了景山公园，俯瞰整个紫禁城，夕阳下的宫殿金碧辉煌。",
+        "这一天没有特别赶行程，只想把每个转角都好好记住。"
+      ],
+      hero: "assets/beijing-photo-1.jpg",
+      heroAlt: "北京天际线",
+      photos: [
+        { src: "assets/beijing-photo-2.jpg", alt: "长城秋景" },
+        { src: "assets/beijing-photo-3.jpg", alt: "央视大楼夜景" },
+        { src: "assets/beijing-photo-4.jpg", alt: "天坛" }
+      ],
+      todo: ["逛胡同", "爬长城", "吃烤鸭", "看天坛"],
+      stars: "★★★★★",
+      weatherEmoji: "☀", weather: "晴朗", temp: "18℃",
+      moodEmoji: "☺", mood: "震撼", company: "独自旅行",
+      map: "assets/beijing-map.png", mapAlt: "北京位置地图"
+    },
+    xian: {
+      date: "2024.02.14 · 西安",
+      title: "西安古城记",
+      text: [
+        "走在古城墙边的时候，会很自然地想到这座城市经历过的漫长时间。",
+        "钟楼、城门和傍晚的暖色天光叠在一起，有一种很厚重的安静。",
+        "夜市上烟火气十足，肉夹馍和甑糕的香味一阵阵飘过来，让人边走边饿。",
+        "西安最打动我的不是某个景点，而是历史和日常生活并排存在的感觉。"
+      ],
+      hero: "assets/xian-photo-1.jpg",
+      heroAlt: "西安城墙夜景",
+      photos: [
+        { src: "assets/xian-photo-2.jpg", alt: "西安钟楼" },
+        { src: "assets/xian-photo-3.jpg", alt: "大唐芙蓉园" },
+        { src: "assets/xian-photo-4.jpg", alt: "古建筑" }
+      ],
+      todo: ["城墙散步", "看看钟楼", "逛夜市", "吃肉夹馍"],
+      stars: "★★★★☆",
+      weatherEmoji: "☀", weather: "晴天", temp: "18℃",
+      moodEmoji: "☺", mood: "充实", company: "独自旅行",
+      map: "assets/xian-map.png", mapAlt: "西安位置地图"
+    }
+  };
+
+  /* ── DOM refs ── */
+  const detailEls = {
+    hero: document.getElementById("detail-hero"),
+    photo1: document.getElementById("detail-photo-1"),
+    photo2: document.getElementById("detail-photo-2"),
+    photo3: document.getElementById("detail-photo-3"),
+    date: document.getElementById("detail-date"),
+    title: document.getElementById("detail-title"),
+    text: document.getElementById("detail-text"),
+    todo: document.getElementById("detail-todo"),
+    stars: document.getElementById("detail-stars"),
+    weatherEmoji: document.getElementById("detail-weather-emoji"),
+    weather: document.getElementById("detail-weather"),
+    temp: document.getElementById("detail-temp"),
+    moodEmoji: document.getElementById("detail-mood-emoji"),
+    mood: document.getElementById("detail-mood"),
+    company: document.getElementById("detail-company"),
+    map: document.getElementById("detail-map")
+  };
+
+  const renderDetail = (key) => {
+    const detail = noteDetails[key];
+    if (!detail) return;
+
+    detailEls.hero.src = detail.hero;
+    detailEls.hero.alt = detail.heroAlt;
+    [detailEls.photo1, detailEls.photo2, detailEls.photo3].forEach((imgEl, i) => {
+      const photo = detail.photos[i];
+      if (!photo) return;
+      imgEl.src = photo.src;
+      imgEl.alt = photo.alt || "";
+    });
+    detailEls.date.textContent = detail.date;
+    detailEls.title.innerHTML = detail.title;
+    detailEls.text.innerHTML = detail.text.join("<br>");
+    detailEls.todo.innerHTML = detail.todo.map(item => `<li>${item}</li>`).join("");
+    detailEls.stars.textContent = detail.stars;
+    detailEls.weatherEmoji.textContent = detail.weatherEmoji;
+    detailEls.weather.textContent = detail.weather;
+    detailEls.temp.textContent = detail.temp;
+    detailEls.moodEmoji.textContent = detail.moodEmoji;
+    detailEls.mood.textContent = detail.mood;
+    detailEls.company.textContent = detail.company;
+    detailEls.map.alt = detail.mapAlt;
+    if (detail.map) detailEls.map.src = detail.map;
+
+    document.querySelectorAll(".note-card").forEach(card => {
+      card.classList.toggle("is-active", card.dataset.note === key);
+    });
+  };
+
+  /* ── Note card click ── */
+  document.querySelectorAll(".note-card").forEach(card => {
+    const openDetail = () => {
+      renderDetail(card.dataset.note);
+    };
+    card.addEventListener("click", openDetail);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openDetail();
+      }
+    });
+  });
+
+  setBoardScale();
+  renderDetail("xiamen");
+  window.addEventListener("resize", setBoardScale);
+})();
+</script>
+
+</body>
+</html>
