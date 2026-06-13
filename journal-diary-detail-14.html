@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>被惦记的感觉，真好 · 生活日记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face {
+  font-family: 'HongLeiXiao';
+  src: local('鸿雷小纸条青春体');
+  font-display: swap;
+}
+
+:root {
+  --paper: #faf8f3;
+  --cream: #f5f0e8;
+  --olive: #8b9d83;
+  --olive-bg: #eef1ec;
+  --brown: #a68b6f;
+  --terracotta: #c97d6e;
+  --ink: #3a3530;
+  --ink-2: #6b635c;
+  --ink-3: #9c948d;
+  --border: #e5ded2;
+  --tape-green: rgba(162,194,160,0.50);
+  --tape-beige: rgba(215,200,175,0.50);
+  --tape-pink: rgba(220,175,175,0.45);
+  --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
+  --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
+  --ease: cubic-bezier(0.22,0.61,0.36,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Serif SC","PingFang SC","Microsoft YaHei",serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.04;
+  background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(139,157,131,0.06) 28px, rgba(139,157,131,0.06) 29px);
+}
+
+.watercolor-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.watercolor-blob { position: absolute; border-radius: 50%; filter: blur(130px); }
+.wb-1 { width: 650px; height: 650px; top: -8%; left: -18%; background: radial-gradient(circle, rgba(139,157,131,0.45) 0%, transparent 70%); opacity: 0.08; }
+.wb-2 { width: 550px; height: 550px; top: 38%; right: -12%; background: radial-gradient(circle, rgba(201,125,110,0.35) 0%, transparent 70%); opacity: 0.07; }
+.wb-3 { width: 420px; height: 420px; bottom: -8%; left: 25%; background: radial-gradient(circle, rgba(166,139,111,0.3) 0%, transparent 70%); opacity: 0.06; }
+
+.main { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+
+/* ── Return bar ── */
+.return-bar { padding: 28px 0 8px; }
+.return-bar a {
+  color: var(--ink-2); text-decoration: none;
+  font-size: 13px; font-weight: 500;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  transition: color 0.2s; letter-spacing: 0.5px;
+}
+.return-bar a:hover { color: var(--olive); }
+
+/* ── Title area ── */
+.title-area { padding: 24px 0 32px; position: relative; }
+.title-area .doodle {
+  position: absolute; pointer-events: none; color: #d4b896; opacity: 0.5;
+}
+.article-title {
+  font-family: "HongLeiXiao","Ma Shan Zheng","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: clamp(32px,4vw,44px);
+  font-weight: normal; line-height: 1.3; color: var(--ink);
+  position: relative; z-index: 1;
+}
+.article-meta {
+  display: flex; align-items: center; gap: 16px; margin-top: 10px;
+  font-size: 12px; color: var(--ink-3);
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  position: relative; z-index: 1;
+}
+.article-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); opacity: 0.4; }
+
+/* ── Content ── */
+.content-area {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; padding: 0 0 40px; position: relative;
+  align-items: start;
+}
+
+/* Left: images */
+.images-col { position: relative; }
+.main-photo {
+  position: relative; z-index: 3;
+  background: #fff; padding: 14px; border-radius: 3px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1deg);
+}
+.main-photo img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.main-photo .heart-btn {
+  position: absolute; top: 22px; right: 22px;
+  background: rgba(255,255,255,0.88); border: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  cursor: pointer; font-size: 13px; color: var(--ink-3);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); z-index: 5;
+  transition: all 0.25s;
+}
+.main-photo .heart-btn:hover { color: var(--terracotta); transform: scale(1.1); }
+.main-photo .heart-btn.liked { color: #fff; background: var(--terracotta); }
+
+.small-polaroid {
+  position: absolute; bottom: -30px; right: -20px; z-index: 5;
+  background: #fff; padding: 8px 8px 28px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(5deg); width: 160px;
+}
+.small-polaroid img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; }
+.small-polaroid .pin {
+  position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+  width: 15px; height: 15px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle at 35% 35%, #f0d0b8, #c97d6e);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.small-polaroid .pin::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5);
+}
+
+.extra-photo {
+  position: relative; z-index: 3; margin-top: 30px;
+  background: #fff; padding: 10px 10px 34px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-2deg); width: 200px;
+}
+.extra-photo img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; }
+.extra-photo .cap {
+  font-family: "Caveat",cursive; font-size: 13px; text-align: center;
+  color: var(--ink-2); margin-top: 6px; letter-spacing: 0.3px;
+}
+
+.washi-tape {
+  position: absolute; z-index: 3; pointer-events: none;
+  border-radius: 1px; opacity: 0.8;
+}
+.euc-deco { position: absolute; pointer-events: none; z-index: 0; }
+
+/* Right: text */
+.text-col { position: relative; z-index: 1; }
+.text-col p {
+  font-size: 14.5px; color: var(--ink-2); line-height: 2.1;
+  margin-bottom: 18px; font-family: "Noto Serif SC","PingFang SC",serif;
+}
+.text-col .day-label {
+  display: inline-block; margin-top: 8px; margin-bottom: 6px;
+  font-family: "Caveat","Ma Shan Zheng",cursive;
+  font-size: 18px; color: var(--olive); letter-spacing: 0.5px;
+}
+.text-note {
+  display: inline-block; margin-top: 36px;
+  padding: 20px 28px;
+  background: #f5f0e0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  box-shadow: var(--shadow-paper);
+  border: 1px solid rgba(180,170,140,0.12);
+  transform: rotate(1.5deg);
+  font-family: "Caveat","Ma Shan Zheng","HongLeiXiao",cursive;
+  font-size: 16px; color: var(--brown); line-height: 1.8;
+  text-align: center;
+}
+
+/* ── Bottom bar ── */
+.bottom-bar {
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 0 50px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.bottom-nav { display: flex; gap: 24px; }
+.bottom-nav a {
+  font-size: 13px; color: var(--ink-2); text-decoration: none;
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  transition: color 0.2s; letter-spacing: 0.5px;
+}
+.bottom-nav a:hover { color: var(--olive); }
+
+/* ── Footer ── */
+footer {
+  background: #e8e4dc; text-align: center;
+  padding: 24px 20px 16px;
+  position: relative; z-index: 1; margin-top: 20px;
+}
+footer .ft-text {
+  font-family: "HongLeiXiao","Caveat","ZCOOL XiaoWei",cursive;
+  font-size: 18px; color: var(--ink); letter-spacing: 0.5px;
+}
+footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.title-area { animation: fadeIn 0.6s var(--ease) both; }
+.content-area { animation: fadeIn 0.7s var(--ease) 0.1s both; }
+
+@media (max-width: 900px) {
+  .content-area { grid-template-columns: 1fr; gap: 24px; }
+  .small-polaroid { position: relative; bottom: auto; right: auto; margin-top: -20px; margin-left: 20px; }
+  .main { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="watercolor-bg">
+  <div class="watercolor-blob wb-1"></div>
+  <div class="watercolor-blob wb-2"></div>
+  <div class="watercolor-blob wb-3"></div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════ RETURN BAR ═══════════ -->
+<div class="return-bar">
+  <a href="journal-diary.html">← 返回日记</a>
+</div>
+
+<!-- ═══════════ TITLE AREA ═══════════ -->
+<section class="title-area">
+  <div class="doodle" style="top:-2px;left:-6px;font-size:17px;">✦</div>
+  <div class="doodle" style="top:10px;left:40px;font-size:11px;">✧</div>
+  <div class="doodle" style="bottom:10px;right:20px;font-size:14px;color:#d4a5a5;">♡</div>
+  <h1 class="article-title">被惦记的感觉，真好</h1>
+  <div class="article-meta">
+    <span><i class="fa-regular fa-calendar"></i> 2026年5月3日</span>
+    <span class="meta-dot"></span>
+    <span>星期日</span>
+    <span class="meta-dot"></span>
+    <span><i class="fa-solid fa-gift"></i> 礼物开箱</span>
+  </div>
+</section>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="content-area">
+
+  <!-- Left: Images -->
+  <div class="images-col">
+    <svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:0.45;" viewBox="0 0 140 170">
+      <g fill="none" stroke="#8b9d83" stroke-width="1.2">
+        <path d="M95,170 Q88,135 100,105 Q108,85 118,65"/>
+        <path d="M100,105 Q88,98 74,92"/>
+        <path d="M106,95 Q114,90 124,85"/>
+        <ellipse cx="74" cy="92" rx="15" ry="6" fill="#8b9d83" opacity="0.16" transform="rotate(-28,74,92)"/>
+        <ellipse cx="124" cy="85" rx="13" ry="5" fill="#8b9d83" opacity="0.16" transform="rotate(22,124,85)"/>
+      </g>
+    </svg>
+
+    <!-- Gift 1 + Gift 2 polaroid -->
+    <div style="position:relative;margin-bottom:30px;">
+      <div class="main-photo">
+        <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+        <img src="detail14-01.jpg" alt="礼物开箱" loading="lazy">
+      </div>
+      <div class="small-polaroid">
+        <div class="pin"></div>
+        <img src="detail14-02.jpg" alt="礼物细节" loading="lazy">
+      </div>
+      <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
+    </div>
+
+    <!-- Gift 3 -->
+    <div style="position:relative;margin-bottom:24px;">
+      <div class="main-photo" style="transform:rotate(2deg);">
+        <img src="detail14-03.jpg" alt="礼物" loading="lazy">
+      </div>
+      <div class="washi-tape" style="top:-6px;left:28%;width:44px;height:12px;background:var(--tape-pink);transform:rotate(-4deg);"></div>
+    </div>
+
+    <!-- Gift 4 -->
+    <div style="position:relative;margin-bottom:24px;">
+      <div class="main-photo" style="transform:rotate(-1.5deg);">
+        <img src="detail14-04.jpg" alt="礼物" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Gift 5 polaroid -->
+    <div class="extra-photo" style="width:220px;transform:rotate(3deg);">
+      <div class="pin"></div>
+      <img src="detail14-05.jpg" alt="礼物" loading="lazy">
+      <div class="cap">每一份都是心意 ♡</div>
+    </div>
+  </div>
+
+  <!-- Right: Text -->
+  <div class="text-col">
+    <span class="day-label">✧ 五一的惊喜</span>
+    <p>
+      五一假期收到了好几份礼物，拆开每一份的时候都忍不住嘴角上扬。被人惦记着的感觉，大概就是这样吧——不需要多贵重，但你知道有人在某个时刻想起了你。
+    </p>
+
+    <span class="day-label">✧ 礼物的意义</span>
+    <p>
+      礼物从来不只是物品本身。是朋友逛街时"这个好适合她"的那一下念头，是包好礼物纸时的那份期待，是递过来时眼睛里的笑。
+    </p>
+    <p>
+      每拆开一份，都像收到了一小片温暖。它们是散落在日常里的证据——你在别人的世界里，是值得被好好对待的人。
+    </p>
+
+    <span class="day-label">✧ 关于友谊</span>
+    <p>
+      有时候觉得自己好幸运，身边有这些温柔的人。不需要天天联系，但彼此心里都留着位置。节日里的一份小礼物、一条消息、一张手写卡片，都是"我记着你呢"的证据。
+    </p>
+    <p>
+      谢谢你们呀，我的朋友们。我也会努力成为那个让人感到被惦记的人 🎀
+    </p>
+
+    <div class="text-note">
+      " 被惦记，<br>是世界上最温柔的确认。 ✦ "
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ BOTTOM BAR ═══════════ -->
+<div class="bottom-bar">
+  <div class="bottom-nav">
+    <a href="journal-diary-detail-5.html">← 上一篇</a>
+    <a href="journal-diary.html">返回列表</a>
+    <a href="journal-diary-detail-6.html">下一篇 →</a>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div>
+</footer>
+
+</div>
+
+  <script src="music-player.js"></script>
+</body>
+</html>
