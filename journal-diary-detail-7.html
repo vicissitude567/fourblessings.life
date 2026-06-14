@@ -99,14 +99,8 @@ body::after {
   padding: 0 0 40px; position: relative;
 }
 
-/* Float images */
-.images-float {
-  float: left;
-  width: 340px;
-  margin-right: 36px;
-  margin-bottom: 24px;
-  position: relative;
-}
+/* Left: images */
+.images-col { position: relative; }
 .main-photo {
   position: relative; z-index: 3;
   background: #fff; padding: 14px; border-radius: 3px;
@@ -151,7 +145,8 @@ body::after {
 }
 .euc-deco { position: absolute; pointer-events: none; z-index: 0; }
 
-/* Text flows around images */
+/* Right: text */
+.text-col { position: relative; z-index: 1; }
 .text-col p {
   font-size: 14.5px; color: var(--ink-2); line-height: 2.1;
   margin-bottom: 18px; text-indent: 2em;
@@ -205,7 +200,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 .content-area { animation: fadeIn 0.7s var(--ease) 0.1s both; }
 
 @media (max-width: 768px) {
-  .images-float { float: none; width: 100%; margin-right: 0; }
+  .content-area { grid-template-columns: 1fr; gap: 24px; }
   .small-polaroid { position: relative; bottom: auto; right: auto; margin-top: -20px; margin-left: 20px; }
   .main { padding: 0 20px; }
 }
@@ -244,8 +239,8 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 <!-- ═══════════ CONTENT ═══════════ -->
 <div class="content-area">
 
-  <!-- Float images left, text wraps around -->
-  <div class="images-float">
+  <!-- Left: Images -->
+  <div class="images-col">
     <!-- Eucalyptus top-right -->
     <svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:0.45;" viewBox="0 0 140 170">
       <g fill="none" stroke="#8b9d83" stroke-width="1.2">
@@ -273,7 +268,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
     <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
   </div>
 
-  <!-- Text wraps around images -->
+  <!-- Right: Text -->
   <div class="text-col">
     <p>
       昨天返校，整理东西时翻到了高三下半年自己写的小纸条。一股难以言说的情绪涌上心头……
@@ -296,17 +291,15 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
     <p>
       如今回头看，轻舟已过万重山。虽然最终也没有考得很好，但当时拼尽全力，不后悔就够了。高考打击了我，也锻炼了我的内心。虽然现在依旧迷茫、普通，但我已不缺从头再来的勇气。
     </p>
-  </div>
 
-  <!-- Full-width quote and closing -->
-  <div style="clear:both;"></div>
-  <div class="text-note" style="margin-top:20px;">
-    " 爱人如养花，最好的花匠一定是自己。<br>要自信，要有勇气，要接纳自己的所有。<br>勇敢的人先享受世界。 "
-  </div>
+    <div class="text-note" style="margin-top:20px;">
+      " 爱人如养花，最好的花匠一定是自己。<br>要自信，要有勇气，要接纳自己的所有。<br>勇敢的人先享受世界。 "
+    </div>
 
-  <p style="text-align:center;margin-top:20px;">
-    祝福所有要高考的宝子们，高考加油，金榜题名！<br>无论结果如何，人生都不会轻易完蛋。
-  </p>
+    <p class="detail-blessing">
+      祝福所有要高考的宝子们，高考加油，金榜题名！<br>无论结果如何，人生都不会轻易完蛋。
+    </p>
+  </div>
 
 </div>
 
