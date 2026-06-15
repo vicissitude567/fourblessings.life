@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>关心弹窗爱心</title>
+  <style>
+    :root {
+      --ink: #33242c;
+      --text: #5a3947;
+      --muted: rgba(90, 57, 71, 0.68);
+      --rose: #ff7aa8;
+      --peach: #ffd2bd;
+      --cream: #fff8ef;
+      --butter: #fff0bd;
+      --lavender: #eadcff;
+      --mint: #dcf8e6;
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      overflow: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255, 210, 189, 0.9), transparent 28%),
+        radial-gradient(circle at 86% 20%, rgba(234, 220, 255, 0.86), transparent 30%),
+        radial-gradient(circle at 72% 82%, rgba(255, 240, 189, 0.82), transparent 28%),
+        linear-gradient(145deg, #fff8ef 0%, #ffe9ef 45%, #f7ecff 100%);
+    }
+
+    .app {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .app::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(141, 89, 108, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(141, 89, 108, 0.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at 50% 46%, black 0 42%, transparent 76%);
+      z-index: -3;
+    }
+
+    .app::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 120px rgba(255, 122, 168, 0.16);
+      z-index: 90;
+    }
+
+    .halo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(78vw, 940px);
+      aspect-ratio: 1.4;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.64), transparent 64%),
+        radial-gradient(circle at 50% 45%, rgba(255, 122, 168, 0.22), transparent 58%);
+      filter: blur(20px);
+      z-index: -1;
+      transition: opacity 900ms ease, transform 1200ms ease;
+    }
+
+    .app.exploding .halo {
+      opacity: 0.2;
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    .title {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      width: min(760px, calc(100vw - 40px));
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 20;
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .title.hide {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-18px);
+    }
+
+    h1 {
+      margin: 0;
+      color: #663348;
+      font-size: clamp(30px, 5vw, 64px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-shadow: 0 18px 48px rgba(255, 122, 168, 0.22);
+    }
+
+    .title p {
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 18px);
+      line-height: 1.75;
+    }
+
+    .heart-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .heart-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(61vw, 780px);
+      aspect-ratio: 1.28;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      filter: drop-shadow(0 0 22px rgba(255, 122, 168, 0.22));
+      transition: opacity 760ms ease, transform 900ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    .heart-line.show { opacity: 0.24; }
+
+    .heart-line.fold {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.52);
+    }
+
+    .heart-line svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .dialog {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: clamp(90px, 7.2vw, 106px);
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 252, 247, 0.86)),
+        var(--tone);
+      box-shadow:
+        0 18px 36px rgba(121, 69, 86, 0.16),
+        0 0 30px var(--glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      color: #513241;
+      overflow: hidden;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.18) rotate(var(--start-rot));
+      transition:
+        left 1180ms cubic-bezier(.18,.95,.16,1),
+        top 1180ms cubic-bezier(.18,.95,.16,1),
+        transform 1180ms cubic-bezier(.18,.95,.16,1),
+        opacity 320ms ease;
+      z-index: var(--z);
+      will-change: left, top, transform, opacity;
+    }
+
+    .dialog.visible {
+      opacity: 1;
+      left: var(--heart-x);
+      top: var(--heart-y);
+      transform: translate(-50%, -50%) scale(1) rotate(var(--heart-rot));
+    }
+
+    .dialog.gather {
+      left: var(--gather-x);
+      top: var(--gather-y);
+      transform: translate(-50%, -50%) scale(var(--gather-scale)) rotate(var(--gather-rot));
+      transition:
+        left 860ms cubic-bezier(.28,.78,.12,1),
+        top 860ms cubic-bezier(.28,.78,.12,1),
+        transform 860ms cubic-bezier(.28,.78,.12,1),
+        opacity 260ms ease;
+    }
+
+    .dialog.explode {
+      left: var(--cover-x);
+      top: var(--cover-y);
+      transform: translate(-50%, -50%) scale(var(--cover-scale)) rotate(var(--cover-rot));
+      transition:
+        left 980ms cubic-bezier(.08,.78,.08,1),
+        top 980ms cubic-bezier(.08,.78,.08,1),
+        transform 980ms cubic-bezier(.08,.78,.08,1),
+        opacity 220ms ease;
+    }
+
+    .bar {
+      height: 19px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      background: rgba(255, 255, 255, 0.66);
+      border-bottom: 1px solid rgba(117, 78, 92, 0.08);
+    }
+
+    .bar i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff7aa8;
+      box-shadow: 12px 0 #ffd36b, 24px 0 #80d99d;
+    }
+
+    .message {
+      padding: 8px 9px 10px;
+      font-size: clamp(10px, .8vw, 11px);
+      font-weight: 800;
+      line-height: 1.32;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .spark {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: rgba(255, 122, 168, 0.8);
+      box-shadow: 0 0 18px rgba(255, 122, 168, 0.72);
+      opacity: 0;
+      animation: spark 5.4s linear infinite;
+      animation-delay: var(--delay);
+      z-index: 1;
+    }
+
+    .controls {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      z-index: 110;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.66);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.56);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 48px rgba(121, 69, 86, 0.18);
+      transition: opacity 450ms ease, transform 450ms ease;
+    }
+
+    .controls.playing {
+      opacity: 0.08;
+      transform: translateX(-50%) translateY(14px);
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      color: #fff9fb;
+      background: linear-gradient(135deg, #c94d78, #ff7aa8);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(255, 122, 168, 0.3);
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    button.secondary {
+      color: #6a3a4e;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(180, 112, 136, 0.24);
+      box-shadow: none;
+    }
+
+    .status {
+      min-width: 128px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @keyframes spark {
+      0% { opacity: 0; transform: translateY(18px) scale(.45); }
+      18% { opacity: .8; }
+      100% { opacity: 0; transform: translateY(-170px) scale(1.25); }
+    }
+
+    @media (max-width: 760px) {
+      .title { top: 26px; }
+      .heart-line { width: 91vw; }
+
+      .dialog {
+        width: clamp(74px, 21vw, 84px);
+        min-height: 44px;
+        border-radius: 12px;
+      }
+
+      .bar {
+        height: 15px;
+        padding: 0 7px;
+      }
+
+      .bar i {
+        width: 5px;
+        height: 5px;
+        box-shadow: 9px 0 #ffd36b, 18px 0 #80d99d;
+      }
+
+      .message {
+        padding: 6px 5px 7px;
+        font-size: 10px;
+      }
+
+      .controls {
+        width: calc(100vw - 26px);
+        bottom: 14px;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      button {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .status { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <div class="halo" aria-hidden="true"></div>
+
+    <section class="title" id="title">
+      <h1>今天也要被好好关心</h1>
+      <p>把一句句日常提醒摆成一颗心，再抱成一团，最后轻轻炸开铺满整个屏幕。</p>
+    </section>
+
+    <div class="heart-stage">
+      <div class="heart-line" id="heartLine" aria-hidden="true">
+        <svg viewBox="-320 -250 640 520">
+          <path id="heartPath" d="M0 -76 C-42 -156 -106 -204 -184 -198 C-272 -190 -320 -116 -306 -26 C-286 102 -158 190 0 286 C158 190 286 102 306 -26 C320 -116 272 -190 184 -198 C106 -204 42 -156 0 -76Z" fill="none" stroke="url(#heartGradient)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="heartGradient" x1="-310" x2="310">
+              <stop stop-color="#ffd2bd"/>
+              <stop offset=".5" stop-color="#ff7aa8"/>
+              <stop offset="1" stop-color="#eadcff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">开始播放</button>
+      <button class="secondary" id="againBtn">重新来过</button>
+      <span class="status" id="status">准备好了</span>
+    </div>
+  </main>
+
+  <script>
+    const heartMessages = [
+      "记得吃饭", "多喝热水", "今天辛苦啦", "别太累了", "按时吃早餐", "出门带伞",
+      "注意保暖", "少喝冰的", "眼睛休息一下", "腰背坐直", "别空腹喝咖啡", "记得吃水果",
+      "心情要好", "慢慢来", "你已经很棒了", "别硬撑", "早点回家", "别忘了吃药",
+      "少刷一会手机", "多一点开心", "路上注意安全", "照顾好自己", "别委屈自己", "有人惦记你",
+      "忙完就休息", "记得伸个懒腰", "别忘了穿外套", "吃点热乎的", "今天也很棒", "别憋在心里"
+    ];
+
+    const coverMessages = [
+      "记得吃饭", "好好吃饭", "按时吃早餐", "午饭别凑合", "晚饭要吃点", "多喝热水",
+      "记得喝水", "水杯放手边", "别总喝冰的", "少喝奶茶", "别空腹喝咖啡", "吃点水果",
+      "带点小零食", "胃不舒服要说", "注意保暖", "出门带伞", "别忘了外套", "风大戴帽子",
+      "路上慢一点", "走路看路", "到家说一声", "早点回家", "注意安全", "别着急赶路",
+      "今天辛苦啦", "你已经很棒了", "别太累了", "忙完就休息", "别硬撑", "可以慢慢来",
+      "别逼自己太紧", "给自己放松", "休息五分钟", "伸个懒腰", "肩膀放松点", "腰背坐直",
+      "眼睛休息一下", "离屏幕远一点", "少刷一会手机", "别憋在心里", "难过要说出来", "开心也告诉我",
+      "少一点焦虑", "多一点开心", "保持微笑", "心情要好", "别委屈自己", "别怕麻烦我",
+      "我在听你说", "有人惦记你", "有人站你这边", "你值得被爱", "你不用逞强", "你可以依赖我",
+      "记得吃药", "按时复查", "不舒服别拖", "身体最重要", "别熬太久", "早点休息一下",
+      "明天会更好", "今天也很棒", "做得很好啦", "别否定自己", "给自己一点耐心", "照顾好自己",
+      "一切都会好起来", "不急这一会儿", "先照顾自己", "别把自己忘了", "愿你今天顺顺利利", "今天也喜欢你"
+    ];
+
+    const tones = [
+      ["#ffd9e8", "rgba(255, 122, 168, .38)"],
+      ["#ffe3d4", "rgba(255, 159, 128, .34)"],
+      ["#fff2c9", "rgba(255, 211, 107, .34)"],
+      ["#e2f8eb", "rgba(128, 217, 157, .28)"],
+      ["#eee1ff", "rgba(173, 128, 255, .3)"]
+    ];
+
+    const app = document.querySelector("#app");
+    const title = document.querySelector("#title");
+    const heartLine = document.querySelector("#heartLine");
+    const heartPath = document.querySelector("#heartPath");
+    const startBtn = document.querySelector("#startBtn");
+    const againBtn = document.querySelector("#againBtn");
+    const status = document.querySelector("#status");
+    const controls = document.querySelector(".controls");
+    let timers = [];
+    let dialogs = [];
+    let running = false;
+
+    function clearTimers() {
+      timers.forEach(clearTimeout);
+      timers = [];
+    }
+
+    function reset() {
+      clearTimers();
+      running = false;
+      dialogs.forEach((node) => node.remove());
+      dialogs = [];
+      document.querySelectorAll(".spark").forEach((node) => node.remove());
+      title.classList.remove("hide");
+      heartLine.classList.remove("show", "fold");
+      app.classList.remove("exploding");
+      controls.classList.remove("playing");
+      startBtn.textContent = "开始播放";
+      status.textContent = "准备好了";
+    }
+
+    function addSparks() {
+      for (let i = 0; i < 52; i += 1) {
+        const spark = document.createElement("span");
+        spark.className = "spark";
+        spark.style.setProperty("--x", `${Math.random() * 100}%`);
+        spark.style.setProperty("--y", `${30 + Math.random() * 65}%`);
+        spark.style.setProperty("--size", `${3 + Math.random() * 4}px`);
+        spark.style.setProperty("--delay", `${Math.random() * 4.6}s`);
+        app.appendChild(spark);
+      }
+    }
+
+    function screenHeartPoint(index, total) {
+      const length = heartPath.getTotalLength();
+      const point = heartPath.getPointAtLength(((index + 0.55) / total) * length);
+      const heartBox = heartLine.getBoundingClientRect();
+      let x = heartBox.left + ((point.x + 320) / 640) * heartBox.width;
+      const y = heartBox.top + ((point.y + 250) / 520) * heartBox.height;
+      if (point.y < -120 && Math.abs(point.x) < 80) {
+        x += point.x < 0 ? -46 : 46;
+      }
+      return { x, y };
+    }
+
+    function coverSlot(index, count) {
+      const isMobile = window.innerWidth < 760;
+      const stepX = isMobile ? 74 : 102;
+      const stepY = isMobile ? 54 : 68;
+      const columns = Math.ceil(window.innerWidth / stepX) + 4;
+      const col = index % columns;
+      const row = Math.floor(index / columns);
+      const jitterX = ((index * 37) % 31) - 15;
+      const jitterY = ((index * 53) % 25) - 12;
+      const progress = count > 1 ? index / (count - 1) : 0;
+      return {
+        x: -72 + col * stepX + (row % 2 ? stepX * 0.46 : 0) + jitterX,
+        y: 22 + row * stepY + jitterY,
+        delay: Math.round(progress * 620)
+      };
+    }
+
+    function gatherPoint(index) {
+      const radius = window.innerWidth < 760 ? 44 : 62;
+      const angle = index * 2.399963;
+      const ring = Math.sqrt(index % 16) / 4;
+      return {
+        x: window.innerWidth / 2 + Math.cos(angle) * radius * ring,
+        y: window.innerHeight / 2 + Math.sin(angle) * radius * ring * 0.68
+      };
+    }
+
+    function baseDialog(text, index) {
+      const node = document.createElement("div");
+      const tone = tones[index % tones.length];
+      node.className = "dialog";
+      node.style.setProperty("--tone", tone[0]);
+      node.style.setProperty("--glow", tone[1]);
+      node.style.setProperty("--start-rot", `${-16 + (index % 9) * 4}deg`);
+      node.style.setProperty("--z", `${10 + index}`);
+      node.innerHTML = `<div class="bar"><i></i></div><div class="message">${text}</div>`;
+      app.appendChild(node);
+      dialogs.push(node);
+      return node;
+    }
+
+    function setGatherVars(node, index) {
+      const point = gatherPoint(index);
+      node.style.setProperty("--gather-x", `${point.x}px`);
+      node.style.setProperty("--gather-y", `${point.y}px`);
+      node.style.setProperty("--gather-rot", `${(index % 13 - 6) * 3.2}deg`);
+      node.style.setProperty("--gather-scale", `${window.innerWidth < 760 ? 0.72 : 0.82}`);
+      node.style.setProperty("--z", `${160 + index}`);
+    }
+
+    function setCoverVars(node, index, total) {
+      const point = coverSlot(index, total);
+      node.style.setProperty("--cover-x", `${point.x}px`);
+      node.style.setProperty("--cover-y", `${point.y}px`);
+      node.style.setProperty("--cover-rot", `${(index % 11 - 5) * 3.2}deg`);
+      node.style.setProperty("--cover-scale", `${window.innerWidth < 760 ? 0.84 : 0.98}`);
+      node.style.setProperty("--z", `${260 + index}`);
+      node.style.transitionDelay = `${point.delay}ms`;
+    }
+
+    function makeHeartDialog(text, index, total) {
+      const node = baseDialog(text, index);
+      const point = screenHeartPoint(index, total);
+      node.style.setProperty("--heart-x", `${point.x}px`);
+      node.style.setProperty("--heart-y", `${point.y}px`);
+      node.style.setProperty("--heart-rot", `${(index % 7 - 3) * 1.2}deg`);
+      setGatherVars(node, index);
+      requestAnimationFrame(() => node.classList.add("visible"));
+      return node;
+    }
+
+    function createHiddenCoverDialogs(startIndex, totalCount) {
+      const existing = dialogs.length;
+      for (let i = existing; i < totalCount; i += 1) {
+        const node = baseDialog(coverMessages[i % coverMessages.length], 100 + i);
+        const gather = gatherPoint(i);
+        node.style.setProperty("--heart-x", `${gather.x}px`);
+        node.style.setProperty("--heart-y", `${gather.y}px`);
+        node.style.setProperty("--heart-rot", `${(i % 11 - 5) * 3}deg`);
+        setGatherVars(node, i);
+        node.classList.add("visible", "gather");
+        node.style.opacity = "0";
+        timers.push(setTimeout(() => {
+          node.style.opacity = "1";
+        }, Math.max(0, startIndex + i * 5)));
+      }
+    }
+
+    function totalCoverCount() {
+      const stepX = window.innerWidth < 760 ? 74 : 102;
+      const stepY = window.innerWidth < 760 ? 54 : 68;
+      const columns = Math.ceil(window.innerWidth / stepX) + 4;
+      const rows = Math.ceil(window.innerHeight / stepY) + 3;
+      return columns * rows;
+    }
+
+    function gatherHeart() {
+      status.textContent = "把关心抱成一团";
+      heartLine.classList.add("fold");
+      dialogs.forEach((node, index) => {
+        setGatherVars(node, index);
+        node.style.transitionDelay = `${index * 12}ms`;
+        node.classList.add("gather");
+      });
+    }
+
+    function explodeDialogs() {
+      const count = totalCoverCount();
+      app.classList.add("exploding");
+      heartLine.classList.remove("show");
+      createHiddenCoverDialogs(40, count);
+      requestAnimationFrame(() => {
+        dialogs.forEach((node, index) => {
+          setCoverVars(node, index, count);
+          node.classList.add("explode");
+        });
+      });
+      status.textContent = "关心炸开啦";
+    }
+
+    function play() {
+      if (running) return;
+      reset();
+      running = true;
+      title.classList.add("hide");
+      heartLine.classList.add("show");
+      controls.classList.add("playing");
+      startBtn.textContent = "播放中";
+      status.textContent = "爱心生成中";
+      addSparks();
+
+      heartMessages.forEach((message, index) => {
+        timers.push(setTimeout(() => {
+          makeHeartDialog(message, index, heartMessages.length);
+          status.textContent = `爱心生成中 ${index + 1}/${heartMessages.length}`;
+        }, 220 + index * 95));
+      });
+
+      timers.push(setTimeout(() => {
+        gatherHeart();
+      }, 220 + heartMessages.length * 95 + 1400));
+
+      timers.push(setTimeout(() => {
+        explodeDialogs();
+      }, 220 + heartMessages.length * 95 + 2600));
+
+      timers.push(setTimeout(() => {
+        running = false;
+        controls.classList.remove("playing");
+        startBtn.textContent = "再播放一次";
+        status.textContent = "播放完成";
+      }, 220 + heartMessages.length * 95 + 6800));
+    }
+
+    startBtn.addEventListener("click", play);
+    againBtn.addEventListener("click", () => {
+      reset();
+      setTimeout(play, 80);
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(play, 650);
+    });
+
+    window.addEventListener("resize", () => {
+      if (!dialogs.length || running) return;
+      reset();
+    });
+  </script>
+</body>
+</html>
