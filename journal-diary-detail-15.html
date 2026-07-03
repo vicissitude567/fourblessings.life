@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>拥抱自己，幸福很简单 · 生活日记</title>
+<title>期末周里的碎花裙和小日常 · 生活日记</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
@@ -25,9 +25,7 @@
   --ink: #3a3530;
   --ink-2: #6b635c;
   --ink-3: #9c948d;
-  --border: #e5ded2;
   --tape-green: rgba(162,194,160,0.50);
-  --tape-beige: rgba(215,200,175,0.50);
   --tape-pink: rgba(220,175,175,0.45);
   --shadow-paper: 0 1px 2px rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.05);
   --shadow-card: 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.05);
@@ -66,7 +64,6 @@ body::after {
 
 .main { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
 
-/* ── Return bar ── */
 .return-bar { padding: 28px 0 8px; }
 .return-bar a {
   color: var(--ink-2); text-decoration: none;
@@ -76,7 +73,6 @@ body::after {
 }
 .return-bar a:hover { color: var(--olive); }
 
-/* ── Title area ── */
 .title-area { padding: 24px 0 32px; position: relative; }
 .title-area .doodle {
   position: absolute; pointer-events: none; color: #d4b896; opacity: 0.5;
@@ -92,18 +88,17 @@ body::after {
   font-size: 12px; color: var(--ink-3);
   font-family: "PingFang SC","Microsoft YaHei",sans-serif;
   position: relative; z-index: 1;
+  flex-wrap: wrap;
 }
 .article-meta span { display: inline-flex; align-items: center; gap: 4px; }
 .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); opacity: 0.4; }
 
-/* ── Content ── */
 .content-area {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 40px; padding: 0 0 40px; position: relative;
   align-items: start;
 }
 
-/* Left: images */
 .images-col { position: relative; }
 .main-photo {
   position: relative; z-index: 3;
@@ -112,18 +107,6 @@ body::after {
   transform: rotate(-1deg);
 }
 .main-photo img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; }
-.main-photo .heart-btn {
-  position: absolute; top: 22px; right: 22px;
-  background: rgba(255,255,255,0.88); border: none;
-  width: 32px; height: 32px; border-radius: 50%;
-  cursor: pointer; font-size: 13px; color: var(--ink-3);
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(4px); z-index: 5;
-  transition: all 0.25s;
-}
-.main-photo .heart-btn:hover { color: var(--terracotta); transform: scale(1.1); }
-.main-photo .heart-btn.liked { color: #fff; background: var(--terracotta); }
-
 .small-polaroid {
   position: absolute; bottom: -30px; right: -20px; z-index: 5;
   background: #fff; padding: 8px 8px 28px;
@@ -131,37 +114,36 @@ body::after {
   transform: rotate(5deg); width: 160px;
 }
 .small-polaroid img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; }
-.small-polaroid .pin {
+.pin {
   position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
   width: 15px; height: 15px; border-radius: 50%; z-index: 3;
   background: radial-gradient(circle at 35% 35%, #f0d0b8, #c97d6e);
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
-.small-polaroid .pin::after {
+.pin::after {
   content: ''; position: absolute; top: 50%; left: 50%;
   transform: translate(-50%,-50%);
   width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5);
 }
-
+.photo-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
 .extra-photo {
-  position: relative; z-index: 3; margin-top: 30px;
+  position: relative; z-index: 3;
   background: #fff; padding: 10px 10px 34px;
   box-shadow: var(--shadow-card);
-  transform: rotate(-2deg); width: 200px;
 }
+.extra-photo:nth-child(odd) { transform: rotate(-2deg); }
+.extra-photo:nth-child(even) { transform: rotate(2deg); }
 .extra-photo img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; }
 .extra-photo .cap {
-  font-family: "Caveat",cursive; font-size: 13px; text-align: center;
+  font-family: "Caveat","Ma Shan Zheng",cursive; font-size: 13px; text-align: center;
   color: var(--ink-2); margin-top: 6px; letter-spacing: 0.3px;
 }
-
 .washi-tape {
   position: absolute; z-index: 3; pointer-events: none;
   border-radius: 1px; opacity: 0.8;
 }
 .euc-deco { position: absolute; pointer-events: none; z-index: 0; }
 
-/* Right: text */
 .text-col { position: relative; z-index: 1; }
 .text-col p {
   font-size: 14.5px; color: var(--ink-2); line-height: 2.1;
@@ -173,7 +155,7 @@ body::after {
   font-size: 18px; color: var(--olive); letter-spacing: 0.5px;
 }
 .text-note {
-  display: inline-block; margin-top: 36px;
+  display: inline-block; margin-top: 28px;
   padding: 20px 28px;
   background: #f5f0e0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -185,7 +167,6 @@ body::after {
   text-align: center;
 }
 
-/* ── Bottom bar ── */
 .bottom-bar {
   display: flex; align-items: center; justify-content: center;
   padding: 20px 0 50px;
@@ -199,7 +180,6 @@ body::after {
 }
 .bottom-nav a:hover { color: var(--olive); }
 
-/* ── Footer ── */
 footer {
   background: #e8e4dc; text-align: center;
   padding: 24px 20px 16px;
@@ -221,6 +201,7 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 @media (max-width: 900px) {
   .content-area { grid-template-columns: 1fr; gap: 24px; }
   .small-polaroid { position: relative; bottom: auto; right: auto; margin-top: -20px; margin-left: 20px; }
+  .photo-stack { grid-template-columns: 1fr; }
   .main { padding: 0 20px; }
 }
 </style>
@@ -236,30 +217,26 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
 
 <div class="main">
 
-<!-- ═══════════ RETURN BAR ═══════════ -->
 <div class="return-bar">
   <a href="journal-diary.html">← 返回日记</a>
 </div>
 
-<!-- ═══════════ TITLE AREA ═══════════ -->
 <section class="title-area">
   <div class="doodle" style="top:-2px;left:-6px;font-size:17px;">✦</div>
   <div class="doodle" style="top:10px;left:40px;font-size:11px;">✧</div>
   <div class="doodle" style="bottom:10px;right:20px;font-size:14px;color:#d4a5a5;">♡</div>
-  <h1 class="article-title">拥抱自己，幸福很简单</h1>
+  <h1 class="article-title">期末周里的碎花裙和小日常</h1>
   <div class="article-meta">
-    <span><i class="fa-regular fa-calendar"></i> 2026年6月13日</span>
+    <span><i class="fa-regular fa-calendar"></i> 2026年6月26日</span>
     <span class="meta-dot"></span>
-    <span>星期六</span>
+    <span>星期五 · 日常vlog</span>
     <span class="meta-dot"></span>
-    <span><i class="fa-solid fa-clapperboard"></i> 生活vlog</span>
+    <span><i class="fa-solid fa-camera-retro"></i> 碎片记录</span>
   </div>
 </section>
 
-<!-- ═══════════ CONTENT ═══════════ -->
 <div class="content-area">
 
-  <!-- Left: Images -->
   <div class="images-col">
     <svg class="euc-deco" style="top:-40px;right:-40px;width:140px;height:170px;opacity:0.45;" viewBox="0 0 140 170">
       <g fill="none" stroke="#8b9d83" stroke-width="1.2">
@@ -271,123 +248,71 @@ footer .ft-text i { color: var(--terracotta); margin: 0 2px; font-size: 13px; }
       </g>
     </svg>
 
-    <!-- Photo group: glasses selfie + hydrangea -->
     <div style="position:relative;margin-bottom:30px;">
       <div class="main-photo">
-        <button class="heart-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-        <img src="detail12-glasses.jpg" alt="半框眼镜自拍" loading="lazy">
+        <img src="detail15-cover.jpg" alt="碎花裙自拍" loading="lazy">
       </div>
       <div class="small-polaroid">
         <div class="pin"></div>
-        <img src="detail12-flower.jpg" alt="绣球花" loading="lazy">
+        <img src="detail15-hairclip.jpg" alt="小发夹" loading="lazy">
       </div>
       <div class="washi-tape" style="top:-6px;left:35%;width:50px;height:14px;background:var(--tape-green);transform:rotate(3deg);"></div>
     </div>
 
-    <!-- Hairstyle photo -->
-    <div style="position:relative;margin-bottom:24px;">
-      <div class="main-photo" style="transform:rotate(2deg);">
-        <img src="detail12-hair.jpg" alt="满意发型" loading="lazy">
+    <div class="photo-stack">
+      <div class="extra-photo">
+        <img src="detail15-healthy-meal.jpg" alt="减脂餐" loading="lazy">
+        <div class="cap">体育课后的减脂餐</div>
       </div>
-      <div class="washi-tape" style="top:-6px;left:28%;width:44px;height:12px;background:var(--tape-pink);transform:rotate(-4deg);"></div>
-    </div>
-
-    <!-- Campus run photo -->
-    <div style="position:relative;margin-bottom:24px;">
-      <div class="main-photo" style="transform:rotate(-1.5deg);">
-        <img src="detail12-run.jpg" alt="校园跑美景" loading="lazy">
+      <div class="extra-photo">
+        <img src="detail15-rice.jpg" alt="米饭" loading="lazy">
+        <div class="cap">看起来好吃但米饭有点硬</div>
       </div>
-    </div>
-
-    <!-- McD ice cream photo -->
-    <div style="position:relative;margin-bottom:24px;">
-      <div class="main-photo" style="transform:rotate(2.5deg);">
-        <img src="detail12-mcd.jpg" alt="麦记冰淇淋" loading="lazy">
+      <div class="extra-photo">
+        <img src="detail15-dessert.jpg" alt="甜点" loading="lazy">
+        <div class="cap">随手记录的小甜口</div>
       </div>
-      <div class="washi-tape" style="top:-6px;left:32%;width:42px;height:12px;background:var(--tape-beige);transform:rotate(-3deg);"></div>
-    </div>
-
-    <!-- Teaching assistant photo -->
-    <div class="extra-photo" style="width:220px;transform:rotate(3deg);">
-      <div class="pin"></div>
-      <img src="detail12-ta.jpg" alt="助教日常" loading="lazy">
-      <div class="cap">助教日·可爱的小画家们</div>
     </div>
   </div>
 
-  <!-- Right: Text -->
   <div class="text-col">
-    <span class="day-label">✧ 心理课 · 治愈短片</span>
+    <span class="day-label">✧ 好久没更日常</span>
     <p>
-      上周心理课老师给我们放的治愈小短片，内容讲述的是一个女孩经常否定自己、不自信，最终郁郁寡欢陷入抑郁……看完很有感触。
-    </p>
-    <p>
-      我想说的是：拥抱自己🫂，相信自己，不要和别人一起欺负自己。
+      好久没更日常，来更一期 vlog 如下↓ 周一体育下课吃的减脂餐哦。虽然我不减肥，但是还挺好吃的，以前一直以为这种不好吃，谁曾想？真的神了，很好吃也很健康～明天我将再次去吃！
     </p>
 
-    <span class="day-label">✧ 无人机课</span>
+    <span class="day-label">✧ 小发夹和碎花裙</span>
     <p>
-      这周无人机课，感觉很不好操控的样子……不适合我这种左右脑经常互搏的人，虽然还没实操┐(ﾟдﾟ┐)
+      购入的小发夹，好看好看！有种古早感吧？还是天使室友给我的！(｡･ω･｡) 最近还购入了新裙子（〜^∇^)〜真的很喜欢碎花裙，夏天很适配了，好看好看。
     </p>
 
-    <span class="day-label">✧ 这周吃的</span>
+    <span class="day-label">✧ 吃饭小插曲</span>
     <p>
-      大多都是面包🍞，适合饿的时候吃，容易饱，好次爱次！😋
+      有个饭忘记哪天吃的了，看着很好吃，其实米饭咋感觉像是剩饭，非常硬，难吃呀（//･_･//）但照片看着倒是很有食欲，记录一下这份反差。
     </p>
 
-    <span class="day-label">✧ 周四晚自习 · 摸鱼</span>
+    <span class="day-label">✧ 期末周碎碎念</span>
     <p>
-      这周周四最后一个晚自习，摸鱼ing🐟
-    </p>
-
-    <span class="day-label">✧ 周五 · 满意发型</span>
-    <p>
-      这周周五满意的发型，好用的发卡，适合我这种手残党，披发有层次✌
-    </p>
-
-    <span class="day-label">✧ 半框眼镜</span>
-    <p>
-      这个镜框如何？？半框哦～就是如此爱笑（〜^∇^)〜
-    </p>
-
-    <span class="day-label">✧ 绣球花</span>
-    <p>
-      昨天拍的绣球花，绣球花简直太好看了！！爱了爱了( ˘ ³˘)❤
-    </p>
-
-    <span class="day-label">✧ 周六 · 助教</span>
-    <p>
-      今天周六来当助教啦！总结：小孩子都好天真喜欢🥰，认知都很超前，画的都画好可爱～唉，就是这卫生真是一言难尽啊！打扫了n次。╥﹏╥
+      马上考试了😭期末周了，好多作业……俺不中嘞，最近也没咋记录。其次是不小心把我拍照的备用机摔了一下，现在的状况是还没拍一两张呢，就一直在重启……已没招，所以更新少了。
     </p>
     <p>
-      回来的时候还把地铁卡忘那儿了……一波三折，如同我的人生，Fighting！💪
-    </p>
-
-    <span class="day-label">✧ 校园跑 & 麦记</span>
-    <p>
-      回来校园跑去了，好美，分享给大家(´∀`)
-    </p>
-    <p>
-      晚上回来吃了麦记！好好次（＞ｙ＜）一天的烦恼和劳累都消失了。冰淇淋🍨我爱你🤟 幸福就是如此简单！ヾ(@^▽^@)ノ
+      拜拜👋大家天天开心哦！
     </p>
 
     <div class="text-note">
-      " 先拥抱自己，<br>剩下的慢慢来。 ✦ "
+      " 期末再忙，<br>也要给生活留一点小开心。 ♡ "
     </div>
   </div>
 
 </div>
 
-<!-- ═══════════ BOTTOM BAR ═══════════ -->
 <div class="bottom-bar">
   <div class="bottom-nav">
-    <a href="journal-diary-detail-13.html">← 上一篇</a>
+    <a href="journal-diary-detail-12.html">← 上一篇</a>
     <a href="journal-diary.html">返回列表</a>
-    <a href="journal-diary-detail-15.html">下一篇 →</a>
   </div>
 </div>
 
-<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="ft-text">" 生活很美好，你也是。 " <i class="fa-solid fa-heart"></i></div>
 </footer>
